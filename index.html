@@ -38,13 +38,6 @@
         button:hover {
             background-color: #0056b3; /* Color del botón al pasar el mouse */
         }
-        #chat {
-            display: none; /* Ocultar el chat inicialmente */
-            margin-top: 20px;
-        }
-        .message { padding: 10px; border-radius: 5px; margin: 10px 0; }
-        .user-message { background-color: #d1e7dd; text-align: left; }
-        .bot-message { background-color: #f8d7da; text-align: left; }
     </style>
 </head>
 <body>
@@ -64,15 +57,10 @@
         </form>
     </div>
 
-    <div id="chat">
-        <div id="messages"></div>
-        <input type="text" id="userInput" placeholder="Escribe tu pregunta..." />
-        <button onclick="sendMessage()">Enviar</button>
-    </div>
-
     <script>
         let users = []; // Array para almacenar los usuarios cargados
 
+        // Cargar el archivo JSON de usuarios y manejar el inicio de sesión
         async function loadUsers() {
             const response = await fetch('clientes.json');
             users = await response.json();
@@ -88,13 +76,8 @@
             if (user && user.claveIntranet === password) {
                 // Almacenar el nombre del usuario en sessionStorage
                 sessionStorage.setItem("clientName", user.razonSocial);
-
-                // Mostrar el chat y ocultar el formulario
-                document.getElementById('loginContainer').style.display = 'none';
-                document.getElementById('chat').style.display = 'block';
-                
-                // Cambiar el encabezado de bienvenida
-                document.querySelector("h1").innerText = `¡Bienvenido, ${user.razonSocial}!`;
+                // Redirigir a la página principal
+                window.location.href = 'pagina_principal.html'; 
                 return false; // Evita el envío del formulario de forma tradicional
             } else {
                 alert("Código o contraseña incorrectos.");
@@ -102,48 +85,8 @@
             }
         }
 
-        async function sendMessage() {
-            const userInput = document.getElementById("userInput").value;
-            if (!userInput) return;
-
-            displayMessage(userInput, "user-message");
-
-            const apiKey = "TU_API_KEY"; // Cambia esto a tu API key de OpenAI
-            const response = await fetch("https://api.openai.com/v1/chat/completions", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${apiKey}`
-                },
-                body: JSON.stringify({
-                    model: "gpt-3.5-turbo", // o usa "gpt-4" si tienes acceso
-                    messages: [{ role: "user", content: userInput }]
-                })
-            });
-
-            const data = await response.json();
-            const botMessage = data.choices[0].message.content;
-            displayMessage(botMessage, "bot-message");
-
-            document.getElementById("userInput").value = ""; // Limpiar el input
-        }
-
-        function displayMessage(text, className) {
-            const messageDiv = document.createElement("div");
-            messageDiv.className = `message ${className}`;
-            messageDiv.innerText = text;
-            document.getElementById("messages").appendChild(messageDiv);
-        }
-
-        window.onload = function() {
-            loadUsers(); // Cargar los usuarios al iniciar
-            const clientName = sessionStorage.getItem("clientName");
-            if (clientName) {
-                document.querySelector("h1").innerText = `¡Bienvenido, ${clientName}!`;
-                document.getElementById('loginContainer').style.display = 'none'; // Ocultar formulario si ya está logueado
-                document.getElementById('chat').style.display = 'block'; // Mostrar el chat
-            }
-        };
+        // Cargar usuarios al iniciar la página
+        window.onload = loadUsers;
     </script>
 </body>
 </html>
