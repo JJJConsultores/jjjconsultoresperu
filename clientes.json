@@ -1,0 +1,18 @@
+[
+    {
+        "razonSocial": "JJJ Consultores Empresariales S.A.C.",
+        "ruc": "20604236135",
+        "claveIntranet": "6135",
+        "situacion": "Activo",
+        "vencimiento": "12",
+        "sueldo": "S/ 500.00",
+        "usuarioSOL": "RALFORFU",
+        "contrasenaSOL": "dordebare",
+        "usuarioSUNAFIL": "RALFORFU",
+        "contrasenaSUNAFIL": "dordebare",
+        "usuarioAFP": "ADM0001",
+        "contrasenaAFP": "202020",
+        "correo": "jjjconsultoresempresariales@gmail.com",
+        "telefono": "923249938"
+    }
+]
