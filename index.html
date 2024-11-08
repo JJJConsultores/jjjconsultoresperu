@@ -41,16 +41,17 @@
     </style>
 </head>
 <body>
+    <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" style="width: 150px; margin-bottom: 20px;">
     <h1>¡Bienvenido!</h1>
     <p>Simple and complete, that’s JJJ.</p>
     <div id="loginContainer">
         <h2>Iniciar Sesión</h2>
         <form id="loginForm" onsubmit="return loginUser();">
-            <label for="ruc">Número de RUC:</label>
-            <input type="text" id="ruc" required placeholder="Ingresa tu RUC">
+            <label for="ruc">Usuario:</label>
+            <input type="text" id="ruc" required placeholder="Ingresa tu número de RUC">
             
             <label for="password">Contraseña:</label>
-            <input type="password" id="password" required placeholder="Los últimos 4 dígitos de tu RUC">
+            <input type="password" id="password" required>
             
             <button type="submit">Iniciar Sesión</button>
         </form>
