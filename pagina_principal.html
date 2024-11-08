@@ -7,8 +7,8 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #e9f5ff; /* Fondo amigable */
-            color: #333;
+            background-color: #007BFF; /* Fondo azul */
+            color: white; /* Color de texto blanco */
             text-align: center;
             padding: 50px;
         }
@@ -18,7 +18,10 @@
             display: block; /* Mostrar el chat */
         }
         h1 {
-            color: #007BFF; /* Color del título */
+            margin-bottom: 0; /* Sin margen inferior */
+        }
+        #greeting {
+            margin-top: 10px; /* Espacio entre fecha y saludo */
         }
         .message { padding: 10px; border-radius: 5px; margin: 10px 0; }
         .user-message { background-color: #d1e7dd; text-align: left; }
@@ -31,7 +34,7 @@
             border-radius: 5px; /* Bordes redondeados */
         }
         button {
-            background-color: #007BFF; /* Color del botón */
+            background-color: #0056b3; /* Color del botón */
             color: white; /* Color del texto del botón */
             padding: 10px 20px; /* Espaciado interno */
             border: none; /* Sin borde */
@@ -39,31 +42,39 @@
             cursor: pointer; /* Cambiar cursor al pasar */
         }
         button:hover {
-            background-color: #0056b3; /* Color del botón al pasar el mouse */
+            background-color: #003d80; /* Color del botón al pasar el mouse */
         }
         .footer-phrase {
             font-style: italic; /* Cursiva */
-            color: #555; /* Color más suave para la frase */
+            color: #fff; /* Color blanco para la frase */
             margin-top: 20px; /* Espaciado superior */
         }
     </style>
 </head>
 <body>
     <h1 id="welcomeMessage">¡Bienvenido!</h1>
-    <p class="footer-phrase">Simple and complete, that’s JJJ.</p>
+    <p id="greeting"></p> <!-- Espacio para el saludo -->
     <div id="chat">
         <div id="messages"></div>
         <input type="text" id="userInput" placeholder="Escribe tu pregunta..." />
         <button onclick="sendMessage()">Enviar</button>
     </div>
+    <p class="footer-phrase">Simple and complete, that’s JJJ.</p>
 
     <script>
-        // Función para cargar el nombre del cliente
+        // Función para cargar el nombre del cliente y la fecha/hora
         window.onload = function() {
             const clientName = sessionStorage.getItem("clientName");
             if (clientName) {
                 document.getElementById('welcomeMessage').innerText = `¡Bienvenido, ${clientName}!`;
                 document.getElementById('chat').style.display = 'block'; // Mostrar el chat
+
+                // Obtener la fecha y la hora actual
+                const now = new Date();
+                const hours = now.getHours();
+                const greetingText = hours < 12 ? "Buenos días" : (hours < 18 ? "Buenas tardes" : "Buenas noches");
+                const dateText = now.toLocaleDateString('es-PE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+                document.getElementById('greeting').innerText = `${greetingText}, hoy es ${dateText}.`; // Mostrar saludo y fecha
             } else {
                 window.location.href = 'index.html'; // Redirigir a la página de inicio si no hay sesión
             }
