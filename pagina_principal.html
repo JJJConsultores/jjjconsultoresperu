@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JJJ Consultores - Chat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #e6f7ff, #f4f4f4);
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+        #chat {
+            max-width: 500px;
+            margin: auto;
+            display: none; /* Ocultar el chat inicialmente */
+        }
+        .message { padding: 10px; border-radius: 5px; margin: 10px 0; }
+        .user-message { background-color: #d1e7dd; text-align: left; }
+        .bot-message { background-color: #f8d7da; text-align: left; }
+    </style>
+</head>
+<body>
+    <h1 id="welcomeMessage">¡Bienvenido!</h1>
+    <div id="chat">
+        <div id="messages"></div>
+        <input type="text" id="userInput" placeholder="Escribe tu pregunta..." />
+        <button onclick="sendMessage()">Enviar</button>
+    </div>
+
+    <script>
+        // Función para cargar el nombre del cliente
+        window.onload = function() {
+            const clientName = sessionStorage.getItem("clientName");
+            if (clientName) {
+                document.getElementById('welcomeMessage').innerText = `¡Bienvenido, ${clientName}!`;
+                document.getElementById('chat').style.display = 'block'; // Mostrar el chat
+            } else {
+                window.location.href = 'index.html'; // Redirigir a la página de inicio si no hay sesión
+            }
+        };
+
+        async function sendMessage() {
+            const userInput = document.getElementById("userInput").value;
+            if (!userInput) return;
+
+            displayMessage(userInput, "user-message");
+
+            const apiKey = "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"; // Tu clave de API aquí
+            const response = await fetch("https://api.openai.com/v1/chat/completions", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${apiKey}`
+                },
+                body: JSON.stringify({
+                    model: "gpt-3.5-turbo", // o usa "gpt-4" si tienes acceso
+                    messages: [{ role: "user", content: userInput }]
+                })
+            });
+
+            const data = await response.json();
+            const botMessage = data.choices[0].message.content;
+            displayMessage(botMessage, "bot-message");
+
+            document.getElementById("userInput").value = ""; // Limpiar el input
+        }
+
+        function displayMessage(text, className) {
+            const messageDiv = document.createElement("div");
+            messageDiv.className = `message ${className}`;
+            messageDiv.innerText = text;
+            document.getElementById("messages").appendChild(messageDiv);
+        }
+    </script>
+</body>
+</html>
