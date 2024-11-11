@@ -15,11 +15,11 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: flex-start;
         }
         #chat {
             max-width: 500px;
-            margin: auto;
+            margin: 20px auto;
             display: block; /* Mostrar el chat */
         }
         h1 {
@@ -38,22 +38,6 @@
             border: 1px solid #ccc; /* Borde suave */
             border-radius: 5px; /* Bordes redondeados */
         }
-        button {
-            background-color: #003d80; /* Color del botón */
-            color: white; /* Color del texto del botón */
-            padding: 10px 20px; /* Espaciado interno */
-            border: none; /* Sin borde */
-            border-radius: 5px; /* Bordes redondeados */
-            cursor: pointer; /* Cambiar cursor al pasar */
-        }
-        button:hover {
-            background-color: #003d80; /* Color del botón al pasar el mouse */
-        }
-        .footer-phrase {
-            font-style: italic; /* Cursiva */
-            color: #fff; /* Color blanco para la frase */
-            margin-top: 20px; /* Espaciado superior */
-        }
         .footer {
             background-color: #003366; /* Fondo más oscuro para la franja */
             color: white;
@@ -62,6 +46,9 @@
             position: fixed;
             bottom: 0;
             width: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
         }
         .footer a {
             color: white;
@@ -73,20 +60,29 @@
         }
         .logo {
             border-radius: 50%; /* Hacer el logo circular */
-            width: 100px;
-            height: 100px;
-            margin-bottom: 20px;
+            width: 50px;
+            height: 50px;
+            margin: 20px 0; /* Espacio entre logo y cuadro de texto */
+            cursor: pointer;
+        }
+        .footer-phrase {
+            font-style: italic; /* Cursiva */
+            color: #fff; /* Color blanco para la frase */
+            margin-top: 20px; /* Espaciado superior */
+            position: absolute;
+            top: 120px;
+            left: 50%;
+            transform: translateX(-50%);
         }
     </style>
 </head>
 <body>
-    <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" class="logo">
     <h1 id="welcomeMessage">¡Bienvenido!</h1>
     <p id="greeting"></p> <!-- Espacio para el saludo -->
     <div id="chat">
         <div id="messages"></div>
         <input type="text" id="userInput" placeholder="Escribe tu pregunta..." />
-        <button onclick="sendMessage()">Enviar</button>
+        <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" class="logo" onclick="sendMessage()">
     </div>
     <p class="footer-phrase">Simple and complete, that's JJJ.</p>
 
