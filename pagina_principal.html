@@ -45,7 +45,7 @@
         }
 
         #greeting {
-            margin-top: 40px; /* Espacio entre fecha y saludo (simulando 4 "enter") */
+            margin-top: 10px; /* Espacio entre fecha y saludo */
         }
 
         .message {
@@ -67,8 +67,8 @@
         /* Estilo para el campo de texto y botón */
         #userInput {
             width: 80%; /* Ajustar el tamaño del input */
-            height: 30px; /* Reducir altura del campo */
-            padding: 5px 10px; /* Ajustar el padding para reducir el alto */
+            height: 40px; /* Altura del campo */
+            padding: 10px; /* Espaciado interno */
             margin: 10px 0; /* Espaciado vertical */
             border: 1px solid #ccc; /* Borde suave */
             border-radius: 5px; /* Bordes redondeados */
@@ -131,7 +131,7 @@
     <p id="greeting"></p>
     <div id="chat">
         <div id="messages"></div>
-        <input type="text" id="userInput" placeholder="Escribe tu pregunta..." />
+        <input type="text" id="userInput" placeholder="Escribe tu pregunta o requerimiento..." />
         <!-- Logo usado como botón enviar -->
         <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" 
              onclick="sendMessage()" 
@@ -168,6 +168,7 @@
                 document.getElementById('welcomeMessage').innerText = `¡Bienvenido, ${clientName}!`;
                 document.getElementById('chat').style.display = 'block'; // Mostrar el chat
 
+                // Obtener la fecha y la hora actual
                 const now = new Date();
                 const hours = now.getHours();
                 const greetingText = hours < 12 ? "Buenos días" : (hours < 18 ? "Buenas tardes" : "Buenas noches");
@@ -201,7 +202,7 @@
             const botMessage = data.choices[0].message.content;
             displayMessage(botMessage, "bot-message");
 
-            document.getElementById("userInput").value = ""; 
+            document.getElementById("userInput").value = ""; // Limpiar el input
         }
 
         function displayMessage(text, className) {
