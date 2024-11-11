@@ -31,14 +31,21 @@
         .legal-content {
             color: white;
             display: flex;
-            flex-direction: column;
-            align-items: flex-start;
+            flex-direction: row;
+            align-items: center;
+            font-style: italic;
         }
 
         .legal-footer a {
             margin: 0 15px;
             color: lightgray;
             font-size: 14px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 20px; /* Añade un espacio entre los enlaces y el borde derecho */
         }
 
         #chat {
@@ -93,15 +100,14 @@
     <div class="legal-footer">
         <div class="legal-content">
             <img class="logo" src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" />
-            <div>JJJ Consultores Empresariales S.A.C.®</div>
-            <div>RUC: 20604236135</div>
+            <div>*JJJ Consultores Empresariales S.A.C.® / RUC: 20604236136*</div>
         </div>
-        <div style="display: flex; justify-content: center; align-items: center;">
+        <div class="footer-links">
+            <a href="#">Contacto</a>
+            <a href="#">Paga tu factura aquí</a>
             <a href="#">Términos de Uso</a>
             <a href="#">Aviso Legal</a>
-            <a href="#">Paga tu factura aquí</a>
             <a href="#">Aviso de Cookies</a>
-            <a href="#">Contacto</a>
         </div>
     </div>
 
@@ -110,9 +116,9 @@
             const clientName = sessionStorage.getItem("clientName");
             const now = new Date();
             const hours = now.getHours();
-            const greetingText = hours < 12 ? "Buenos días" : (hours < 18 ? "Buenas tardes" : "Buenas noches");
+            const greetingText = hours < 12 ? "¡Buenos días" : (hours < 18 ? "¡Buenas tardes" : "¡Buenas noches");
             const dateText = now.toLocaleDateString('es-PE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-            document.getElementById('greeting').innerText = `Hoy es ${dateText}.`;
+            document.getElementById('greeting').innerText = `Hoy, ${dateText}.`;
             document.getElementById('welcomeMessage').innerText = `${greetingText}, ${clientName}!`;
             document.getElementById('chat').style.display = 'block';
         };
