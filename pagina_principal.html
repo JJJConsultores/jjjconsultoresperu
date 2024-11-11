@@ -31,7 +31,7 @@
             color: lightgray;
             margin: 0 10px;
             text-decoration: none;
-            font-size: 14px; /* Tamaño de la letra para los enlaces */
+            font-size: 14px;
         }
 
         /* Estilo para los logos y botones */
@@ -107,7 +107,7 @@
 
         /* Estilo para la franja legal */
         .legal-content {
-            color: white; /* Texto blanco */
+            color: white;
             display: flex;
             align-items: center;
             justify-content: flex-start;
@@ -119,25 +119,21 @@
             margin-right: 10px;
         }
 
-        /* Centrado de los enlaces dentro de la franja legal */
+        /* Estilo para centrar los enlaces en la franja legal */
         .legal-footer a {
-            color: lightgray;
-            font-size: 14px;
             margin: 0 15px;
+            color: white; /* Color blanco para los enlaces */
+            font-size: 14px;
         }
 
-        .legal-footer div {
+        /* Centrado de los enlaces y ajuste de la altura */
+        .legal-footer .legal-links {
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 10px 0;
+            height: 60px; /* Altura ajustada para centrar verticalmente */
         }
 
-        /* Estilo del bloque de texto de los nombres y RUC en blanco */
-        .legal-footer div div {
-            color: white; /* Texto blanco para los nombres y RUC */
-            font-size: 14px;
-        }
     </style>
 </head>
 <body>
@@ -157,16 +153,16 @@
     <div class="legal-footer">
         <div class="legal-content">
             <img class="logo" src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" />
-            <div style="text-align: left;"> <!-- Texto en blanco y alineado a la izquierda -->
-                <div>JJJ Consultores Peru E.I.R.L. (®)</div>
+            <div style="text-align: left; color: white;"> <!-- Texto en blanco y alineado a la izquierda -->
+                <div>JJJ Consultores Peru E.I.R.L.®</div>
                 <div>RUC: 20111111111</div>
-                <div>JJJ Consultores Empresariales S.A.C. (®)</div>
+                <div>JJJ Consultores Empresariales S.A.C.®</div>
                 <div>RUC: 20604236135</div>
             </div>
         </div>
 
-        <!-- Centrado de los enlaces en la franja legal -->
-        <div>
+        <!-- Centrado de los enlaces en la franja legal a la altura correcta -->
+        <div class="legal-links">
             <a href="#">Términos de Uso</a>
             <a href="#">Aviso Legal</a>
             <a href="#">Paga tu factura aquí</a> <!-- Enlace centrado -->
