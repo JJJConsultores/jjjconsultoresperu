@@ -11,15 +11,10 @@
             color: white; /* Color de texto blanco */
             text-align: center;
             padding: 50px;
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
         }
         #chat {
             max-width: 500px;
-            margin: 20px auto;
+            margin: auto;
             display: block; /* Mostrar el chat */
         }
         h1 {
@@ -38,61 +33,72 @@
             border: 1px solid #ccc; /* Borde suave */
             border-radius: 5px; /* Bordes redondeados */
         }
-        .footer {
-            background-color: #003366; /* Fondo más oscuro para la franja */
-            color: white;
-            padding: 10px;
-            text-align: center;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-        .footer a {
-            color: white;
-            text-decoration: none;
-            margin: 0 10px;
-        }
-        .footer a:hover {
-            text-decoration: underline;
-        }
-        .logo {
-            border-radius: 50%; /* Hacer el logo circular */
-            width: 50px;
-            height: 50px;
-            margin: 20px 0; /* Espacio entre logo y cuadro de texto */
-            cursor: pointer;
+        button {
+            display: none; /* Ocultar el botón de enviar */
         }
         .footer-phrase {
             font-style: italic; /* Cursiva */
             color: #fff; /* Color blanco para la frase */
             margin-top: 20px; /* Espaciado superior */
-            position: absolute;
-            top: 120px;
-            left: 50%;
-            transform: translateX(-50%);
+        }
+
+        /* Estilos para la franja inferior con los enlaces */
+        .footer-links {
+            background-color: #003366; /* Azul oscuro */
+            color: white;
+            padding: 10px;
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Estilo para logo que se hace clic */
+        #logo {
+            width: 40px; /* Ajusta el tamaño del logo */
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer; /* Hacer que sea clickeable */
+            margin-left: 10px; /* Espacio al lado del input */
         }
     </style>
 </head>
 <body>
     <h1 id="welcomeMessage">¡Bienvenido!</h1>
     <p id="greeting"></p> <!-- Espacio para el saludo -->
+    
+    <!-- Aquí va el logo -->
+    <div id="logoContainer" style="text-align: left; padding: 10px;">
+        <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" style="width: 50px; border-radius: 50%;">
+    </div>
+
     <div id="chat">
         <div id="messages"></div>
         <input type="text" id="userInput" placeholder="Escribe tu pregunta..." />
-        <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" class="logo" onclick="sendMessage()">
+        <!-- Aquí el logo reemplaza el botón de "Enviar" -->
+        <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Enviar" id="logo" onclick="sendMessage()" />
     </div>
+    
     <p class="footer-phrase">Simple and complete, that's JJJ.</p>
 
-    <div class="footer">
-        <a href="#terminos">Términos de Uso</a>
-        <a href="#avisoLegal">Aviso Legal</a>
-        <a href="#politicaPrivacidad">Política de Privacidad</a>
-        <a href="#avisoCookies">Aviso de Cookies</a>
-        <a href="#contacto">Contacto</a>
-        <a href="#pagarFactura">Paga tu factura aquí</a>
+    <!-- Enlaces legales en la franja -->
+    <div class="footer-links">
+        <a href="#">Términos de Uso</a> | 
+        <a href="#">Aviso Legal</a> | 
+        <a href="#">Política de Privacidad</a> | 
+        <a href="#">Aviso de Cookies</a> | 
+        <a href="#">Contacto</a> | 
+        <a href="#">Paga tu factura aquí</a>
     </div>
 
     <script>
@@ -120,7 +126,7 @@
 
             displayMessage(userInput, "user-message");
 
-            const apiKey = "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"; // Tu clave de API aquí
+            const apiKey = "TU_API_KEY"; // Cambia esto a tu API key de OpenAI
             const response = await fetch("https://api.openai.com/v1/chat/completions", {
                 method: "POST",
                 headers: {
