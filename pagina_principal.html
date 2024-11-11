@@ -23,12 +23,22 @@
             left: 0;
             bottom: 0;
             width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .legal-content {
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
 
         .legal-footer a {
+            margin: 0 15px;
             color: lightgray;
-            margin: 0 10px;
-            text-decoration: none;
+            font-size: 14px;
         }
 
         #chat {
@@ -45,22 +55,6 @@
             margin-top: 10px;
         }
 
-        .message {
-            padding: 10px;
-            border-radius: 5px;
-            margin: 10px 0;
-        }
-
-        .user-message {
-            background-color: #d1e7dd;
-            text-align: left;
-        }
-
-        .bot-message {
-            background-color: #f8d7da;
-            text-align: left;
-        }
-
         #userInput {
             width: 80%;
             height: 30px;
@@ -68,19 +62,6 @@
             margin: 10px 0;
             border: 1px solid #ccc;
             border-radius: 5px;
-        }
-
-        button {
-            background-color: #0056b3;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #003d80;
         }
 
         .footer-phrase {
@@ -97,25 +78,6 @@
             margin-left: 10px;
             vertical-align: middle;
         }
-
-        .legal-content {
-            color: gray;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            margin: 0 15px;
-        }
-
-        .legal-content img {
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-
-        .legal-footer a {
-            margin: 0 15px;
-            color: lightgray;
-            font-size: 14px;
-        }
     </style>
 </head>
 <body>
@@ -124,19 +86,15 @@
     <div id="chat">
         <div id="messages"></div>
         <input type="text" id="userInput" placeholder="Escribe tu pregunta..." />
-        <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" 
-             onclick="sendMessage()" 
-             class="logo">
+        <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" onclick="sendMessage()" class="logo">
     </div>
     <p class="footer-phrase">Simple and complete, that's JJJ.</p>
 
     <div class="legal-footer">
         <div class="legal-content">
             <img class="logo" src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" />
-            <div style="text-align: left; color: white;">
-                <div>JJJ Consultores Empresariales S.A.C.®</div>
-                <div>RUC: 20604236135</div>
-            </div>
+            <div>JJJ Consultores Empresariales S.A.C.®</div>
+            <div>RUC: 20604236135</div>
         </div>
         <div style="display: flex; justify-content: center; align-items: center;">
             <a href="#">Términos de Uso</a>
@@ -150,17 +108,13 @@
     <script>
         window.onload = function() {
             const clientName = sessionStorage.getItem("clientName");
-            if (clientName) {
-                const now = new Date();
-                const hours = now.getHours();
-                const greetingText = hours < 12 ? "Buenos días" : (hours < 18 ? "Buenas tardes" : "Buenas noches");
-                const dateText = now.toLocaleDateString('es-PE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-                document.getElementById('greeting').innerText = `Hoy es ${dateText}.`;
-                document.getElementById('welcomeMessage').innerText = `${greetingText}, ${clientName}!`;
-                document.getElementById('chat').style.display = 'block';
-            } else {
-                window.location.href = 'index.html';
-            }
+            const now = new Date();
+            const hours = now.getHours();
+            const greetingText = hours < 12 ? "Buenos días" : (hours < 18 ? "Buenas tardes" : "Buenas noches");
+            const dateText = now.toLocaleDateString('es-PE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            document.getElementById('greeting').innerText = `Hoy es ${dateText}.`;
+            document.getElementById('welcomeMessage').innerText = `${greetingText}, ${clientName}!`;
+            document.getElementById('chat').style.display = 'block';
         };
 
         async function sendMessage() {
