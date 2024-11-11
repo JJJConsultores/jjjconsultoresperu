@@ -49,6 +49,21 @@
             color: #fff; /* Color blanco para la frase */
             margin-top: 20px; /* Espaciado superior */
         }
+        .legal-links {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #0056b3; /* Fondo azul */
+            text-align: center;
+            font-size: 14px;
+        }
+        .legal-links a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        .legal-links a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -60,6 +75,16 @@
         <button onclick="sendMessage()">Enviar</button>
     </div>
     <p class="footer-phrase">Simple and complete, that’s JJJ.</p>
+
+    <!-- Enlaces legales y pagos al pie de la página -->
+    <div class="legal-links">
+        <a href="#terminos">Términos de Uso</a> |
+        <a href="#aviso">Aviso Legal</a> |
+        <a href="#privacidad">Política de Privacidad</a> |
+        <a href="#cookies">Aviso de Cookies</a> |
+        <a href="#contacto">Contacto</a> |
+        <a href="#pagos">Paga tu factura aquí</a> <!-- Enlace agregado para pagos -->
+    </div>
 
     <script>
         // Función para cargar el nombre del cliente y la fecha/hora
