@@ -31,6 +31,7 @@
             color: lightgray;
             margin: 0 10px;
             text-decoration: none;
+            font-size: 14px; /* Tamaño de la letra para los enlaces */
         }
 
         /* Estilo para los logos y botones */
@@ -38,7 +39,6 @@
             max-width: 500px;
             margin: auto;
             display: block; /* Mostrar el chat */
-            margin-top: 60px;  /* Agregado: Espacio para bajar todo el bloque */
         }
 
         h1 {
@@ -46,7 +46,7 @@
         }
 
         #greeting {
-            margin-top: 60px; /* Espacio entre fecha y saludo (espacio ajustado con margen superior) */
+            margin-top: 10px; /* Espacio entre fecha y saludo (dos "enter") */
         }
 
         .message {
@@ -92,7 +92,7 @@
         .footer-phrase {
             font-style: italic;
             color: white;
-            margin-top: 30px;  /* Ajustado el margen para bajar la frase */
+            margin-top: 10px;
         }
 
         /* Estilo del logo */
@@ -107,7 +107,7 @@
 
         /* Estilo para la franja legal */
         .legal-content {
-            color: gray;
+            color: white; /* Texto blanco */
             display: flex;
             align-items: center;
             justify-content: flex-start;
@@ -119,10 +119,23 @@
             margin-right: 10px;
         }
 
-        /* Estilo para centrar los enlaces en la franja legal */
+        /* Centrado de los enlaces dentro de la franja legal */
         .legal-footer a {
-            margin: 0 15px;
             color: lightgray;
+            font-size: 14px;
+            margin: 0 15px;
+        }
+
+        .legal-footer div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 0;
+        }
+
+        /* Estilo del bloque de texto de los nombres y RUC en blanco */
+        .legal-footer div div {
+            color: white; /* Texto blanco para los nombres y RUC */
             font-size: 14px;
         }
     </style>
@@ -144,15 +157,16 @@
     <div class="legal-footer">
         <div class="legal-content">
             <img class="logo" src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" />
-            <div style="text-align: left; color: black;"> <!-- Texto en negro y alineado a la izquierda -->
+            <div style="text-align: left;"> <!-- Texto en blanco y alineado a la izquierda -->
                 <div>JJJ Consultores Peru E.I.R.L. (®)</div>
                 <div>RUC: 20111111111</div>
                 <div>JJJ Consultores Empresariales S.A.C. (®)</div>
                 <div>RUC: 20604236135</div>
             </div>
         </div>
-        <!-- Centrado de los enlaces -->
-        <div style="display: flex; justify-content: center;">
+
+        <!-- Centrado de los enlaces en la franja legal -->
+        <div>
             <a href="#">Términos de Uso</a>
             <a href="#">Aviso Legal</a>
             <a href="#">Paga tu factura aquí</a> <!-- Enlace centrado -->
