@@ -10,7 +10,9 @@
             background-color: #007BFF;
             color: white;
             display: flex;
+            flex-direction: column;
             margin: 0;
+            min-height: 100vh; /* Ocupa el alto completo de la pantalla */
         }
 
         /* Barra lateral */
@@ -38,10 +40,24 @@
         }
 
         .sidebar ul li {
+            display: flex;
+            align-items: center;
             margin-bottom: 15px;
             font-size: 1em;
             color: white;
         }
+
+        /* Círculos de colores */
+        .circle {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .circle.perfil { background-color: #FF5733; }   /* Color para Perfil */
+        .circle.sunat { background-color: #33FF57; }    /* Color para SUNAT */
+        .circle.sunafil { background-color: #3357FF; }  /* Color para SUNAFIL */
+        .circle.afp { background-color: #F5A623; }      /* Color para AFP */
 
         /* Contenedor principal */
         .main-content {
@@ -50,6 +66,7 @@
             width: calc(100% - 220px);
             box-sizing: border-box;
             text-align: center;
+            flex-grow: 1; /* Hace que el contenido ocupe el espacio restante */
         }
 
         #greeting, #welcomeMessage {
@@ -82,7 +99,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
-            max-width: 1200px; /* Aumenta el ancho de los cuadros */
+            max-width: 1200px;
             margin: 40px auto;
         }
 
@@ -110,17 +127,17 @@
         .legal-footer {
             background-color: #2c2c2c; /* Gris oscuro */
             color: lightgray;
-            padding: 10px 20px; /* Ajusta el padding si necesitas más o menos espacio */
+            padding: 10px 20px;
             text-align: center;
             font-size: 0.9em;
             position: fixed;
             left: 200px; /* Deja espacio para la barra lateral */
             bottom: 0;
             width: calc(100% - 200px); /* Ajuste para ocupar el ancho restante */
+            height: auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: auto; /* Asegura que no tome toda la altura */
         }
 
         .legal-content {
@@ -150,10 +167,10 @@
     <div class="sidebar">
         <h2>Menú</h2>
         <ul>
-            <li>Perfil</li>
-            <li>SUNAT</li>
-            <li>SUNAFIL</li>
-            <li>AFP</li>
+            <li><span class="circle perfil"></span>Perfil</li>
+            <li><span class="circle sunat"></span>SUNAT</li>
+            <li><span class="circle sunafil"></span>SUNAFIL</li>
+            <li><span class="circle afp"></span>AFP</li>
         </ul>
     </div>
 
@@ -196,22 +213,16 @@
 
     <script>
         window.onload = function() {
-            const clientName = sessionStorage.getItem("clientName"); // Obtener el nombre del cliente
+            const clientName = sessionStorage.getItem("clientName");
             const now = new Date();
             const hours = now.getHours();
-
-            // Definir el saludo dependiendo de la hora
             const greetingText = hours < 12 ? "¡Buenos días" : (hours < 18 ? "¡Buenas tardes" : "¡Buenas noches");
-
-            // Formatear la fecha
             const dateText = now.toLocaleDateString('es-PE', { 
                 weekday: 'long', 
                 year: 'numeric', 
                 month: 'long', 
                 day: 'numeric' 
             });
-
-            // Mostrar fecha y saludo personalizado con el nombre del cliente
             document.getElementById('greeting').innerText = `Hoy, ${dateText}.`;
             document.getElementById('welcomeMessage').innerText = `${greetingText}, ${clientName}!`;
             document.getElementById('chat').style.display = 'block';
