@@ -49,29 +49,37 @@
             color: #fff; /* Color blanco para la frase */
             margin-top: 20px; /* Espaciado superior */
         }
-        .footer {
-            background-color: #003366; /* Azul más oscuro */
+
+        /* Estilos de la franja legal */
+        .legal-franja {
+            background-color: #003366; /* Azul oscuro */
+            color: #b0b0b0; /* Gris claro para las letras */
             text-align: center;
-            padding: 20px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
         }
-        .footer a {
-            color: white;
+
+        .legal-franja span {
+            color: #b0b0b0; /* Gris claro */
+        }
+
+        .legal-franja img {
+            height: 40px; /* Ajustar el logo */
+            width: auto;
+        }
+
+        .legal-franja p {
+            margin: 0; /* Quitar margen */
+            font-weight: normal;
+        }
+
+        .legal-franja a {
+            color: #b0b0b0;
             text-decoration: none;
-            margin: 0 15px;
-        }
-        .footer .footer-logo {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: 10px;
-        }
-        .footer p {
-            font-size: 12px;
-            margin-top: 10px;
+            padding: 0 10px;
         }
     </style>
 </head>
@@ -81,21 +89,22 @@
     <div id="chat">
         <div id="messages"></div>
         <input type="text" id="userInput" placeholder="Escribe tu pregunta..." />
-        <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" class="footer-logo" onclick="sendMessage()" /> <!-- Logo como botón -->
+        <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" style="width: 50px; cursor: pointer;" onclick="sendMessage()" />
     </div>
     <p class="footer-phrase">Simple and complete, that's JJJ.</p>
 
-    <div class="footer">
-        <div style="display: flex; align-items: center; justify-content: center;">
-            <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" class="footer-logo" />
-            <p>JJJ Consultores Peru E.I.R.L. (r)<br/>RUC: 20111111111<br/>JJJ Consultores Empresariales S.A.C. (r)<br/>RUC: 20604236135</p>
+    <!-- Franja Legal -->
+    <div class="legal-franja">
+        <div style="display: flex; align-items: center;">
+            <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ">
+            <p>JJJ Consultores Peru E.I.R.L. (®) <br>RUC: 20111111111 <br>JJJ Consultores Empresariales S.A.C. (®) <br>RUC: 20604236135</p>
         </div>
         <div>
-            <a href="#">Términos de Uso</a> | 
-            <a href="#">Aviso Legal</a> | 
-            <a href="#">Política de Privacidad</a> | 
-            <a href="#">Aviso de Cookies</a> | 
-            <a href="#">Contacto</a> | 
+            <a href="#">Términos de Uso</a>
+            <a href="#">Aviso Legal</a>
+            <a href="#">Política de Privacidad</a>
+            <a href="#">Aviso de Cookies</a>
+            <a href="#">Contacto</a>
             <a href="#">Paga tu factura aquí</a>
         </div>
     </div>
