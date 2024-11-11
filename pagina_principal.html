@@ -15,7 +15,7 @@
 
         /* Estilo para la franja de la parte legal */
         .legal-footer {
-            background-color: #003d80; /* Azul oscuro */
+            background-color: #002C5F; /* Azul oscuro */
             color: lightgray; /* Color gris claro */
             padding: 10px;
             text-align: center;
@@ -29,7 +29,7 @@
         /* Estilo para los enlaces en la franja legal */
         .legal-footer a {
             color: lightgray;
-            margin: 0 10px;
+            margin: 0 15px;
             text-decoration: none;
         }
 
@@ -45,7 +45,7 @@
         }
 
         #greeting {
-            margin-top: 40px; /* Espacio entre fecha y saludo */
+            margin-top: 10px; /* Espacio entre fecha y saludo (dos "enter") */
         }
 
         .message {
@@ -106,7 +106,7 @@
 
         /* Estilo para la franja legal */
         .legal-content {
-            color: gray;
+            color: white;
             display: flex;
             align-items: center;
             justify-content: flex-start;
@@ -124,11 +124,16 @@
             color: lightgray;
             font-size: 14px;
         }
+
+        /* Alinear los enlaces legales al centro */
+        .legal-footer a {
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
-    <p id="greeting"></p> <!-- Fecha arriba del saludo -->
     <h1 id="welcomeMessage">¡Bienvenido!</h1>
+    <p id="greeting"></p>
     <div id="chat">
         <div id="messages"></div>
         <input type="text" id="userInput" placeholder="Escribe tu pregunta..." />
@@ -143,8 +148,8 @@
     <div class="legal-footer">
         <div class="legal-content">
             <img class="logo" src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" />
-            <div style="text-align: left; color: black;"> <!-- Texto en negro y alineado a la izquierda -->
-                <div>JJJ Consultores Empresariales S.A.C. (®)</div>
+            <div style="text-align: left; color: white;"> <!-- Texto en blanco -->
+                <div>JJJ Consultores Empresariales S.A.C.®</div>
                 <div>RUC: 20604236135</div>
             </div>
         </div>
@@ -163,14 +168,15 @@
         window.onload = function() {
             const clientName = sessionStorage.getItem("clientName");
             if (clientName) {
-                document.getElementById('welcomeMessage').innerText = `¡Bienvenido, ${clientName}!`;
-                document.getElementById('chat').style.display = 'block'; // Mostrar el chat
-
+                // Saludo según la hora
                 const now = new Date();
                 const hours = now.getHours();
                 const greetingText = hours < 12 ? "Buenos días" : (hours < 18 ? "Buenas tardes" : "Buenas noches");
+                document.getElementById('welcomeMessage').innerText = `${greetingText}, ${clientName}!`;  // Cambio en el saludo
+
+                // Modificar la fecha para mostrar solo el día, mes y año
                 const dateText = now.toLocaleDateString('es-PE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-                document.getElementById('greeting').innerText = `${greetingText}, hoy es ${dateText}.`; // Mostrar saludo y fecha
+                document.getElementById('greeting').innerText = `Hoy es ${dateText}`; // Solo muestra la fecha
             } else {
                 window.location.href = 'index.html'; // Redirigir a la página de inicio si no hay sesión
             }
