@@ -12,20 +12,59 @@
             text-align: center;
             padding: 50px;
         }
+
+        /* Estilo para la franja de la parte legal */
+        .legal-footer {
+            background-color: #003d80; /* Azul oscuro */
+            color: lightgray; /* Color gris claro */
+            padding: 10px;
+            text-align: center;
+            font-size: 0.9em;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Estilo para los enlaces en la franja legal */
+        .legal-footer a {
+            color: lightgray;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        /* Estilo para los logos y botones */
         #chat {
             max-width: 500px;
             margin: auto;
             display: block; /* Mostrar el chat */
         }
+
         h1 {
             margin-bottom: 0; /* Sin margen inferior */
         }
+
         #greeting {
             margin-top: 10px; /* Espacio entre fecha y saludo */
         }
-        .message { padding: 10px; border-radius: 5px; margin: 10px 0; }
-        .user-message { background-color: #d1e7dd; text-align: left; }
-        .bot-message { background-color: #f8d7da; text-align: left; }
+
+        .message {
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+
+        .user-message {
+            background-color: #d1e7dd;
+            text-align: left;
+        }
+
+        .bot-message {
+            background-color: #f8d7da;
+            text-align: left;
+        }
+
+        /* Estilo para el campo de texto y botón */
         #userInput {
             width: 80%; /* Ajustar el tamaño del input */
             padding: 10px; /* Espaciado interno */
@@ -33,6 +72,7 @@
             border: 1px solid #ccc; /* Borde suave */
             border-radius: 5px; /* Bordes redondeados */
         }
+
         button {
             background-color: #0056b3; /* Color del botón */
             color: white; /* Color del texto del botón */
@@ -41,72 +81,69 @@
             border-radius: 5px; /* Bordes redondeados */
             cursor: pointer; /* Cambiar cursor al pasar */
         }
+
         button:hover {
             background-color: #003d80; /* Color del botón al pasar el mouse */
         }
+
+        /* Estilo para la frase debajo del buscador */
         .footer-phrase {
-            font-style: italic; /* Cursiva */
-            color: #fff; /* Color blanco para la frase */
-            margin-top: 20px; /* Espaciado superior */
+            font-style: italic;
+            color: white;
+            margin-top: 10px;
         }
 
-        /* Estilos de la franja legal */
-        .legal-franja {
-            background-color: #003366; /* Azul oscuro */
-            color: #b0b0b0; /* Gris claro para las letras */
-            text-align: center;
-            padding: 10px 0;
+        /* Estilo del logo */
+        .logo {
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        /* Estilo para la franja legal */
+        .legal-content {
+            color: gray;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            font-size: 14px;
+            justify-content: flex-start;
+            margin: 0 15px;
         }
 
-        .legal-franja span {
-            color: #b0b0b0; /* Gris claro */
-        }
-
-        .legal-franja img {
-            height: 40px; /* Ajustar el logo */
-            width: auto;
-        }
-
-        .legal-franja p {
-            margin: 0; /* Quitar margen */
-            font-weight: normal;
-        }
-
-        .legal-franja a {
-            color: #b0b0b0;
-            text-decoration: none;
-            padding: 0 10px;
+        .legal-content img {
+            border-radius: 50%;
+            margin-right: 10px;
         }
     </style>
 </head>
 <body>
     <h1 id="welcomeMessage">¡Bienvenido!</h1>
-    <p id="greeting"></p> <!-- Espacio para el saludo -->
+    <p id="greeting"></p>
     <div id="chat">
         <div id="messages"></div>
         <input type="text" id="userInput" placeholder="Escribe tu pregunta..." />
-        <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" style="width: 50px; cursor: pointer;" onclick="sendMessage()" />
+        <img class="logo" src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" onclick="sendMessage()" />
     </div>
     <p class="footer-phrase">Simple and complete, that's JJJ.</p>
 
-    <!-- Franja Legal -->
-    <div class="legal-franja">
-        <div style="display: flex; align-items: center;">
-            <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ">
-            <p>JJJ Consultores Peru E.I.R.L. (®) <br>RUC: 20111111111 <br>JJJ Consultores Empresariales S.A.C. (®) <br>RUC: 20604236135</p>
+    <!-- Franja legal -->
+    <div class="legal-footer">
+        <div class="legal-content">
+            <img class="logo" src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" />
+            <div>
+                <div>JJJ Consultores Peru E.I.R.L. (®)</div>
+                <div>RUC: 20111111111</div>
+                <div>JJJ Consultores Empresariales S.A.C. (®)</div>
+                <div>RUC: 20604236135</div>
+            </div>
         </div>
-        <div>
-            <a href="#">Términos de Uso</a>
-            <a href="#">Aviso Legal</a>
-            <a href="#">Política de Privacidad</a>
-            <a href="#">Aviso de Cookies</a>
-            <a href="#">Contacto</a>
-            <a href="#">Paga tu factura aquí</a>
-        </div>
+        <a href="#">Términos de Uso</a>
+        <a href="#">Aviso Legal</a>
+        <a href="#">Política de Privacidad</a>
+        <a href="#">Aviso de Cookies</a>
+        <a href="#">Contacto</a>
+        <a href="#">Paga tu factura aquí</a>
     </div>
 
     <script>
