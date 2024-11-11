@@ -89,6 +89,32 @@
         .legal-content .logo {
             margin-right: 10px; /* Añade espacio entre el logo y el texto */
         }
+
+        /* Estilo para los cuadros */
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 900px;
+            margin: 40px auto;
+        }
+
+        .dashboard .card {
+            background-color: white;
+            color: #007BFF;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .dashboard .card h2 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+
     </style>
 </head>
 <body>
@@ -100,6 +126,16 @@
         <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" onclick="sendMessage()" class="logo">
     </div>
     <p class="footer-phrase">Simple and complete, that's JJJ.</p>
+
+    <!-- Sección de cuadros -->
+    <div class="dashboard">
+        <div class="card"><h2>Mis Pendientes</h2></div>
+        <div class="card"><h2>Notificaciones</h2></div>
+        <div class="card"><h2>Mis Pedidos</h2></div>
+        <div class="card"><h2>Mis Impuestos del Mes</h2></div>
+        <div class="card"><h2>Notificaciones no atendidas</h2></div>
+        <div class="card"><h2>Bloc de notas</h2></div>
+    </div>
 
     <div class="legal-footer">
         <div class="legal-content">
