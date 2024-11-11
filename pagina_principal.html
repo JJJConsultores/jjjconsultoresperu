@@ -7,16 +7,15 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #007BFF; /* Fondo azul */
-            color: white; /* Color de texto blanco */
+            background-color: #007BFF;
+            color: white;
             text-align: center;
             padding: 50px;
         }
 
-        /* Estilo para la franja de la parte legal */
         .legal-footer {
-            background-color: #002D62; /* Azul oscuro */
-            color: lightgray; /* Color gris claro */
+            background-color: #003d80;
+            color: lightgray;
             padding: 10px;
             text-align: center;
             font-size: 0.9em;
@@ -26,27 +25,24 @@
             width: 100%;
         }
 
-        /* Estilo para los enlaces en la franja legal */
         .legal-footer a {
             color: lightgray;
             margin: 0 10px;
             text-decoration: none;
-            font-size: 14px;
         }
 
-        /* Estilo para los logos y botones */
         #chat {
             max-width: 500px;
             margin: auto;
-            display: block; /* Mostrar el chat */
+            display: block;
         }
 
         h1 {
-            margin-bottom: 0; /* Sin margen inferior */
+            margin-bottom: 0;
         }
 
         #greeting {
-            margin-top: 0; /* La fecha va arriba */
+            margin-top: 10px;
         }
 
         .message {
@@ -65,49 +61,45 @@
             text-align: left;
         }
 
-        /* Estilo para el campo de texto y botón */
         #userInput {
-            width: 80%; /* Ajustar el tamaño del input */
-            height: 30px; /* Reducir altura del campo */
-            padding: 5px 10px; /* Ajustar el padding para reducir el alto */
-            margin: 10px 0; /* Espaciado vertical */
-            border: 1px solid #ccc; /* Borde suave */
-            border-radius: 5px; /* Bordes redondeados */
+            width: 80%;
+            height: 30px;
+            padding: 5px 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
 
         button {
-            background-color: #0056b3; /* Color del botón */
-            color: white; /* Color del texto del botón */
-            padding: 10px 20px; /* Espaciado interno */
-            border: none; /* Sin borde */
-            border-radius: 5px; /* Bordes redondeados */
-            cursor: pointer; /* Cambiar cursor al pasar */
+            background-color: #0056b3;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
         button:hover {
-            background-color: #003d80; /* Color del botón al pasar el mouse */
+            background-color: #003d80;
         }
 
-        /* Estilo para la frase debajo del buscador */
         .footer-phrase {
             font-style: italic;
             color: white;
             margin-top: 10px;
         }
 
-        /* Estilo del logo */
         .logo {
             border-radius: 50%;
-            width: 40px; /* Ajustado para ser proporcional */
-            height: 40px; /* Ajustado para ser proporcional */
+            width: 40px;
+            height: 40px;
             cursor: pointer;
             margin-left: 10px;
             vertical-align: middle;
         }
 
-        /* Estilo para la franja legal */
         .legal-content {
-            color: white;
+            color: gray;
             display: flex;
             align-items: center;
             justify-content: flex-start;
@@ -119,64 +111,34 @@
             margin-right: 10px;
         }
 
-        /* Estilo para centrar los enlaces en la franja legal */
-        .legal-footer .links {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 10px;
-        }
-
-        .legal-footer .links a {
+        .legal-footer a {
+            margin: 0 15px;
             color: lightgray;
-            margin: 0 10px;
-        }
-
-        .legal-footer .data {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            color: white;
-        }
-
-        .legal-footer .data div {
-            margin-bottom: 5px;
-        }
-
-        .legal-footer .links {
-            margin-top: 0;
-            align-items: center;
-        }
-
-        /* Ajuste para que los enlaces estén al centro y a la altura del RUC */
-        .legal-footer .links a {
             font-size: 14px;
         }
     </style>
 </head>
 <body>
-    <h1 id="welcomeMessage"></h1>
+    <h1 id="welcomeMessage">¡Bienvenido!</h1>
     <p id="greeting"></p>
     <div id="chat">
         <div id="messages"></div>
         <input type="text" id="userInput" placeholder="Escribe tu pregunta..." />
-        <!-- Logo usado como botón enviar -->
-        <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" onclick="sendMessage()" class="logo">
+        <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" 
+             onclick="sendMessage()" 
+             class="logo">
     </div>
     <p class="footer-phrase">Simple and complete, that's JJJ.</p>
 
-    <!-- Franja legal -->
     <div class="legal-footer">
         <div class="legal-content">
             <img class="logo" src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" />
-            <div class="data">
+            <div style="text-align: left; color: white;">
                 <div>JJJ Consultores Empresariales S.A.C.®</div>
                 <div>RUC: 20604236135</div>
             </div>
         </div>
-
-        <!-- Enlaces centrados -->
-        <div class="links">
+        <div style="display: flex; justify-content: center; align-items: center;">
             <a href="#">Términos de Uso</a>
             <a href="#">Aviso Legal</a>
             <a href="#">Paga tu factura aquí</a>
@@ -193,10 +155,11 @@
                 const hours = now.getHours();
                 const greetingText = hours < 12 ? "Buenos días" : (hours < 18 ? "Buenas tardes" : "Buenas noches");
                 const dateText = now.toLocaleDateString('es-PE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+                document.getElementById('greeting').innerText = `Hoy es ${dateText}.`;
                 document.getElementById('welcomeMessage').innerText = `${greetingText}, ${clientName}!`;
-                document.getElementById('greeting').innerText = `Hoy es ${dateText}.`; // Mostrar la fecha correctamente
+                document.getElementById('chat').style.display = 'block';
             } else {
-                window.location.href = 'index.html'; // Redirigir a la página de inicio si no hay sesión
+                window.location.href = 'index.html';
             }
         };
 
@@ -206,7 +169,7 @@
 
             displayMessage(userInput, "user-message");
 
-            const apiKey = "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"; // Tu clave de API aquí
+            const apiKey = "your-api-key";
             const response = await fetch("https://api.openai.com/v1/chat/completions", {
                 method: "POST",
                 headers: {
@@ -214,7 +177,7 @@
                     "Authorization": `Bearer ${apiKey}`
                 },
                 body: JSON.stringify({
-                    model: "gpt-3.5-turbo", // o usa "gpt-4" si tienes acceso
+                    model: "gpt-3.5-turbo",
                     messages: [{ role: "user", content: userInput }]
                 })
             });
@@ -223,7 +186,7 @@
             const botMessage = data.choices[0].message.content;
             displayMessage(botMessage, "bot-message");
 
-            document.getElementById("userInput").value = ""; 
+            document.getElementById("userInput").value = "";
         }
 
         function displayMessage(text, className) {
