@@ -15,7 +15,7 @@
 
         /* Estilo para la franja de la parte legal */
         .legal-footer {
-            background-color: #002C5F; /* Azul oscuro */
+            background-color: #002D62; /* Azul oscuro */
             color: lightgray; /* Color gris claro */
             padding: 10px;
             text-align: center;
@@ -29,8 +29,9 @@
         /* Estilo para los enlaces en la franja legal */
         .legal-footer a {
             color: lightgray;
-            margin: 0 15px;
+            margin: 0 10px;
             text-decoration: none;
+            font-size: 14px;
         }
 
         /* Estilo para los logos y botones */
@@ -119,15 +120,27 @@
         }
 
         /* Estilo para centrar los enlaces en la franja legal */
-        .legal-footer a {
-            margin: 0 15px;
-            color: lightgray;
-            font-size: 14px;
+        .legal-footer .links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        /* Alinear los enlaces legales al centro */
-        .legal-footer a {
-            display: inline-block;
+        .legal-footer .links a {
+            color: lightgray;
+            margin: 0 10px;
+        }
+
+        /* Alineación de los datos de la empresa y los enlaces */
+        .legal-footer .data {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            color: white;
+        }
+
+        .legal-footer .data div {
+            margin-bottom: 5px;
         }
     </style>
 </head>
@@ -138,9 +151,7 @@
         <div id="messages"></div>
         <input type="text" id="userInput" placeholder="Escribe tu pregunta..." />
         <!-- Logo usado como botón enviar -->
-        <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" 
-             onclick="sendMessage()" 
-             class="logo">
+        <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" onclick="sendMessage()" class="logo">
     </div>
     <p class="footer-phrase">Simple and complete, that's JJJ.</p>
 
@@ -148,35 +159,34 @@
     <div class="legal-footer">
         <div class="legal-content">
             <img class="logo" src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" />
-            <div style="text-align: left; color: white;"> <!-- Texto en blanco -->
+            <div class="data">
                 <div>JJJ Consultores Empresariales S.A.C.®</div>
                 <div>RUC: 20604236135</div>
             </div>
         </div>
-        <!-- Centrado de los enlaces -->
-        <div style="display: flex; justify-content: center;">
+
+        <!-- Enlaces centrados -->
+        <div class="links">
             <a href="#">Términos de Uso</a>
             <a href="#">Aviso Legal</a>
-            <a href="#">Paga tu factura aquí</a> <!-- Enlace centrado -->
+            <a href="#">Paga tu factura aquí</a>
             <a href="#">Aviso de Cookies</a>
             <a href="#">Contacto</a>
         </div>
     </div>
 
     <script>
-        // Función para cargar el nombre del cliente y la fecha/hora
         window.onload = function() {
             const clientName = sessionStorage.getItem("clientName");
             if (clientName) {
-                // Saludo según la hora
+                document.getElementById('welcomeMessage').innerText = `¡Bienvenido, ${clientName}!`;
+                document.getElementById('chat').style.display = 'block'; // Mostrar el chat
+
                 const now = new Date();
                 const hours = now.getHours();
                 const greetingText = hours < 12 ? "Buenos días" : (hours < 18 ? "Buenas tardes" : "Buenas noches");
-                document.getElementById('welcomeMessage').innerText = `${greetingText}, ${clientName}!`;  // Cambio en el saludo
-
-                // Modificar la fecha para mostrar solo el día, mes y año
                 const dateText = now.toLocaleDateString('es-PE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-                document.getElementById('greeting').innerText = `Hoy es ${dateText}`; // Solo muestra la fecha
+                document.getElementById('greeting').innerText = `Hoy es ${dateText}.`; // Mostrar saludo y fecha
             } else {
                 window.location.href = 'index.html'; // Redirigir a la página de inicio si no hay sesión
             }
