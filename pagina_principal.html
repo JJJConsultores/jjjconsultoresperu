@@ -46,7 +46,7 @@
         }
 
         #greeting {
-            margin-top: 10px; /* Espacio entre fecha y saludo (dos "enter") */
+            margin-top: 0; /* La fecha va arriba */
         }
 
         .message {
@@ -124,6 +124,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-top: 10px;
         }
 
         .legal-footer .links a {
@@ -131,7 +132,6 @@
             margin: 0 10px;
         }
 
-        /* Alineación de los datos de la empresa y los enlaces */
         .legal-footer .data {
             display: flex;
             align-items: center;
@@ -142,10 +142,20 @@
         .legal-footer .data div {
             margin-bottom: 5px;
         }
+
+        .legal-footer .links {
+            margin-top: 0;
+            align-items: center;
+        }
+
+        /* Ajuste para que los enlaces estén al centro y a la altura del RUC */
+        .legal-footer .links a {
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
-    <h1 id="welcomeMessage">¡Bienvenido!</h1>
+    <h1 id="welcomeMessage"></h1>
     <p id="greeting"></p>
     <div id="chat">
         <div id="messages"></div>
@@ -179,14 +189,12 @@
         window.onload = function() {
             const clientName = sessionStorage.getItem("clientName");
             if (clientName) {
-                document.getElementById('welcomeMessage').innerText = `¡Bienvenido, ${clientName}!`;
-                document.getElementById('chat').style.display = 'block'; // Mostrar el chat
-
                 const now = new Date();
                 const hours = now.getHours();
                 const greetingText = hours < 12 ? "Buenos días" : (hours < 18 ? "Buenas tardes" : "Buenas noches");
                 const dateText = now.toLocaleDateString('es-PE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-                document.getElementById('greeting').innerText = `Hoy es ${dateText}.`; // Mostrar saludo y fecha
+                document.getElementById('welcomeMessage').innerText = `${greetingText}, ${clientName}!`;
+                document.getElementById('greeting').innerText = `Hoy es ${dateText}.`; // Mostrar la fecha correctamente
             } else {
                 window.location.href = 'index.html'; // Redirigir a la página de inicio si no hay sesión
             }
