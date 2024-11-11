@@ -9,23 +9,27 @@
             font-family: Arial, sans-serif;
             background-color: #007BFF;
             color: white;
+            text-align: center;
+            padding: 50px;
+            margin: 0;
             display: flex;
             flex-direction: column;
-            margin: 0;
-            min-height: 100vh; /* Ocupa el alto completo de la pantalla */
+            min-height: 100vh;
         }
 
-        /* Barra lateral */
+        /* Franja lateral */
         .sidebar {
             width: 200px;
             background-color: #2c2c2c; /* Gris oscuro */
             color: white;
             padding: 20px;
             height: 100vh;
-            box-sizing: border-box;
             position: fixed;
             left: 0;
             top: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
 
         .sidebar h2 {
@@ -47,36 +51,65 @@
             color: white;
         }
 
-        /* Círculos de colores */
         .circle {
             width: 10px;
             height: 10px;
             border-radius: 50%;
             margin-right: 10px;
         }
-        .circle.perfil { background-color: #FF5733; }   /* Color para Perfil */
-        .circle.sunat { background-color: #33FF57; }    /* Color para SUNAT */
-        .circle.sunafil { background-color: #3357FF; }  /* Color para SUNAFIL */
-        .circle.afp { background-color: #F5A623; }      /* Color para AFP */
+        .circle.perfil { background-color: #FF5733; }
+        .circle.sunat { background-color: #33FF57; }
+        .circle.sunafil { background-color: #3357FF; }
+        .circle.afp { background-color: #F5A623; }
 
-        /* Contenedor principal */
-        .main-content {
-            margin-left: 220px; /* Espacio para la barra lateral */
-            padding: 50px;
-            width: calc(100% - 220px);
-            box-sizing: border-box;
+        .legal-footer {
+            background-color: #2c2c2c; /* Gris oscuro */
+            color: lightgray;
+            padding: 10px 20px;
             text-align: center;
-            flex-grow: 1; /* Hace que el contenido ocupe el espacio restante */
+            font-size: 0.9em;
+            position: fixed;
+            left: 200px;
+            bottom: 0;
+            width: calc(100% - 200px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: auto;
         }
 
-        #greeting, #welcomeMessage {
-            text-align: center;
+        .legal-content {
+            color: white;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            font-style: italic;
+        }
+
+        .legal-footer a {
+            margin: 0 15px;
+            color: lightgray;
+            font-size: 14px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 20px;
         }
 
         #chat {
-            max-width: 600px;
-            margin: 20px auto;
+            max-width: 500px;
+            margin: auto;
             display: block;
+        }
+
+        h1 {
+            margin-bottom: 0;
+        }
+
+        #greeting {
+            margin-top: 10px;
         }
 
         #userInput {
@@ -94,23 +127,36 @@
             margin-top: 10px;
         }
 
+        .logo {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        .legal-content .logo {
+            margin-right: 10px;
+        }
+
         /* Estilos para los cuadros */
         .dashboard {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
-            max-width: 1200px;
+            max-width: 1200px; /* Ancho aumentado */
             margin: 40px auto;
         }
 
         .dashboard .card {
             background-color: white;
             color: black;
-            padding: 20px;
+            padding: 30px;
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: left;
-            font-size: 1em;
+            font-size: 0.9em;
             font-weight: bold;
             border: 1px solid #ddd;
             height: 200px;
@@ -121,43 +167,6 @@
             font-size: 1em;
             color: black;
             font-weight: bold;
-        }
-
-        /* Franja legal */
-        .legal-footer {
-            background-color: #2c2c2c; /* Gris oscuro */
-            color: lightgray;
-            padding: 10px 20px;
-            text-align: center;
-            font-size: 0.9em;
-            position: fixed;
-            left: 200px; /* Deja espacio para la barra lateral */
-            bottom: 0;
-            width: calc(100% - 200px); /* Ajuste para ocupar el ancho restante */
-            height: auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .legal-content {
-            color: white;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            font-style: italic;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: flex-end;
-            padding-right: 20px;
-        }
-
-        .legal-footer a {
-            margin: 0 15px;
-            color: lightgray;
-            font-size: 14px;
         }
 
     </style>
@@ -174,29 +183,25 @@
         </ul>
     </div>
 
-    <!-- Contenido principal -->
-    <div class="main-content">
-        <p id="greeting"></p> <!-- Fecha dinámica -->
-        <h1 id="welcomeMessage"></h1> <!-- Saludo dinámico -->
-        <div id="chat">
-            <div id="messages"></div>
-            <input type="text" id="userInput" placeholder="Escribe tu pregunta..." />
-            <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" onclick="sendMessage()" class="logo">
-        </div>
-        <p class="footer-phrase">Simple and complete, that's JJJ.</p>
+    <p id="greeting"></p>
+    <h1 id="welcomeMessage">¡Bienvenido!</h1>
+    <div id="chat">
+        <div id="messages"></div>
+        <input type="text" id="userInput" placeholder="Escribe tu pregunta..." />
+        <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" onclick="sendMessage()" class="logo">
+    </div>
+    <p class="footer-phrase">Simple and complete, that's JJJ.</p>
 
-        <!-- Sección de cuadros -->
-        <div class="dashboard">
-            <div class="card"><h2>Mis Pendientes</h2></div>
-            <div class="card"><h2>Notificaciones</h2></div>
-            <div class="card"><h2>Mis Pedidos</h2></div>
-            <div class="card"><h2>Mis Impuestos del Mes</h2></div>
-            <div class="card"><h2>Notificaciones no atendidas</h2></div>
-            <div class="card"><h2>Bloc de notas</h2></div>
-        </div>
+    <!-- Sección de cuadros -->
+    <div class="dashboard">
+        <div class="card"><h2>Mis Pendientes</h2></div>
+        <div class="card"><h2>Notificaciones</h2></div>
+        <div class="card"><h2>Mis Pedidos</h2></div>
+        <div class="card"><h2>Mis Impuestos del Mes</h2></div>
+        <div class="card"><h2>Notificaciones no atendidas</h2></div>
+        <div class="card"><h2>Bloc de notas</h2></div>
     </div>
 
-    <!-- Franja legal -->
     <div class="legal-footer">
         <div class="legal-content">
             <img class="logo" src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" />
@@ -217,12 +222,7 @@
             const now = new Date();
             const hours = now.getHours();
             const greetingText = hours < 12 ? "¡Buenos días" : (hours < 18 ? "¡Buenas tardes" : "¡Buenas noches");
-            const dateText = now.toLocaleDateString('es-PE', { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-            });
+            const dateText = now.toLocaleDateString('es-PE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
             document.getElementById('greeting').innerText = `Hoy, ${dateText}.`;
             document.getElementById('welcomeMessage').innerText = `${greetingText}, ${clientName}!`;
             document.getElementById('chat').style.display = 'block';
