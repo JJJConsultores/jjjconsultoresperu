@@ -31,7 +31,6 @@
             color: lightgray;
             margin: 0 10px;
             text-decoration: none;
-            font-size: 14px;
         }
 
         /* Estilo para los logos y botones */
@@ -46,7 +45,7 @@
         }
 
         #greeting {
-            margin-top: 10px; /* Espacio entre fecha y saludo (dos "enter") */
+            margin-top: 40px; /* Espacio entre fecha y saludo */
         }
 
         .message {
@@ -107,7 +106,7 @@
 
         /* Estilo para la franja legal */
         .legal-content {
-            color: white;
+            color: gray;
             display: flex;
             align-items: center;
             justify-content: flex-start;
@@ -122,23 +121,14 @@
         /* Estilo para centrar los enlaces en la franja legal */
         .legal-footer a {
             margin: 0 15px;
-            color: white; /* Color blanco para los enlaces */
+            color: lightgray;
             font-size: 14px;
         }
-
-        /* Centrado de los enlaces y ajuste de la altura */
-        .legal-footer .legal-links {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 60px; /* Altura ajustada para centrar verticalmente */
-        }
-
     </style>
 </head>
 <body>
+    <p id="greeting"></p> <!-- Fecha arriba del saludo -->
     <h1 id="welcomeMessage">¡Bienvenido!</h1>
-    <p id="greeting"></p>
     <div id="chat">
         <div id="messages"></div>
         <input type="text" id="userInput" placeholder="Escribe tu pregunta..." />
@@ -153,16 +143,13 @@
     <div class="legal-footer">
         <div class="legal-content">
             <img class="logo" src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" />
-            <div style="text-align: left; color: white;"> <!-- Texto en blanco y alineado a la izquierda -->
-                <div>JJJ Consultores Peru E.I.R.L.®</div>
-                <div>RUC: 20111111111</div>
-                <div>JJJ Consultores Empresariales S.A.C.®</div>
+            <div style="text-align: left; color: black;"> <!-- Texto en negro y alineado a la izquierda -->
+                <div>JJJ Consultores Empresariales S.A.C. (®)</div>
                 <div>RUC: 20604236135</div>
             </div>
         </div>
-
-        <!-- Centrado de los enlaces en la franja legal a la altura correcta -->
-        <div class="legal-links">
+        <!-- Centrado de los enlaces -->
+        <div style="display: flex; justify-content: center;">
             <a href="#">Términos de Uso</a>
             <a href="#">Aviso Legal</a>
             <a href="#">Paga tu factura aquí</a> <!-- Enlace centrado -->
