@@ -20,14 +20,13 @@
         /* Franja lateral */
         .sidebar {
             width: 200px;
-            background-color: #2c2c2c; /* Gris oscuro */
+            background-color: #2c2c2c;
             color: white;
             padding: 20px;
             height: 100vh;
             position: fixed;
             left: 0;
             top: 0;
-            bottom: 40px; /* Se detiene antes de la franja legal */
             display: flex;
             flex-direction: column;
             align-items: flex-start;
@@ -63,17 +62,16 @@
         .circle.sunafil { background-color: #3357FF; }
         .circle.afp { background-color: #F5A623; }
 
-        /* Franja legal */
         .legal-footer {
-            background-color: #2c2c2c; /* Gris oscuro */
+            background-color: #2c2c2c;
             color: lightgray;
             padding: 10px 20px;
             text-align: center;
             font-size: 0.9em;
             position: fixed;
-            left: 0;
+            left: 200px;
             bottom: 0;
-            width: 100%; /* Ocupa todo el ancho de la pantalla */
+            width: calc(100% - 200px);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -101,7 +99,7 @@
         }
 
         #chat {
-            max-width: 600px; /* Aumenta el ancho del contenedor del buscador */
+            max-width: 600px;
             margin: auto;
             display: flex;
             justify-content: center;
@@ -109,11 +107,11 @@
         }
 
         #userInput {
-            width: 80%; /* Ajusta el ancho del input */
-            max-width: 500px; /* Aumenta el tamaño del campo de búsqueda */
+            width: 80%;
+            max-width: 500px;
             height: 30px;
             padding: 5px 10px;
-            margin-right: 10px; /* Espacio entre el input y el logo */
+            margin-right: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
         }
@@ -127,7 +125,7 @@
         }
 
         .legal-content .logo {
-            margin-right: 15px; /* Añade espacio entre el logo y el texto */
+            margin-right: 15px;
         }
 
         .footer-phrase {
@@ -148,10 +146,10 @@
         .dashboard {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 20px; /* Espacio entre los cuadros */
-            max-width: calc(100% - 240px); /* Ancho total con márgenes */
-            margin: 40px auto; /* Espacio alrededor del contenedor */
-            padding-left: 220px; /* Espacio desde la franja lateral */
+            gap: 30px; /* Espacio entre los cuadros */
+            width: 80%; /* Ocupar el 80% del ancho de la página */
+            margin: 40px auto;
+            padding-left: 0;
         }
 
         .dashboard .card {
@@ -161,7 +159,7 @@
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: left;
-            font-size: 0.9em;
+            font-size: 1em;
             font-weight: bold;
             border: 1px solid #ddd;
             height: 250px;
