@@ -20,7 +20,7 @@
         /* Franja lateral */
         .sidebar {
             width: 200px;
-            background-color: #2c2c2c;
+            background-color: #2c2c2c; /* Gris oscuro */
             color: white;
             padding: 20px;
             height: 100vh;
@@ -63,7 +63,7 @@
         .circle.afp { background-color: #F5A623; }
 
         .legal-footer {
-            background-color: #2c2c2c;
+            background-color: #2c2c2c; /* Gris oscuro */
             color: lightgray;
             padding: 10px 20px;
             text-align: center;
@@ -99,7 +99,7 @@
         }
 
         #chat {
-            max-width: 600px;
+            max-width: 600px; /* Aumenta el ancho del contenedor del buscador */
             margin: auto;
             display: flex;
             justify-content: center;
@@ -107,11 +107,11 @@
         }
 
         #userInput {
-            width: 80%;
-            max-width: 500px;
+            width: 80%; /* Ajusta el ancho del input */
+            max-width: 500px; /* Aumenta el tamaño del campo de búsqueda */
             height: 30px;
             padding: 5px 10px;
-            margin-right: 10px;
+            margin-right: 10px; /* Espacio entre el input y el logo */
             border: 1px solid #ccc;
             border-radius: 5px;
         }
@@ -125,7 +125,7 @@
         }
 
         .legal-content .logo {
-            margin-right: 15px;
+            margin-right: 15px; /* Añade espacio entre el logo y el texto */
         }
 
         .footer-phrase {
@@ -145,11 +145,11 @@
         /* Estilos para los cuadros */
         .dashboard {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px; /* Espacio entre los cuadros */
-            width: 80%; /* Ocupar el 80% del ancho de la página */
-            margin: 40px auto;
-            padding-left: 0;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px 40px; /* Espacio entre columnas y filas */
+            max-width: calc(100% - 260px); /* Ajuste de ancho total, considerando margen lateral y espacio */
+            margin: 40px 30px; /* Margen general para espacios alrededor */
+            margin-left: 230px; /* Deja espacio a la izquierda para la franja lateral */
         }
 
         .dashboard .card {
@@ -159,11 +159,11 @@
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: left;
-            font-size: 1em;
+            font-size: 0.9em;
             font-weight: bold;
             border: 1px solid #ddd;
             height: 250px;
-            width: 100%;
+            width: 100%; /* Aumenta el tamaño de cada cuadro para que sea más amplio */
         }
 
         .dashboard .card h2 {
