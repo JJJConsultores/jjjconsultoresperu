@@ -23,10 +23,10 @@
             background-color: #2c2c2c; /* Gris oscuro */
             color: white;
             padding: 20px;
-            height: 100vh;
             position: fixed;
             left: 0;
             top: 0;
+            bottom: 40px; /* Se detiene antes de la franja legal */
             display: flex;
             flex-direction: column;
             align-items: flex-start;
@@ -62,6 +62,7 @@
         .circle.sunafil { background-color: #3357FF; }
         .circle.afp { background-color: #F5A623; }
 
+        /* Franja legal */
         .legal-footer {
             background-color: #2c2c2c; /* Gris oscuro */
             color: lightgray;
@@ -69,9 +70,9 @@
             text-align: center;
             font-size: 0.9em;
             position: fixed;
-            left: 200px;
+            left: 0;
             bottom: 0;
-            width: calc(100% - 200px);
+            width: 100%; /* Ocupa todo el ancho de la pantalla */
             display: flex;
             justify-content: space-between;
             align-items: center;
