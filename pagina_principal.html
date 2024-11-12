@@ -99,34 +99,9 @@
         }
 
         #chat {
-            max-width: 800px; /* Aumenta el ancho del contenedor del buscador */
+            max-width: 500px;
             margin: auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        #userInput {
-            width: 80%; /* Ajusta el ancho del input */
-            max-width: 600px; /* Aumenta el tamaño del campo de búsqueda */
-            height: 30px;
-            padding: 5px 10px;
-            margin-right: 10px; /* Espacio entre el input y el logo */
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .logo {
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-        }
-
-        .footer-phrase {
-            font-style: italic;
-            color: white;
-            margin-top: 10px;
+            display: block;
         }
 
         h1 {
@@ -137,12 +112,40 @@
             margin-top: 10px;
         }
 
+        #userInput {
+            width: 80%;
+            height: 30px;
+            padding: 5px 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .footer-phrase {
+            font-style: italic;
+            color: white;
+            margin-top: 10px;
+        }
+
+        .logo {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        .legal-content .logo {
+            margin-right: 10px;
+        }
+
         /* Estilos para los cuadros */
         .dashboard {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
-            max-width: 1400px; /* Aumenta el ancho total de los cuadros */
+            max-width: 1200px; /* Ancho aumentado */
             margin: 40px auto;
         }
 
@@ -156,16 +159,16 @@
             font-size: 0.9em;
             font-weight: bold;
             border: 1px solid #ddd;
-            height: 250px; /* Altura aumentada para asemejarse a los cuadros de Asana */
-            width: 90%; /* Aumenta el tamaño de cada cuadro */
+            height: 200px;
         }
 
         .dashboard .card h2 {
             margin: 0;
-            font-size: 1em; /* Tamaño más pequeño y en negrita */
+            font-size: 1em;
             color: black;
             font-weight: bold;
         }
+
     </style>
 </head>
 <body>
@@ -183,6 +186,7 @@
     <p id="greeting"></p>
     <h1 id="welcomeMessage">¡Bienvenido!</h1>
     <div id="chat">
+        <div id="messages"></div>
         <input type="text" id="userInput" placeholder="Escribe tu pregunta..." />
         <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" onclick="sendMessage()" class="logo">
     </div>
@@ -221,7 +225,7 @@
             const dateText = now.toLocaleDateString('es-PE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
             document.getElementById('greeting').innerText = `Hoy, ${dateText}.`;
             document.getElementById('welcomeMessage').innerText = `${greetingText}, ${clientName}!`;
-            document.getElementById('chat').style.display = 'flex';
+            document.getElementById('chat').style.display = 'block';
         };
 
         async function sendMessage() {
