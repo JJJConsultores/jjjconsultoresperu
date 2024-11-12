@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JJJ Consultores - Chat</title>
     <style>
-        /* Estilos generales */
         body {
             font-family: Arial, sans-serif;
             background-color: #007BFF;
@@ -20,7 +19,6 @@
             min-height: 100vh;
         }
 
-        /* Sidebar lateral */
         .sidebar {
             width: 200px;
             background-color: #2c2c2c;
@@ -65,7 +63,6 @@
         .circle.sunafil { background-color: #3357FF; }
         .circle.afp { background-color: #F5A623; }
 
-        /* Barra inferior */
         .legal-footer {
             background-color: #2c2c2c;
             color: lightgray;
@@ -105,10 +102,9 @@
             padding-right: 20px;
         }
 
-        /* Contenedor central */
         .main-content {
-            margin-left: 220px; /* Espacio para no chocar con el sidebar */
-            margin-right: 20px; /* Espacio en el borde derecho */
+            margin-left: 220px; /* Ajuste para centrar correctamente */
+            margin-right: 20px;
             text-align: center;
             flex-grow: 1;
         }
@@ -152,6 +148,27 @@
         #greeting {
             margin-top: 10px;
         }
+
+        /* Estilos para los cuadros */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Dos columnas */
+            gap: 20px; /* Espaciado entre los cuadros */
+            max-width: calc(100% - 240px); /* Ajuste de ancho para margen */
+            margin: 40px auto;
+        }
+
+        .dashboard .card {
+            background-color: white;
+            color: black;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-size: 1em;
+            font-weight: bold;
+            height: 250px; /* Aumento de la altura de los cuadros */
+        }
     </style>
 </head>
 <body>
@@ -160,8 +177,8 @@
         <h2>Menú</h2>
         <ul>
             <li><span class="circle perfil"></span>Perfil</li>
-            <li><span class="circle sunat"></span>SUNAT</li>
-            <li><span class="circle sunafil"></span>SUNAFIL</li>
+            <li><span class="circle sunat"></span>Sunat</li>
+            <li><span class="circle sunafil"></span>Sunafil</li>
             <li><span class="circle afp"></span>AFP</li>
         </ul>
     </div>
@@ -175,17 +192,27 @@
             <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" onclick="sendMessage()" class="logo">
         </div>
         <p class="footer-phrase">Simple and complete, that's JJJ.</p>
+
+        <!-- Sección de cuadros -->
+        <div class="dashboard">
+            <div class="card">Mis Pendientes</div>
+            <div class="card">Notificaciones</div>
+            <div class="card">Mis Pedidos</div>
+            <div class="card">Mis Impuestos del Mes</div>
+            <div class="card">Notificaciones no Atendidas</div>
+            <div class="card">Bloc de Notas</div>
+        </div>
     </div>
 
     <!-- Footer -->
     <div class="legal-footer">
         <div class="legal-content">
             <img class="logo" src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" />
-            <div style="font-size: 0.8em;">JJJ Consultores Empresariales S.A.C.® / RUC: 20604236136</div>
+            <div style="font-size: 0.8em;">JJJ Consultores Empresariales S.A.C.® / RUC: 20604236135</div>
         </div>
         <div class="footer-links">
             <a href="#">Contacto</a>
-            <a href="#">Paga tu factura aquí</a>
+            <a href="#">Paga tu factura Aquí</a>
             <a href="#">Términos de Uso</a>
             <a href="#">Aviso Legal</a>
             <a href="#">Aviso de Cookies</a>
