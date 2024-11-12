@@ -17,9 +17,10 @@
             min-height: 100vh;
         }
 
+        /* Franja lateral */
         .sidebar {
             width: 200px;
-            background-color: #2c2c2c;
+            background-color: #2c2c2c; /* Gris oscuro */
             color: white;
             padding: 20px;
             height: 100vh;
@@ -62,7 +63,7 @@
         .circle.afp { background-color: #F5A623; }
 
         .legal-footer {
-            background-color: #2c2c2c;
+            background-color: #2c2c2c; /* Gris oscuro */
             color: lightgray;
             padding: 10px 20px;
             text-align: center;
@@ -74,7 +75,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: auto;
         }
 
         .legal-content {
@@ -98,7 +98,7 @@
         }
 
         #chat {
-            max-width: 600px;
+            max-width: 800px; /* Ajuste del ancho del buscador */
             margin: auto;
             display: flex;
             justify-content: center;
@@ -106,11 +106,10 @@
         }
 
         #userInput {
-            width: 80%;
-            max-width: 500px;
+            width: 90%; /* Expande el ancho del input */
             height: 30px;
             padding: 5px 10px;
-            margin-right: 10px;
+            margin-right: 10px; /* Espacio entre el input y el logo */
             border: 1px solid #ccc;
             border-radius: 5px;
         }
@@ -124,7 +123,7 @@
         }
 
         .legal-content .logo {
-            margin-right: 15px;
+            margin-right: 15px; /* Espacio entre el logo y el texto */
         }
 
         .footer-phrase {
@@ -140,39 +139,10 @@
         #greeting {
             margin-top: 10px;
         }
-
-        .dashboard {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            column-gap: 30px;
-            row-gap: 30px;
-            max-width: 1400px;
-            margin: 40px auto;
-        }
-
-        .dashboard .card {
-            background-color: white;
-            color: black;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: left;
-            font-size: 0.9em;
-            font-weight: bold;
-            border: 1px solid #ddd;
-            height: 250px;
-            width: 100%;
-        }
-
-        .dashboard .card h2 {
-            margin: 0;
-            font-size: 1em;
-            color: black;
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
+    <!-- Barra lateral -->
     <div class="sidebar">
         <h2>Menú</h2>
         <ul>
@@ -190,15 +160,6 @@
         <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" onclick="sendMessage()" class="logo">
     </div>
     <p class="footer-phrase">Simple and complete, that's JJJ.</p>
-
-    <div class="dashboard">
-        <div class="card"><h2>Mis Pendientes</h2></div>
-        <div class="card"><h2>Notificaciones</h2></div>
-        <div class="card"><h2>Mis Pedidos</h2></div>
-        <div class="card"><h2>Mis Impuestos del Mes</h2></div>
-        <div class="card"><h2>Notificaciones no atendidas</h2></div>
-        <div class="card"><h2>Bloc de notas</h2></div>
-    </div>
 
     <div class="legal-footer">
         <div class="legal-content">
