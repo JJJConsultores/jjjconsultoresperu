@@ -5,9 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JJJ Consultores - Chat</title>
     <style>
+        /* Estilos generales */
         body {
             font-family: Arial, sans-serif;
             background-color: #007BFF;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 10%), 
+                              radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 10%);
+            background-position: 0 0, 50px 50px;
+            background-size: 100px 100px;
             color: white;
             margin: 0;
             display: flex;
@@ -85,7 +90,7 @@
         }
 
         .legal-content .logo {
-            margin-right: 20px; /* Espacio ajustado entre el logo y el texto */
+            margin-right: 20px;
         }
 
         .legal-footer a {
@@ -163,8 +168,8 @@
 
     <!-- Contenido principal -->
     <div class="main-content">
-        <p id="greeting">Hoy, martes, 12 de noviembre de 2024.</p>
-        <h1 id="welcomeMessage">¡Buenas tardes, Cliente!</h1>
+        <p id="greeting"></p>
+        <h1 id="welcomeMessage"></h1>
         <div id="chat">
             <input type="text" id="userInput" placeholder="Escribe tu pregunta..." />
             <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" onclick="sendMessage()" class="logo">
@@ -202,7 +207,6 @@
             const userInput = document.getElementById("userInput").value;
             if (!userInput) return;
 
-            // Simulación del mensaje enviado
             alert("Mensaje enviado: " + userInput);
             document.getElementById("userInput").value = "";
         }
