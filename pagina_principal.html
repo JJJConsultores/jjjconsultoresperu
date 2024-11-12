@@ -42,6 +42,7 @@
         .sidebar ul {
             list-style-type: none;
             padding: 0;
+            width: 100%;
         }
 
         .sidebar ul li {
@@ -59,9 +60,19 @@
             margin-right: 10px;
         }
         .circle.perfil { background-color: #FF5733; }
-        .circle.sunat { background-color: #33FF57; }
-        .circle.sunafil { background-color: #3357FF; }
-        .circle.afp { background-color: #F5A623; }
+        .circle.contable { background-color: #33FF57; }
+        .circle.laboral { background-color: #3357FF; }
+        .circle.documentos { background-color: #F5A623; }
+        .circle.descargables { background-color: #5A9BF6; }
+        .circle.subir { background-color: #FF9C33; }
+
+        /* Divider line after "Perfil" */
+        .divider {
+            width: 100%;
+            height: 1px;
+            background-color: gray;
+            margin: 15px 0;
+        }
 
         .legal-footer {
             background-color: #2c2c2c;
@@ -103,7 +114,7 @@
         }
 
         .main-content {
-            margin-left: 220px; /* Ajuste para centrar correctamente */
+            margin-left: 220px;
             margin-right: 20px;
             text-align: center;
             flex-grow: 1;
@@ -152,9 +163,9 @@
         /* Estilos para los cuadros */
         .dashboard {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* Dos columnas */
-            gap: 20px; /* Espaciado entre los cuadros */
-            max-width: calc(100% - 240px); /* Ajuste de ancho para margen */
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: calc(100% - 240px);
             margin: 40px auto;
         }
 
@@ -167,7 +178,16 @@
             text-align: center;
             font-size: 1em;
             font-weight: bold;
-            height: 250px; /* Aumento de la altura de los cuadros */
+            height: 250px;
+            position: relative;
+        }
+
+        /* Divider line in each card title */
+        .card-title {
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #ccc;
+            display: inline-block;
         }
     </style>
 </head>
@@ -177,9 +197,12 @@
         <h2>Menú</h2>
         <ul>
             <li><span class="circle perfil"></span>Perfil</li>
-            <li><span class="circle sunat"></span>Sunat</li>
-            <li><span class="circle sunafil"></span>Sunafil</li>
-            <li><span class="circle afp"></span>AFP</li>
+            <div class="divider"></div>
+            <li><span class="circle contable"></span>Contable</li>
+            <li><span class="circle laboral"></span>Laboral</li>
+            <li><span class="circle documentos"></span>Documentos</li>
+            <li><span class="circle descargables"></span>Descargables</li>
+            <li><span class="circle subir"></span>Subir Archivo</li>
         </ul>
     </div>
 
@@ -195,12 +218,12 @@
 
         <!-- Sección de cuadros -->
         <div class="dashboard">
-            <div class="card">Mis Pendientes</div>
-            <div class="card">Notificaciones</div>
-            <div class="card">Mis Pedidos</div>
-            <div class="card">Mis Impuestos del Mes</div>
-            <div class="card">Notificaciones no Atendidas</div>
-            <div class="card">Bloc de Notas</div>
+            <div class="card"><span class="card-title">Mis Pendientes</span></div>
+            <div class="card"><span class="card-title">Notificaciones</span></div>
+            <div class="card"><span class="card-title">Mis Pedidos</span></div>
+            <div class="card"><span class="card-title">Mis Impuestos del Mes</span></div>
+            <div class="card"><span class="card-title">Notificaciones no Atendidas</span></div>
+            <div class="card"><span class="card-title">Bloc de Notas</span></div>
         </div>
     </div>
 
