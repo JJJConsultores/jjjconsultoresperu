@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - JJJ Consultores</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #333333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .contact-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 30px;
+            width: 90%;
+            max-width: 1100px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Ajuste para "Escríbenos" */
+        h1 {
+            font-size: 1.7em;
+            color: #007BFF;
+            text-align: left;
+            margin-top: 10px;
+            padding-top: 0;
+            margin-bottom: 20px;
+        }
+
+        /* Ajuste para "Información de Contacto" */
+        .info-container h2 {
+            font-size: 1.7em;
+            color: #007BFF;
+            text-align: left;
+            margin-top: 3px;
+            padding-top: 0;
+            margin-bottom: 20px;
+        }
+
+        /* Cambiar el tamaño de la fuente de las etiquetas */
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+            font-size: 0.8em;
+        }
+
+        /* Cambiar el tamaño de la fuente de los campos de texto */
+        input[type="text"],
+        input[type="email"],
+        textarea,
+        select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 0.8em;
+        }
+
+        textarea {
+            resize: vertical;
+            height: 120px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .info-container {
+            color: #333;
+            line-height: 1.8;
+        }
+
+        .info-container p {
+            margin-top: -13px;
+            font-size: 0.8em;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+        }
+
+        .social-icons a {
+            text-decoration: none;
+            color: #007BFF;
+            font-size: 20px;
+        }
+
+        .social-icons a:hover {
+            color: #0056b3;
+        }
+
+        /* Mapa de Google */
+        .map-container iframe {
+            width: 100%;
+            height: 200px;
+            border: 0;
+        }
+
+        /* Alineación de las secciones */
+        .contact-container > div {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        /* Alineación de los elementos en la izquierda */
+        #contactForm {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .social-icons {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="contact-container">
+        <!-- Formulario de contacto -->
+        <div>
+            <div class="section-title">
+                <h1>Escríbenos</h1>
+            </div>
+            <form id="contactForm">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Nombre del Cliente">
+
+                <label for="correo">Correo</label>
+                <input type="email" id="correo" name="correo" placeholder="Correo del Cliente">
+
+                <label for="telefono">Teléfono</label>
+                <input type="text" id="telefono" name="telefono" placeholder="Teléfono del Cliente">
+
+                <label for="asunto">Asunto</label>
+                <select id="asunto" name="asunto">
+                    <option value="">Selecciona tu consulta</option>
+                    <option value="Consulta Laboral">Consulta Laboral</option>
+                    <option value="Consulta Tributaria">Consulta Tributaria</option>
+                    <option value="Consulta Contable">Consulta Contable</option>
+                    <option value="Solicitud Adicional">Solicitud Adicional</option>
+                    <option value="Problemas de Pago y de Sistema">Problemas de Pago y de Sistema</option>
+                    <option value="Area Administrativa">Área Administrativa</option>
+                </select>
+
+                <label for="mensaje">Mensaje</label>
+                <textarea id="mensaje" name="mensaje" placeholder="Escribe tu mensaje..."></textarea>
+
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+
+        <!-- Información de contacto -->
+        <div class="info-container">
+            <div class="section-title">
+                <h2>Información de Contacto</h2>
+            </div>
+            <p><strong>Razón Social:</strong> JJJ Consultores Empresariales S.A.C.</p>
+            <p><strong>RUC:</strong> 20604236135</p>
+            <p><strong>Teléfono:</strong> +51 1 4801060</p>
+            <p><strong>Dirección:</strong> Calle Esquilache Nº 371 Oficina 601 - 723, San Isidro - Lima - Lima</p>
+            <p><strong>Horario:</strong> Lunes a Viernes de 9:00 am a 6:00 pm</p>
+            <p><strong>Correo:</strong> <a href="mailto:atencionalcliente@jjjconsultoresempresariales.com">atencionalcliente@jjjconsultoresempresariales.com</a></p>
+            <p><strong>Web:</strong> <a href="https://www.jjjconsultoresempresariales.com" target="_blank">www.jjjconsultoresempresariales.com</a></p>
+
+            <!-- Google Maps -->
+            <div class="map-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.079065365416!2d-77.03239268464557!3d-12.102075091430436!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c85e40cf7795%3A0x909ba5ad3ea91e31!2sCalle%20Esquilache%20371%2C%20San%20Isidro%2015073%2C%20Peru!5e0!3m2!1sen!2sus!4v1634234800204!5m2!1sen!2sus"
+                    width="100%" height="200px" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+
+            <!-- Iconos de redes sociales -->
+            <div class="social-icons">
+                <a href="https://www.facebook.com/jjjconsultoresempresariales" target="_blank">
+                    <img src="https://github.com/JJJConsultores/jjjconsultoresperu/raw/main/social-icons/icons8-facebook-48.png" alt="Facebook" width="30" height="30">
+                </a>
+                <a href="https://www.instagram.com/jjjconsultoresempresariales" target="_blank">
+                    <img src="https://github.com/JJJConsultores/jjjconsultoresperu/raw/main/social-icons/icons8-instagram-48.png" alt="Instagram" width="30" height="30">
+                </a>
+                <a href="https://pe.linkedin.com/company/jjj-consultoresempresariales" target="_blank">
+                    <img src="https://github.com/JJJConsultores/jjjconsultoresperu/raw/main/social-icons/icons8-linkedin-48.png" alt="LinkedIn" width="30" height="30">
+                </a>
+                <a href="https://www.tiktok.com/@jjj_consultores" target="_blank">
+                    <img src="https://github.com/JJJConsultores/jjjconsultoresperu/raw/main/social-icons/icons8-tiktok-50.png" alt="TikTok" width="30" height="30">
+                </a>
+                <a href="https://wa.me/51923249938" target="_blank">
+                    <img src="https://github.com/JJJConsultores/jjjconsultoresperu/raw/main/social-icons/icons8-whatsapp-48.png" alt="WhatsApp" width="30" height="30">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const rucCliente = sessionStorage.getItem("clienteRUC");
+
+                if (!rucCliente) {
+                    alert("No se ha encontrado el cliente que inició sesión.");
+                    return;
+                }
+
+                const response = await fetch('clientes.json');
+                const clientesData = await response.json();
+
+                const clienteActual = clientesData.find(cliente => cliente.ruc === rucCliente);
+
+                if (clienteActual) {
+                    document.getElementById('nombre').value = clienteActual.razonSocial || '';
+                    document.getElementById('correo').value = clienteActual.correo || '';
+                    document.getElementById('telefono').value = clienteActual.telefono || '';
+                } else {
+                    alert("Cliente no encontrado en el archivo JSON.");
+                }
+
+            } catch (error) {
+                console.error('Error al cargar los datos del JSON:', error);
+            }
+
+            document.getElementById('contactForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const asunto = document.getElementById('asunto').value;
+                let destinatario;
+
+                switch (asunto) {
+                    case 'Consulta Laboral':
+                        destinatario = 'planillas@jjjconsultoresempresariales.com';
+                        break;
+                    case 'Consulta Tributaria':
+                    case 'Consulta Contable':
+                        destinatario = 'contabilidad@jjjconsultoresempresariales.com';
+                        break;
+                    case 'Solicitud Adicional':
+                    case 'Problemas de Pago y de Sistema':
+                    case 'Area Administrativa':
+                        destinatario = 'administracion@jjjconsultoresempresariales.com';
+                        break;
+                    default:
+                        alert("Por favor, selecciona un asunto válido.");
+                        return;
+                }
+
+                alert(`El mensaje será enviado a: ${destinatario}`);
+                this.reset();
+            });
+        });
+    </script>
+</body>
+</html>
