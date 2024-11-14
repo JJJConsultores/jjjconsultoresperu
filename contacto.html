@@ -183,9 +183,9 @@
         <!-- Información de contacto -->
         <div class="info-container">
             <h2>Información de Contacto</h2>
-            <p><strong>Razón Social:</strong> JJJ Consultores Empresariales S.A.C.</p>
-            <p><strong>RUC:</strong> 20604236135</p>
-            <p><strong>Teléfono:</strong> +51 1 4801060</p>
+            <p><strong>Razón Social:</strong> <span id="empresaNombre">JJJ Consultores Empresariales S.A.C.</span></p>
+            <p><strong>RUC:</strong> <span id="empresaRuc">20604236135</span></p>
+            <p><strong>Teléfono:</strong> <span id="empresaTelefono">+51 1 4801060</span></p>
             <p><strong>Dirección:</strong> Calle Esquilache Nº 371 Oficina 601 - 723, San Isidro - Lima - Lima</p>
             <p><strong>Horario:</strong> Lunes a Viernes de 9:00 am a 6:00 pm</p>
             <p><strong>Correo:</strong> <a href="mailto:atencionalcliente@jjjconsultoresempresariales.com">atencionalcliente@jjjconsultoresempresariales.com</a></p>
@@ -238,6 +238,10 @@
                     document.getElementById('nombre').value = clienteActual.razonSocial || '';
                     document.getElementById('correo').value = clienteActual.correo || '';
                     document.getElementById('telefono').value = clienteActual.telefono || '';
+                    // Los campos fijos también se pueden actualizar si lo deseas
+                    document.getElementById('empresaNombre').innerText = clienteActual.razonSocial || '';
+                    document.getElementById('empresaRuc').innerText = clienteActual.ruc || '';
+                    document.getElementById('empresaTelefono').innerText = clienteActual.telefono || '';
                 } else {
                     alert("Cliente no encontrado en el archivo JSON.");
                 }
