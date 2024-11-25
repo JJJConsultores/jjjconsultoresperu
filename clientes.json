@@ -13,6 +13,26 @@
         "usuarioAFP": "ADM0001",
         "contrasenaAFP": "202020",
         "correo": "jjjconsultoresempresariales@gmail.com",
-        "telefono": "923249938"
+        "telefono": "923249938",
+        "idApiSUNAT": "ID_CLIENTE_SUNAT",
+        "claveApiSUNAT": "CLAVE_CLIENTE_SUNAT"
+    },
+    {
+        "razonSocial": "Lopez Guerra Jose Luis",
+        "ruc": "10444371990",
+        "claveIntranet": "1990",
+        "situacion": "Activo",
+        "vencimiento": "12",
+        "sueldo": "S/ 300.00",
+        "usuarioSOL": "LOPEZ002",
+        "contrasenaSOL": "Jorge2007",
+        "usuarioSUNAFIL": "LOPEZ002",
+        "contrasenaSUNAFIL": Jorge2007",
+        "usuarioAFP": "JP0002",
+        "contrasenaAFP": "456789",
+        "correo": "pp200887@gmail.com",
+        "telefono": "912716055",
+        "idApiSUNAT": "5ce27621-d921-463e-8f3a-bae30a35c991",
+        "claveApiSUNAT": "jEK4fR9mThb1ZlN9nAb2yg=="
     }
 ]
