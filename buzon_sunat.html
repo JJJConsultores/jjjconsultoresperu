@@ -62,43 +62,6 @@
         .btn:hover {
             background-color: #0056b3;
         }
-
-        /* Media Queries for Responsiveness */
-        @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-
-            table {
-                font-size: 14px;
-            }
-
-            th, td {
-                padding: 8px;
-            }
-
-            .btn {
-                padding: 8px 16px;
-                font-size: 14px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            table {
-                display: block;
-                overflow-x: auto;
-                white-space: nowrap;
-            }
-
-            th, td {
-                font-size: 12px;
-            }
-
-            .btn {
-                font-size: 12px;
-            }
-        }
-
     </style>
 </head>
 <body>
@@ -120,50 +83,68 @@
             </tbody>
         </table>
     </div>
-
     <script>
         // Verificar que las credenciales del cliente estén activas
-        const clientName = sessionStorage.getItem("clientName");
         const clientRUC = sessionStorage.getItem("clientRUC");
+        const idApiSUNAT = sessionStorage.getItem("idApiSUNAT");
+        const claveApiSUNAT = sessionStorage.getItem("claveApiSUNAT");
 
-        if (!clientName || !clientRUC) {
+        if (!clientRUC || !idApiSUNAT || !claveApiSUNAT) {
             alert("Debe iniciar sesión para acceder a esta página.");
             window.location.href = "index.html";
         }
 
-        // Datos de ejemplo para llenar la tabla
-        const data = [
-            {
-                fecha: "2024-11-25",
-                titulo: "Resolución Coactiva N° 0290077070095",
-                detalle: "La presente constancia acredita el depósito...",
-                adjunto: "<a href='#' class='btn'>Ver PDF</a>"
-            },
-            {
-                fecha: "2024-11-24",
-                titulo: "Notificación de Orden de Pago",
-                detalle: "Se le informa sobre la Orden de Pago N°...",
-                adjunto: "<a href='#' class='btn'>Ver PDF</a>"
-            }
-        ];
+        // Fecha de inicio y fin
+        const fechaInicio = "2024-01-01"; // Solo desde enero 2024
+        const fechaFin = new Date().toISOString().split("T")[0]; // Fecha actual
 
-        // Función para llenar la tabla
-        function populateTable() {
-            const tableBody = document.getElementById("buzonTable");
-            data.forEach(item => {
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>${item.fecha}</td>
-                    <td>${item.titulo}</td>
-                    <td>${item.detalle}</td>
-                    <td>${item.adjunto}</td>
-                `;
-                tableBody.appendChild(row);
-            });
+        // Recuperar IDs procesados anteriormente
+        const processedIDs = JSON.parse(localStorage.getItem("processedIDs")) || [];
+
+        // URL de la API con el ID del API incluido
+        const urlAPI = `https://api.sunat.gob.pe/v1/contribuyente/controlmsg?idApi=${idApiSUNAT}&ruc=${clientRUC}&fechaInicio=${fechaInicio}&fechaFin=${fechaFin}`;
+
+        // Llamada a la API de SUNAT
+        async function fetchMessages() {
+            try {
+                const response = await fetch(urlAPI, {
+                    headers: {
+                        'Authorization': 'Bearer ' + claveApiSUNAT,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) throw new Error("Error al obtener datos de SUNAT");
+
+                const data = await response.json();
+
+                // Filtrar mensajes no procesados
+                const newMessages = data.filter(msg => !processedIDs.includes(msg.id));
+
+                // Agregar los nuevos IDs al almacenamiento
+                newMessages.forEach(msg => processedIDs.push(msg.id));
+                localStorage.setItem("processedIDs", JSON.stringify(processedIDs));
+
+                // Mostrar los nuevos mensajes en la tabla
+                const tableBody = document.getElementById("buzonTable");
+                newMessages.forEach(msg => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${msg.fecha}</td>
+                        <td>${msg.titulo}</td>
+                        <td>${msg.detalle || "Sin detalle disponible"}</td>
+                        <td><a href="${msg.adjunto}" class="btn">Ver PDF</a></td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error(error);
+                alert("Hubo un problema al obtener los datos del buzón SUNAT.");
+            }
         }
 
-        // Llenar la tabla al cargar la página
-        window.onload = populateTable;
+        // Ejecutar la función al cargar la página
+        window.onload = fetchMessages;
     </script>
 </body>
 </html>
