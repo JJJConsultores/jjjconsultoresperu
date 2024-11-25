@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buzón SUNAT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Buzón SUNAT</h1>
+
+        <!-- Tabla de notificaciones y mensajes -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Título</th>
+                    <th>Detalle / Constancia</th>
+                    <th>Notificación / Adjunto</th>
+                </tr>
+            </thead>
+            <tbody id="buzonTable">
+                <!-- Aquí se insertarán dinámicamente las filas -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Verificar que las credenciales del cliente estén activas
+        const clientName = sessionStorage.getItem("clientName");
+        const clientRUC = sessionStorage.getItem("clientRUC");
+
+        if (!clientName || !clientRUC) {
+            alert("Debe iniciar sesión para acceder a esta página.");
+            window.location.href = "index.html";
+        }
+
+        // Datos de ejemplo para llenar la tabla
+        const data = [
+            {
+                fecha: "2024-11-25",
+                titulo: "Resolución Coactiva N° 0290077070095",
+                detalle: "La presente constancia acredita el depósito...",
+                adjunto: "<a href='#' class='btn'>Ver PDF</a>"
+            },
+            {
+                fecha: "2024-11-24",
+                titulo: "Notificación de Orden de Pago",
+                detalle: "Se le informa sobre la Orden de Pago N°...",
+                adjunto: "<a href='#' class='btn'>Ver PDF</a>"
+            }
+        ];
+
+        // Función para llenar la tabla
+        function populateTable() {
+            const tableBody = document.getElementById("buzonTable");
+            data.forEach(item => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${item.fecha}</td>
+                    <td>${item.titulo}</td>
+                    <td>${item.detalle}</td>
+                    <td>${item.adjunto}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Llenar la tabla al cargar la página
+        window.onload = populateTable;
+    </script>
+</body>
+</html>
