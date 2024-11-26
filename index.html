@@ -47,8 +47,8 @@
         <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" style="width: 100px; margin-bottom: 10px;">
         <h2>Iniciar Sesión</h2>
         <form id="loginForm" onsubmit="return loginUser();">
-            <label for="ruc">Usuario:</label>
-            <input type="text" id="ruc" required placeholder="Ingresa tu número de RUC">
+            <label for="identifier">RUC/DNI/CE:</label>
+            <input type="text" id="identifier" required placeholder="Ingresa tu RUC, DNI o CE">
             
             <label for="password">Contraseña:</label>
             <input type="password" id="password" required>
@@ -58,38 +58,69 @@
     </div>
 
     <script>
-        let users = []; // Array para almacenar los usuarios cargados
+        let clients = [];
+        let employees = [];
 
-        // Cargar el archivo JSON de usuarios y manejar el inicio de sesión
+        // Cargar ambos archivos JSON
         async function loadUsers() {
-            const response = await fetch('clientes.json');  // Asegúrate de que la ruta sea correcta
-            users = await response.json();
-        }
+            try {
+                const clientResponse = await fetch('clientes.json');
+                clients = await clientResponse.json();
 
-        function loginUser() {
-            const userRUC = document.getElementById("ruc").value;
-            const password = document.getElementById("password").value;
-
-            // Verificar si el usuario existe
-            const user = users.find(u => u.ruc === userRUC);
-
-            if (user && user.claveIntranet === password) {
-                // Almacenar el nombre del usuario en sessionStorage
-                sessionStorage.setItem("clientName", user.razonSocial);
-                sessionStorage.setItem("clientRUC", user.ruc);
-                sessionStorage.setItem("clientEmail", user.correo); // Asegúrate de que este campo exista en JSON
-                sessionStorage.setItem("clientPhone", user.telefono); // Asegúrate de que este campo exista en JSON
-                
-                // Redirigir a la página principal
-                window.location.href = 'pagina_principal.html'; 
-                return false; // Evita el envío del formulario de forma tradicional
-            } else {
-                alert("Código o contraseña incorrectos.");
-                return false; // Evita el envío del formulario si hay un error
+                const employeeResponse = await fetch('empleados.json');
+                employees = await employeeResponse.json();
+            } catch (error) {
+                console.error("Error al cargar los archivos JSON:", error);
             }
         }
 
-        // Cargar usuarios al iniciar la página
+        function loginUser() {
+            const identifier = document.getElementById("identifier").value;
+            const password = document.getElementById("password").value;
+
+            if (identifier.length === 11) {
+                // Buscar en clientes
+                const client = clients.find(c => c.ruc === identifier);
+
+                if (client && client.claveIntranet === password) {
+                    // Almacenar información del cliente
+                    sessionStorage.setItem("clientName", client.razonSocial);
+                    sessionStorage.setItem("clientRUC", client.ruc);
+                    sessionStorage.setItem("clientEmail", client.correo || "");
+                    sessionStorage.setItem("clientPhone", client.telefono || "");
+
+                    // Redirigir a la página de clientes
+                    window.location.href = 'pagina_principal.html';
+                    return false;
+                } else {
+                    alert("Código o contraseña incorrectos (Cliente).");
+                    return false;
+                }
+            } else if (identifier.length === 8 || identifier.length === 9) {
+                // Buscar en empleados
+                const employee = employees.find(e => e.dni === identifier);
+
+                if (employee && employee.clave === password) {
+                    // Almacenar información del empleado
+                    sessionStorage.setItem("employeeName", employee.nombre);
+                    sessionStorage.setItem("employeeDNI", employee.dni);
+                    sessionStorage.setItem("employeeEmail", employee.correo || "");
+                    sessionStorage.setItem("employeePhone", employee.telefono || "");
+
+                    // Redirigir a la página de empleados
+                    window.location.href = 'pagina_empleados.html';
+                    return false;
+                } else {
+                    alert("Código o contraseña incorrectos (Empleado).");
+                    return false;
+                }
+            } else {
+                alert("El código ingresado no es válido. Verifique el RUC, DNI o CE.");
+                return false;
+            }
+        }
+
+        // Cargar los usuarios al iniciar la página
         window.onload = loadUsers;
     </script>
 </body>
