@@ -1,1 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JJJ Consultores - Empleados</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #28a745;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 10%), 
+                              radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 10%);
+            background-position: 0 0, 50px 50px;
+            background-size: 100px 100px;
+            color: white;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden; /* Evita el scroll horizontal */
+        }
 
+        .sidebar {
+            width: 200px;
+            background-color: #2c2c2c;
+            color: white;
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .sidebar h2 {
+            color: lightgray;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 1em;
+            color: white;
+        }
+
+        .circle {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .circle.perfil { background-color: #FF5733; }
+        .circle.contable { background-color: #33FF57; }
+        .circle.laboral { background-color: #3357FF; }
+        .circle.documentos { background-color: #FFD700; }
+        .circle.descargables { background-color: #9370DB; }
+        .circle.subir { background-color: #FFA07A; }
+        .circle.sunat { background-color: #FFC107; }
+
+        .legal-footer {
+            background-color: #2c2c2c;
+            color: lightgray;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 0.9em;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .legal-content {
+            color: white;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            font-style: italic;
+        }
+
+        .legal-content .logo {
+            margin-right: 20px;
+        }
+
+        .legal-footer a {
+            margin: 0 15px;
+            color: lightgray;
+            font-size: 14px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 20px;
+        }
+
+        .main-content {
+            margin-left: 220px;
+            margin-right: 20px;
+            text-align: center;
+            padding-bottom: 60px; /* Asegura que no se superponga con la barra legal */
+            flex-grow: 1;
+            overflow-y: auto; /* Permite el scroll vertical */
+        }
+        #chat {
+            max-width: 800px;
+            margin: 40px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #userInput {
+            width: 80%;
+            max-width: 700px;
+            height: 30px;
+            padding: 5px 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .logo {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            vertical-align: middle;
+        }
+
+        .footer-phrase {
+            font-style: italic;
+            color: white;
+            margin-top: 10px;
+        }
+
+        h1 {
+            margin-bottom: 0;
+        }
+
+        #greeting {
+            margin-top: 10px;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: calc(100% - 240px);
+            margin: 40px auto;
+        }
+
+        .dashboard .card {
+            background-color: white;
+            color: black;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-size: 1em;
+            font-weight: bold;
+            height: 250px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Menú</h2>
+        <ul>
+            <li><span class="circle perfil"></span>Perfil</li>
+            <li><span class="circle contable"></span>Contable</li>
+            <li><span class="circle laboral"></span>Laboral</li>
+            <li><span class="circle documentos"></span>Documentos</li>
+            <li><span class="circle descargables"></span>Descargables</li>
+            <li><span class="circle subir"></span>Subir Archivo</li>
+            <li><span class="circle sunat"></span><a href="buzon_sunat.html" style="text-decoration: none; color: white;">Buzón SUNAT</a></li>
+        </ul>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="main-content">
+        <p id="greeting"></p>
+        <h1 id="welcomeMessage"></h1>
+        <div id="chat">
+            <input type="text" id="userInput" placeholder="Escribe tu pregunta..." />
+            <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" onclick="sendMessage()" class="logo">
+        </div>
+        <p class="footer-phrase">Simple and complete, that's JJJ.</p>
+
+        <!-- Sección de cuadros -->
+        <div class="dashboard">
+            <div class="card">Mis Pendientes</div>
+            <div class="card">Notificaciones</div>
+            <div class="card">Mis Pedidos</div>
+            <div class="card">Mis Impuestos del Mes</div>
+            <div class="card">Notificaciones no Atendidas</div>
+            <div class="card">Bloc de Notas</div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="legal-footer">
+        <div class="legal-content">
+            <img class="logo" src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" />
+            <div style="font-size: 0.8em;">JJJ Consultores Empresariales S.A.C.® / RUC: 20604236135</div>
+        </div>
+        <div class="footer-links">
+            <a href="contacto.html" style="color: lightgray; font-size: 14px;">Contacto</a>
+            <a href="#">Paga tu factura Aquí</a>
+            <a href="terminos.html">Términos de Uso</a>
+            <a href="aviso_legal.html">Aviso Legal</a>
+            <a href="aviso_cookies.html">Aviso de Cookies</a>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const employeeApodo = sessionStorage.getItem("employeeApodo") || "Empleado";
+            const now = new Date();
+            const hours = now.getHours();
+            const greetingText = hours < 12 ? "¡Buenos días" : (hours < 18 ? "¡Buenas tardes" : "¡Buenas noches");
+            const dateText = now.toLocaleDateString('es-PE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            document.getElementById('greeting').innerText = `Hoy, ${dateText}.`;
+            document.getElementById('welcomeMessage').innerText = `${greetingText}, ${employeeApodo}!`;
+        };
+
+        async function sendMessage() {
+            const userInput = document.getElementById("userInput").value;
+            if (!userInput) return;
+
+            alert("Mensaje enviado: " + userInput);
+            document.getElementById("userInput").value = "";
+        }
+    </script>
+</body>
+</html>
