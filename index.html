@@ -75,8 +75,8 @@
         }
 
         function loginUser() {
-            const identifier = document.getElementById("identifier").value;
-            const password = document.getElementById("password").value;
+            const identifier = document.getElementById("identifier").value.trim();
+            const password = document.getElementById("password").value.trim();
 
             if (identifier.length === 11) {
                 // Buscar en clientes
@@ -98,12 +98,12 @@
                 }
             } else if (identifier.length === 8 || identifier.length === 9) {
                 // Buscar en empleados
-                const employee = employees.find(e => e.dni === identifier);
+                const employee = employees.find(e => e["dni o ce"] === identifier);
 
                 if (employee && employee.clave === password) {
                     // Almacenar información del empleado
                     sessionStorage.setItem("employeeName", employee.nombre);
-                    sessionStorage.setItem("employeeDNI", employee.dni);
+                    sessionStorage.setItem("employeeApodo", employee.apodo);
                     sessionStorage.setItem("employeeEmail", employee.correo || "");
                     sessionStorage.setItem("employeePhone", employee.telefono || "");
 
