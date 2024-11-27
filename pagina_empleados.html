@@ -198,63 +198,65 @@
             <li><span class="circle sunat"></span><a href="buzon_sunat.html" style="text-decoration: none; color: white;">Buzón SUNAT</a></li>
         </ul>
     </div>
-    <div id="chat">
-        <label for="fileInput">📎</label>
-        <input type="file" id="fileInput" />
-        <input type="text" id="userInput" placeholder="Escribe tu pregunta..." />
-        <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" onclick="sendMessage()" class="logo">
+    <!-- Contenido principal -->
+    <div class="main-content">
+        <p id="greeting"></p>
+        <h1 id="welcomeMessage"></h1>
+        <div id="chat">
+            <label for="fileInput">📎</label>
+            <input type="file" id="fileInput" style="display: none;" />
+            <input type="text" id="userInput" placeholder="Escribe tu pregunta..." />
+            <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" onclick="sendMessage()" class="logo">
+        </div>
+        <p class="footer-phrase">Simple and complete, that's JJJ.</p>
+
+        <!-- Sección de cuadros -->
+        <div class="dashboard">
+            <div class="card">Historial Archivos Subidos</div>
+            <div class="card">Historial de Consultas</div>
+            <div class="card">Tareas Pendientes del Mes</div>
+            <div class="card">Tareas Pendientes Futuras</div>
+            <div class="card">Impuestos Futuros</div>
+            <div class="card">Bloc de Notas</div>
+        </div>
     </div>
-    <p class="footer-phrase">Simple and complete, that's JJJ.</p>
-
-    <!-- Sección de cuadros -->
-    <div class="dashboard">
-        <div class="card">Historial Archivos Subidos</div>
-        <div class="card">Historial de Consultas</div>
-        <div class="card">Tareas Pendientes del Mes</div>
-        <div class="card">Tareas Pendientes Futuras</div>
-        <div class="card">Impuestos Futuros</div>
-        <div class="card">Bloc de Notas</div>
+    <!-- Footer -->
+    <div class="legal-footer">
+        <div class="legal-content">
+            <img class="logo" src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" />
+            <div style="font-size: 0.8em;">JJJ Consultores Empresariales S.A.C.® / RUC: 20604236135</div>
+        </div>
+        <div class="footer-links">
+            <a href="contacto.html" style="color: lightgray; font-size: 14px;">Contacto</a>
+            <a href="#">Paga tu factura Aquí</a>
+            <a href="terminos.html">Términos de Uso</a>
+            <a href="aviso_legal.html">Aviso Legal</a>
+            <a href="aviso_cookies.html">Aviso de Cookies</a>
+        </div>
     </div>
-</div>
+    <script>
+        window.onload = function() {
+            const employeeApodo = sessionStorage.getItem("employeeApodo") || "Empleado";
+            const now = new Date();
+            const hours = now.getHours();
+            const greetingText = hours < 12 ? "¡Buenos días" : (hours < 18 ? "¡Buenas tardes" : "¡Buenas noches");
+            const dateText = now.toLocaleDateString('es-PE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            document.getElementById('greeting').innerText = `Hoy, ${dateText}.`;
+            document.getElementById('welcomeMessage').innerText = `${greetingText}, ${employeeApodo}!`;
+        };
 
-<!-- Footer -->
-<div class="legal-footer">
-    <div class="legal-content">
-        <img class="logo" src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" />
-        <div style="font-size: 0.8em;">JJJ Consultores Empresariales S.A.C.® / RUC: 20604236135</div>
-    </div>
-    <div class="footer-links">
-        <a href="contacto.html" style="color: lightgray; font-size: 14px;">Contacto</a>
-        <a href="#">Paga tu factura Aquí</a>
-        <a href="terminos.html">Términos de Uso</a>
-        <a href="aviso_legal.html">Aviso Legal</a>
-        <a href="aviso_cookies.html">Aviso de Cookies</a>
-    </div>
-</div>
+        async function sendMessage() {
+            const userInput = document.getElementById("userInput").value;
+            const fileInput = document.getElementById("fileInput").files[0];
 
-<script>
-    window.onload = function() {
-        const employeeApodo = sessionStorage.getItem("employeeApodo") || "Empleado";
-        const now = new Date();
-        const hours = now.getHours();
-        const greetingText = hours < 12 ? "¡Buenos días" : (hours < 18 ? "¡Buenas tardes" : "¡Buenas noches");
-        const dateText = now.toLocaleDateString('es-PE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-        document.getElementById('greeting').innerText = `Hoy, ${dateText}.`;
-        document.getElementById('welcomeMessage').innerText = `${greetingText}, ${employeeApodo}!`;
-    };
-
-    async function sendMessage() {
-        const userInput = document.getElementById("userInput").value;
-        const fileInput = document.getElementById("fileInput").files[0];
-
-        if (fileInput) {
-            alert(`Archivo seleccionado: ${fileInput.name}`);
+            if (fileInput) {
+                alert(`Archivo seleccionado: ${fileInput.name}`);
+            }
+            if (userInput) {
+                alert(`Mensaje enviado: ${userInput}`);
+                document.getElementById("userInput").value = "";
+            }
         }
-        if (userInput) {
-            alert(`Mensaje enviado: ${userInput}`);
-            document.getElementById("userInput").value = "";
-        }
-    }
-</script>
+    </script>
 </body>
 </html>
