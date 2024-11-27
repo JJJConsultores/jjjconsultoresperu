@@ -1,7 +1,3 @@
-
-
-Pagina Empleados
-1
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -21,7 +17,7 @@ Pagina Empleados
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            overflow-x: hidden; /* Evita el scroll horizontal */
+            overflow-x: hidden;
         }
 
         .sidebar {
@@ -114,9 +110,9 @@ Pagina Empleados
             margin-left: 220px;
             margin-right: 20px;
             text-align: center;
-            padding-bottom: 60px; /* Asegura que no se superponga con la barra legal */
+            padding-bottom: 60px;
             flex-grow: 1;
-            overflow-y: auto; /* Permite el scroll vertical */
+            overflow-y: auto;
         }
         #chat {
             max-width: 800px;
@@ -184,7 +180,7 @@ Pagina Empleados
         }
 
         #fileInput {
-            display: none; /* Oculta el input de archivo */
+            display: none;
         }
     </style>
 </head>
@@ -201,7 +197,17 @@ Pagina Empleados
             <li><span class="circle subir"></span>Subir Archivo</li>
             <li><span class="circle sunat"></span><a href="buzon_sunat.html" style="text-decoration: none; color: white;">Buzón SUNAT</a></li>
         </ul>
-></div>
+    </div>
+    <!-- Contenido principal -->
+    <div class="main-content">
+        <p id="greeting"></p>
+        <h1 id="welcomeMessage"></h1>
+        <div id="chat">
+            <label for="fileInput">📎</label>
+            <input type="file" id="fileInput" style="display: none;" />
+            <input type="text" id="userInput" placeholder="Escribe tu pregunta..." />
+            <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" onclick="sendMessage()" class="logo">
+        </div>
         <p class="footer-phrase">Simple and complete, that's JJJ.</p>
 
         <!-- Sección de cuadros -->
@@ -214,22 +220,13 @@ Pagina Empleados
             <div class="card">Bloc de Notas</div>
         </div>
     </div>
-<!-- Contenido principal -->
-    <div class="main-content">
-        <p id="greeting"></p>
-        <h1 id="welcomeMessage"></h1>
-        <div id="chat">
-            <label for="fileInput">📎</label>
-            <input type="file" id="fileInput" style="display: none;" />
-            <input type="text" id="userInput" placeholder="Escribe tu pregunta..." />
-            <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" onclick="sendMessage()" class="logo">
     <!-- Footer -->
     <div class="legal-footer">
         <div class="legal-content">
             <img class="logo" src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" />
             <div style="font-size: 0.8em;">JJJ Consultores Empresariales S.A.C.® / RUC: 20604236135</div>
         </div>
-         <div class="footer-links">
+        <div class="footer-links">
             <a href="contacto.html" style="color: lightgray; font-size: 14px;">Contacto</a>
             <a href="#">Paga tu factura Aquí</a>
             <a href="terminos.html">Términos de Uso</a>
@@ -237,7 +234,6 @@ Pagina Empleados
             <a href="aviso_cookies.html">Aviso de Cookies</a>
         </div>
     </div>
-
     <script>
         window.onload = function() {
             const employeeApodo = sessionStorage.getItem("employeeApodo") || "Empleado";
@@ -254,22 +250,19 @@ Pagina Empleados
             const fileInput = document.getElementById("fileInput").files[0];
 
             if (fileInput) {
-                const formData = new FormData();
-                formData.append('file', fileInput);
-
                 try {
-                    const response = await fetch('http://localhost:3000/upload', {
-                        method: 'POST',
-                        body: formData
+                    const formData = new FormData();
+                    formData.append("file", fileInput);
+
+                    const response = await fetch("http://localhost:3000/upload", {
+                        method: "POST",
+                        body: formData,
                     });
 
-                    if (response.ok) {
-                        alert("Archivo subido correctamente.");
-                    } else {
-                        alert("Error al subir el archivo.");
-                    }
+                    const result = await response.json();
+                    alert(result.message);
                 } catch (error) {
-                    console.error("Error al subir el archivo:", error);
+                    alert("Error al subir el archivo: " + error.message);
                 }
             }
 
