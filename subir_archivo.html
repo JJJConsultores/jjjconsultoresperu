@@ -1,1 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subir Archivo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .upload-container {
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+        }
+        input[type="file"] {
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Subir Archivo</h1>
+    <div class="upload-container">
+        <form id="uploadForm">
+            <!-- Campo de subida con extensiones ampliadas -->
+            <input type="file" id="fileInput" 
+                accept=".doc,.docx,.dot,.dotx,.xls,.xlsx,.xlsm,.xlt,.xltx,.csv,.pdf,.jpg,.jpeg,.png,.gif,.bmp,.tiff,.webp,.txt" 
+                required />
+            <button type="button" onclick="processFile()">Subir y Procesar</button>
+        </form>
+    </div>
+    <script>
+        function processFile() {
+            const fileInput = document.getElementById("fileInput");
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert("Por favor, selecciona un archivo.");
+                return;
+            }
+
+            // Mostrar información básica del archivo
+            console.log("Archivo seleccionado:");
+            console.log("Nombre:", file.name);
+            console.log("Tipo:", file.type);
+            console.log("Tamaño:", file.size, "bytes");
+
+            // Validar el tipo del archivo
+            const allowedTypes = [
+                "application/msword", // .doc, .dot
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document", // .docx
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.template", // .dotx
+                "application/vnd.ms-excel", // .xls, .xlt
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", // .xlsx
+                "application/vnd.ms-excel.sheet.macroEnabled.12", // .xlsm
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.template", // .xltx
+                "text/csv", // .csv
+                "application/pdf", // .pdf
+                "image/jpeg", "image/png", "image/gif", "image/bmp", "image/tiff", "image/webp", // Imágenes
+                "text/plain" // .txt
+            ];
+
+            if (!allowedTypes.includes(file.type)) {
+                alert("El tipo de archivo no es permitido.");
+                return;
+            }
+
+            // Leer el archivo
+            const reader = new FileReader();
+
+            reader.onload = function(event) {
+                const fileContent = event.target.result;
+
+                console.log("Contenido del archivo:");
+                console.log(fileContent);
+
+                // Aquí podrías enviar el archivo al servidor o procesarlo
+                alert("El archivo fue procesado correctamente.");
+            };
+
+            reader.onerror = function(event) {
+                alert("Error al leer el archivo.");
+            };
+
+            // Leer archivo como texto o datos binarios según el tipo
+            if (file.type.includes("text") || file.type === "application/pdf") {
+                reader.readAsText(file);
+            } else {
+                reader.readAsDataURL(file); // Para imágenes, Word y Excel
+            }
+        }
+    </script>
+</body>
+</html>
 
