@@ -1,14 +1,13 @@
 {
   "name": "jjjconsultores",
   "version": "1.0.0",
-  "description": "Intranet para JJJ Consultores Empresariales",
-  "main": "index.js",
+  "description": "Aplicación backend de JJJ Consultores",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"No test specified\" && exit 0"
   },
+  "keywords": [],
   "author": "JJJ Consultores",
-  "license": "MIT",
-  "dependencies": {}
+  "license": "ISC"
 }
-
