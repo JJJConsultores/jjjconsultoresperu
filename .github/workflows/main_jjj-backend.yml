@@ -21,11 +21,10 @@ jobs:
         with:
           node-version: '20.x'
 
-      - name: npm install, build, and skip tests
+      - name: npm install and build
         run: |
           npm install
           npm run build --if-present
-          echo "Skipping tests as none are defined"
 
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
