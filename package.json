@@ -1,13 +1,13 @@
 {
   "name": "jjjconsultores",
   "version": "1.0.0",
-  "description": "Aplicación backend de JJJ Consultores",
+  "description": "Backend para JJJ Consultores",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "test": "echo \"No test specified\" && exit 0"
   },
-  "keywords": [],
   "author": "JJJ Consultores",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {}
 }
