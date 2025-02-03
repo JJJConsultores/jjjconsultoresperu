@@ -77,22 +77,16 @@
                 // Verificar el estado de la respuesta
                 if (!response.ok) {
                     console.error("Error HTTP:", response.status, response.statusText);
-                    appendToResponseBox("Error: No se pudo conectar con el servidor.");
+                    appendToResponseBox(`Error HTTP: ${response.status} ${response.statusText}`);
                     return;
                 }
 
                 const data = await response.json();
                 console.log("Respuesta completa de Qwen:", data); // Depuración
 
-                // Procesar la respuesta
-                let respuesta = "No se pudo obtener una respuesta.";
-                if (data.choices && data.choices[0]?.message?.content) {
-                    respuesta = data.choices[0].message.content;
-                }
-
-                // Mostrar la respuesta en el recuadro
+                // Mostrar EXACTAMENTE lo que devuelve la API
                 appendToResponseBox(`Tú: ${userInput}`);
-                appendToResponseBox(`Qwen: ${respuesta}`);
+                appendToResponseBox(`Respuesta de Qwen: ${JSON.stringify(data)}`);
             } catch (error) {
                 console.error("Error:", error); // Depuración
                 appendToResponseBox("Error: Hubo un problema al procesar tu solicitud.");
