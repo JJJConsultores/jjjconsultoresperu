@@ -40,9 +40,10 @@
     <!-- Barra de chat -->
     <div id="chat">
         <input type="text" id="userInput" placeholder="Escribe tu pregunta..." />
-        <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" onclick="sendMessage()" class="logo">
+        <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" class="logo">
     </div>
     <script>
+        // Función para manejar el envío de la pregunta
         async function sendMessage() {
             const userInput = document.getElementById("userInput").value.trim();
             if (!userInput) return;
@@ -78,6 +79,13 @@
             // Limpiar el campo de entrada
             document.getElementById("userInput").value = "";
         }
+
+        // Detectar cuando se presiona "Enter" en el campo de texto
+        document.getElementById("userInput").addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        });
     </script>
 </body>
 </html>
