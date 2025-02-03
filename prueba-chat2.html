@@ -47,36 +47,29 @@
             const userInput = document.getElementById("userInput").value.trim();
             if (!userInput) return;
 
-            // Endpoint de la API pública de Qwen
-            const url = "https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions";
+            // Endpoint de prueba (dummyjson.com)
+            const url = "https://dummyjson.com/products/search";
 
             try {
-                const response = await fetch(url, {
-                    method: "POST",
-                    headers: {
-                        "Authorization": "Bearer LTAI5tEhmaTtgr2E9M2vg3yY:7e1598baa5c29a187a9de13060ffb8c3e10e2ac91be0294e21ff59d286fa8db9", // Usa el token generado
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        model: "qwen-plus",
-                        messages: [
-                            { role: "system", content: "You are a helpful assistant." },
-                            { role: "user", content: userInput }
-                        ]
-                    })
-                });
+                const response = await fetch(`${url}?q=${encodeURIComponent(userInput)}`);
+                
+                // Verificar el estado de la respuesta
+                if (!response.ok) {
+                    console.error("Error HTTP:", response.status, response.statusText);
+                    alert(`Error HTTP: ${response.status} ${response.statusText}`);
+                    return;
+                }
 
                 const data = await response.json();
                 console.log("Respuesta de la API:", data); // Agrega esta línea para depurar
 
-                // Maneja diferentes estructuras de respuesta
-                let respuestaQwen = "No se pudo obtener una respuesta.";
-                if (data.choices && data.choices[0]?.message?.content) {
-                    respuestaQwen = data.choices[0].message.content;
+                // Mostrar la respuesta en un alert
+                let respuesta = "No se pudo obtener una respuesta.";
+                if (data.products && data.products.length > 0) {
+                    respuesta = `Resultado: ${data.products[0].title}`;
                 }
 
-                // Mostrar la respuesta en un alert
-                alert(`Respuesta: ${respuestaQwen}`);
+                alert(`Respuesta: ${respuesta}`);
             } catch (error) {
                 console.error("Error:", error); // Agregamos esto para depurar
                 alert("Hubo un problema al procesar tu solicitud. Por favor, intenta nuevamente.");
