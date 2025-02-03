@@ -69,8 +69,11 @@
 
                 const data = await response.json();
 
-                // Verifica si la respuesta contiene un campo "output" o "result"
-                const respuestaQwen = data.output?.choices[0]?.message?.content || data.result || "No se pudo obtener una respuesta.";
+                // Maneja diferentes estructuras de respuesta
+                let respuestaQwen = "No se pudo obtener una respuesta.";
+                if (data.choices && data.choices[0]?.message?.content) {
+                    respuestaQwen = data.choices[0].message.content;
+                }
 
                 // Mostrar la respuesta en un alert
                 alert(`Respuesta: ${respuestaQwen}`);
