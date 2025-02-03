@@ -55,12 +55,25 @@
             // Limpiar el campo de entrada
             document.getElementById("userInput").value = "";
 
-            // Endpoint de prueba (dummyjson.com)
-            const url = "https://dummyjson.com/products/search";
+            // Endpoint de Qwen
+            const url = "https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions";
 
             try {
-                const response = await fetch(`${url}?q=${encodeURIComponent(userInput)}`);
-                
+                const response = await fetch(url, {
+                    method: "POST",
+                    headers: {
+                        "Authorization": "Bearer LTAI5tEhmaTtgr2E9M2vg3yY:7e1598baa5c29a187a9de13060ffb8c3e10e2ac91be0294e21ff59d286fa8db9", // Usa el token generado
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        model: "qwen-plus",
+                        messages: [
+                            { role: "system", content: "You are a helpful assistant." },
+                            { role: "user", content: userInput }
+                        ]
+                    })
+                });
+
                 // Verificar el estado de la respuesta
                 if (!response.ok) {
                     console.error("Error HTTP:", response.status, response.statusText);
@@ -69,17 +82,17 @@
                 }
 
                 const data = await response.json();
-                console.log("Respuesta de la API:", data); // Depuración
+                console.log("Respuesta completa de Qwen:", data); // Depuración
 
                 // Procesar la respuesta
                 let respuesta = "No se pudo obtener una respuesta.";
-                if (data.products && data.products.length > 0) {
-                    respuesta = `Resultado: ${data.products[0].title}`;
+                if (data.choices && data.choices[0]?.message?.content) {
+                    respuesta = data.choices[0].message.content;
                 }
 
                 // Mostrar la respuesta en el recuadro
                 appendToResponseBox(`Tú: ${userInput}`);
-                appendToResponseBox(`Respuesta: ${respuesta}`);
+                appendToResponseBox(`Qwen: ${respuesta}`);
             } catch (error) {
                 console.error("Error:", error); // Depuración
                 appendToResponseBox("Error: Hubo un problema al procesar tu solicitud.");
