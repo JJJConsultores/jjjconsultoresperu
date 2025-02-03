@@ -220,15 +220,37 @@
             if (!userInput) return;
 
             // Endpoint de la API pública de Qwen
-            const url = "https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions"; // Endpoint real
+            const url = "https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions";
 
             try {
                 const response = await fetch(url, {
                     method: "POST",
                     headers: {
-                        "Authorization": "Bearer LTAI5tEhmaTtgr2E9M2vg3yY:P3029Qlfh99OUAliNvHCYKG3GE9LHT", // Tus credenciales
+                        "Authorization": "Bearer LTAI5tEhmaTtgr2E9M2vg3yY:P3029Qlfh99OUAliNvHCYKG3GE9LHT", // Tus credenciales actuales
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
-                        model: "qwen-plus", // Modelo de Qwen
-                        messages:
+                        model: "qwen-plus",
+                        messages: [
+                            { role: "system", content: "You are a helpful assistant." },
+                            { role: "user", content: userInput }
+                        ]
+                    })
+                });
+
+                const data = await response.json();
+                const respuestaQwen = data.response || "No se pudo obtener una respuesta.";
+
+                // Mostrar la respuesta en la interfaz
+                alert(`Respuesta: ${respuestaQwen}`);
+            } catch (error) {
+                console.error("Error al comunicarse con Qwen:", error);
+                alert("Hubo un problema al procesar tu solicitud. Por favor, intenta nuevamente.");
+            }
+
+            // Limpiar el campo de entrada
+            document.getElementById("userInput").value = "";
+        }
+    </script>
+</body>
+</html>
