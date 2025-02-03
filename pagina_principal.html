@@ -239,6 +239,11 @@
                 });
 
                 const data = await response.json();
+
+                // Imprime la respuesta completa en la consola para depuración
+                console.log("Respuesta de la API:", data);
+
+                // Verifica si la respuesta contiene un campo "response"
                 const respuestaQwen = data.response || "No se pudo obtener una respuesta.";
 
                 // Mostrar la respuesta en la interfaz
