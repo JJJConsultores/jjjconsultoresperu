@@ -21,6 +21,17 @@
             flex-direction: column;
             align-items: center;
         }
+        #responseBox {
+            width: 300px;
+            height: 150px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            overflow-y: auto;
+            background-color: white;
+            color: black;
+        }
         #userInput {
             width: 300px;
             height: 30px;
@@ -28,25 +39,21 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-        .logo {
-            width: 40px;
-            height: 40px;
-            margin-top: 10px;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
     <!-- Barra de chat -->
     <div id="chat">
+        <div id="responseBox"></div>
         <input type="text" id="userInput" placeholder="Escribe tu pregunta..." />
-        <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" class="logo">
     </div>
     <script>
-        // Función para manejar el envío de la pregunta
         async function sendMessage() {
             const userInput = document.getElementById("userInput").value.trim();
             if (!userInput) return;
+
+            // Limpiar el campo de entrada
+            document.getElementById("userInput").value = "";
 
             // Endpoint de prueba (dummyjson.com)
             const url = "https://dummyjson.com/products/search";
@@ -57,27 +64,37 @@
                 // Verificar el estado de la respuesta
                 if (!response.ok) {
                     console.error("Error HTTP:", response.status, response.statusText);
-                    alert(`Error HTTP: ${response.status} ${response.statusText}`);
+                    appendToResponseBox("Error: No se pudo conectar con el servidor.");
                     return;
                 }
 
                 const data = await response.json();
-                console.log("Respuesta de la API:", data); // Agrega esta línea para depurar
+                console.log("Respuesta de la API:", data); // Depuración
 
-                // Mostrar la respuesta en un alert
+                // Procesar la respuesta
                 let respuesta = "No se pudo obtener una respuesta.";
                 if (data.products && data.products.length > 0) {
                     respuesta = `Resultado: ${data.products[0].title}`;
                 }
 
-                alert(`Respuesta: ${respuesta}`);
+                // Mostrar la respuesta en el recuadro
+                appendToResponseBox(`Tú: ${userInput}`);
+                appendToResponseBox(`Respuesta: ${respuesta}`);
             } catch (error) {
-                console.error("Error:", error); // Agregamos esto para depurar
-                alert("Hubo un problema al procesar tu solicitud. Por favor, intenta nuevamente.");
+                console.error("Error:", error); // Depuración
+                appendToResponseBox("Error: Hubo un problema al procesar tu solicitud.");
             }
+        }
 
-            // Limpiar el campo de entrada
-            document.getElementById("userInput").value = "";
+        // Función para agregar mensajes al recuadro de respuestas
+        function appendToResponseBox(message) {
+            const responseBox = document.getElementById("responseBox");
+            const newMessage = document.createElement("p");
+            newMessage.textContent = message;
+            responseBox.appendChild(newMessage);
+
+            // Desplazar automáticamente hacia abajo para ver el último mensaje
+            responseBox.scrollTop = responseBox.scrollHeight;
         }
 
         // Detectar cuando se presiona "Enter" en el campo de texto
