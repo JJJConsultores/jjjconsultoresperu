@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JJJ Consultores - Chat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #007BFF;
+            color: white;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        #chat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #userInput {
+            width: 300px;
+            height: 30px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .logo {
+            width: 40px;
+            height: 40px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de chat -->
+    <div id="chat">
+        <input type="text" id="userInput" placeholder="Escribe tu pregunta..." />
+        <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" onclick="sendMessage()" class="logo">
+    </div>
+
+    <script>
+        async function sendMessage() {
+            const userInput = document.getElementById("userInput").value.trim();
+            if (!userInput) return;
+
+            // Endpoint de la API pública de Qwen
+            const url = "https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions";
+
+            try {
+                const response = await fetch(url, {
+                    method: "POST",
+                    headers: {
+                        "Authorization": "Bearer LTAI5tEhmaTtgr2E9M2vg3yY:P3029Qlfh99OUAliNvHCYKG3GE9LHT", // Tus credenciales actuales
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        model: "qwen-plus",
+                        messages: [
+                            { role: "system", content: "You are a helpful assistant." },
+                            { role: "user", content: userInput }
+                        ]
+                    })
+                });
+
+                const data = await response.json();
+
+                // Verifica si la respuesta contiene un campo "output" o "result"
+                const respuestaQwen = data.output?.choices[0]?.message?.content || data.result || "No se pudo obtener una respuesta.";
+
+                // Mostrar la respuesta en un alert
+                alert(`Respuesta: ${respuestaQwen}`);
+            } catch (error) {
+                alert("Hubo un problema al procesar tu solicitud. Por favor, intenta nuevamente.");
+            }
+
+            // Limpiar el campo de entrada
+            document.getElementById("userInput").value = "";
+        }
+    </script>
+</body>
+</html>
