@@ -19,7 +19,6 @@
             min-height: 100vh;
             overflow-x: hidden; /* Evita el scroll horizontal */
         }
-
         .sidebar {
             width: 200px;
             background-color: #2c2c2c;
@@ -33,18 +32,15 @@
             flex-direction: column;
             align-items: flex-start;
         }
-
         .sidebar h2 {
             color: lightgray;
             font-size: 1.2em;
             margin-bottom: 20px;
         }
-
         .sidebar ul {
             list-style-type: none;
             padding: 0;
         }
-
         .sidebar ul li {
             display: flex;
             align-items: center;
@@ -52,7 +48,6 @@
             font-size: 1em;
             color: white;
         }
-
         .circle {
             width: 10px;
             height: 10px;
@@ -66,7 +61,6 @@
         .circle.descargables { background-color: #9370DB; }
         .circle.subir { background-color: #FFA07A; }
         .circle.sunat { background-color: #FFC107; } /* Nuevo color para Buzón SUNAT */
-
         .legal-footer {
             background-color: #2c2c2c;
             color: lightgray;
@@ -81,7 +75,6 @@
             justify-content: space-between;
             align-items: center;
         }
-
         .legal-content {
             color: white;
             display: flex;
@@ -89,23 +82,19 @@
             align-items: center;
             font-style: italic;
         }
-
         .legal-content .logo {
             margin-right: 20px;
         }
-
         .legal-footer a {
             margin: 0 15px;
             color: lightgray;
             font-size: 14px;
         }
-
         .footer-links {
             display: flex;
             justify-content: flex-end;
             padding-right: 20px;
         }
-
         .main-content {
             margin-left: 220px;
             margin-right: 20px;
@@ -121,7 +110,6 @@
             justify-content: center;
             align-items: center;
         }
-
         #userInput {
             width: 80%;
             max-width: 700px;
@@ -131,7 +119,6 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
-
         .logo {
             border-radius: 50%;
             width: 40px;
@@ -139,21 +126,17 @@
             cursor: pointer;
             vertical-align: middle;
         }
-
         .footer-phrase {
             font-style: italic;
             color: white;
             margin-top: 10px;
         }
-
         h1 {
             margin-bottom: 0;
         }
-
         #greeting {
             margin-top: 10px;
         }
-
         .dashboard {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -161,7 +144,6 @@
             max-width: calc(100% - 240px);
             margin: 40px auto;
         }
-
         .dashboard .card {
             background-color: white;
             color: black;
@@ -189,7 +171,6 @@
             <li><span class="circle sunat"></span><a href="buzon_sunat.html" style="text-decoration: none; color: white;">Buzón SUNAT</a></li>
         </ul>
     </div>
-
     <!-- Contenido principal -->
     <div class="main-content">
         <p id="greeting"></p>
@@ -199,7 +180,6 @@
             <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" onclick="sendMessage()" class="logo">
         </div>
         <p class="footer-phrase">Simple and complete, that's JJJ.</p>
-
         <!-- Sección de cuadros -->
         <div class="dashboard">
             <div class="card">Mis Pendientes</div>
@@ -210,7 +190,6 @@
             <div class="card">Bloc de Notas</div>
         </div>
     </div>
-
     <!-- Footer -->
     <div class="legal-footer">
         <div class="legal-content">
@@ -225,7 +204,6 @@
             <a href="aviso_cookies.html">Aviso de Cookies</a>
         </div>
     </div>
-
     <script>
         window.onload = function() {
             const clientName = sessionStorage.getItem("clientName") || "Cliente";
@@ -238,12 +216,19 @@
         };
 
         async function sendMessage() {
-            const userInput = document.getElementById("userInput").value;
+            const userInput = document.getElementById("userInput").value.trim();
             if (!userInput) return;
 
-            alert("Mensaje enviado: " + userInput);
-            document.getElementById("userInput").value = "";
-        }
-    </script>
-</body>
-</html>
+            // Endpoint de la API pública de Qwen
+            const url = "https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions"; // Endpoint real
+
+            try {
+                const response = await fetch(url, {
+                    method: "POST",
+                    headers: {
+                        "Authorization": "Bearer LTAI5tEhmaTtgr2E9M2vg3yY:P3029Qlfh99OUAliNvHCYKG3GE9LHT", // Tus credenciales
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        model: "qwen-plus", // Modelo de Qwen
+                        messages:
