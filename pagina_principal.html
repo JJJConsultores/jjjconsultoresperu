@@ -160,9 +160,23 @@
         <!-- Contenedor de la conversación -->
 <div id="chatContainer">
     <div id="chatBox"></div>
+     <div id="smartButtons">
+        <button class="button" onclick="showOptions('PDTs')">📁 PDTs y Declaraciones 📊</button>
+        <button class="button" onclick="showOptions('Contratos')">📄 Contratos y Documentos 📝</button>
+        <button class="button" onclick="showOptions('Documentos')">📜 Documentos 📂</button>
+        <button class="button" onclick="showOptions('EstadosFinancieros')">💰 Estados Financieros 📈</button>
+        <button class="button" onclick="showOptions('Reportes')">📊 Reportes 📑</button>
+        <button class="button" onclick="showOptions('InfoJJJ')">🔒 Información JJJ</button>
+    </div>
+
+    <div id="subOptions"></div> <!-- Aquí se mostrarán las subopciones -->
+
     <div id="chatInputContainer">
         <input type="text" id="userInput" placeholder="Escribe tu pregunta..." onkeypress="handleKeyPress(event)" />
-        <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Enviar" onclick="sendMessage()" class="logo">
+        <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" 
+             alt="Enviar" 
+             onclick="sendMessage()" 
+             class="logo">
     </div>
 </div>
 
@@ -210,36 +224,172 @@
         color: black;
         text-align: left;
     }
+    #smartButtons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 10px;
+    }
+
+    .button {
+        background-color: #007BFF;
+        color: white;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        text-align: center;
+        transition: background 0.3s ease;
+    }
+
+    .button:hover {
+        background-color: #0056b3;
+    }
+
+    /* Botones de nivel 2 */
+    .subButton {
+        background-color: #F4F4F4;
+        color: black;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        text-align: center;
+        transition: background 0.3s ease;
+    }
+
+    .subButton:hover {
+        background-color: #DDDDDD;
+    }
+
+    /* Botones de control */
+    .controlButton {
+        background-color: #444444;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        text-align: center;
+        transition: background 0.3s ease;
+    }
+
+    .controlButton:hover {
+        background-color: #222222;
+    }
 </style>
 
 <script>
-    function handleKeyPress(event) {
-        if (event.key === "Enter") {
-            sendMessage();
-        }
+   function handleKeyPress(event) {
+    if (event.key === "Enter") {
+        sendMessage();
     }
-    
-    async function sendMessage() {
-        const userInput = document.getElementById("userInput").value.trim();
-        if (!userInput) return;
-        
-        addMessageToChat(userInput, "userMessage");
-        document.getElementById("userInput").value = "";
+}
 
-        // Simulación de respuesta de la IA
-        setTimeout(() => {
-            addMessageToChat("Hola, ¿cómo puedo ayudarte?", "botMessage");
-        }, 1000);
+async function sendMessage() {
+    const userInput = document.getElementById("userInput").value.trim();
+    if (!userInput) return;
+    
+    addMessageToChat(userInput, "userMessage");
+    document.getElementById("userInput").value = "";
+
+    // Simulación de respuesta de la IA
+    setTimeout(() => {
+        addMessageToChat("Hola, ¿cómo puedo ayudarte?", "botMessage");
+    }, 1000);
+}
+
+// 🔹 FUNCIÓN PARA MOSTRAR SUBOPCIONES 🔹
+function showOptions(category) {
+    const subOptions = {
+        "PDTs": ["IGV-Renta", "Planillas", "Otras Rentas"],
+        "Contratos": ["Plazo Fijo", "Indeterminado", "Recibo por Honorario", "Anteriores", "Otros"],
+        "Documentos": ["Sunat", "Sunafil", "Registrales y Notariales", "Empleados", "Otros"],
+        "EstadosFinancieros": ["3 Meses", "6 Meses", "Anual", "Archivo"],
+        "Reportes": ["Reporte Tributario", "Reporte Aduanero", "Ficha RUC"],
+        "InfoJJJ": ["Factura Contable", "Contrato Comercial"]
+    };
+
+    const subOptionContainer = document.getElementById("subOptions");
+    subOptionContainer.innerHTML = ""; // Limpiar opciones previas
+
+    if (subOptions[category]) {
+        subOptions[category].forEach(option => {
+            const btn = document.createElement("button");
+            btn.classList.add("subButton");
+            btn.textContent = option;
+            btn.onclick = () => showFinalStep(category, option);
+            subOptionContainer.appendChild(btn);
+        });
+
+        // Agregar botones de control
+        addControlButtons(subOptionContainer, "menu");
+    }
+}
+
+// 🔹 FUNCIÓN PARA MOSTRAR SELECCIÓN DE MESES 🔹
+function showFinalStep(category, selectedOption) {
+    const subOptionContainer = document.getElementById("subOptions");
+    subOptionContainer.innerHTML = ""; // Limpiar opciones previas
+
+    const months = ["1 Mes", "3 Meses", "6 Meses", "12 Meses", "Otros"];
+    months.forEach(month => {
+        const btn = document.createElement("button");
+        btn.classList.add("subButton");
+        btn.textContent = month;
+        btn.onclick = () => sendFinalRequest(selectedOption, month);
+        subOptionContainer.appendChild(btn);
+    });
+
+    // Agregar botones de control
+    addControlButtons(subOptionContainer, "back", category);
+}
+
+// 🔹 FUNCIÓN PARA AGREGAR BOTONES DE CONTROL 🔹
+function addControlButtons(container, type, category = null) {
+    const backButton = document.createElement("button");
+    backButton.classList.add("controlButton");
+    backButton.textContent = "⬅️ Retroceder";
+    
+    if (type === "menu") {
+        backButton.onclick = () => container.innerHTML = "";
+    } else if (type === "back" && category) {
+        backButton.onclick = () => showOptions(category);
     }
     
-    function addMessageToChat(message, className) {
-        const chatBox = document.getElementById("chatBox");
-        const messageElement = document.createElement("div");
-        messageElement.classList.add("message", className);
-        messageElement.textContent = message;
-        chatBox.appendChild(messageElement);
-        chatBox.scrollTop = chatBox.scrollHeight;
-    }
+    container.appendChild(backButton);
+
+    const mainMenuButton = document.createElement("button");
+    mainMenuButton.classList.add("controlButton");
+    mainMenuButton.textContent = "🏠 Menú Principal";
+    mainMenuButton.onclick = () => location.reload(); // Recarga la página
+    container.appendChild(mainMenuButton);
+}
+
+// 🔹 FUNCIÓN PARA PROCESAR SOLICITUD 🔹
+function sendFinalRequest(option, period) {
+    addMessageToChat(`Has solicitado ${option} por ${period}. Procesando...`, "botMessage");
+
+    // Simulación de respuesta con retardo
+    setTimeout(() => {
+        addMessageToChat(`✅ Tu solicitud de ${option} por ${period} ha sido enviada por correo.`, "botMessage");
+    }, 2000);
+}
+
+// 🔹 FUNCIÓN PARA AÑADIR MENSAJES AL CHAT 🔹
+function addMessageToChat(message, className) {
+    const chatBox = document.getElementById("chatBox");
+    const messageElement = document.createElement("div");
+    messageElement.classList.add("message", className);
+    messageElement.textContent = message;
+    chatBox.appendChild(messageElement);
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
 </script>
         <p class="footer-phrase">Simple and complete, that's JJJ.</p>
     </div>
