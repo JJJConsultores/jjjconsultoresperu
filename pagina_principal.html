@@ -156,10 +156,90 @@
     <div class="main-content">
         <p id="greeting"></p>
         <h1 id="welcomeMessage"></h1>
-        <div id="chat">
-            <input type="text" id="userInput" placeholder="Escribe tu pregunta..." />
-            <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" onclick="sendMessage()" class="logo">
-        </div>
+        <!-- Contenedor de la conversación -->
+<div id="chatContainer">
+    <div id="chatBox"></div>
+    <div id="chatInputContainer">
+        <input type="text" id="userInput" placeholder="Escribe tu pregunta..." onkeypress="handleKeyPress(event)" />
+        <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Enviar" onclick="sendMessage()" class="logo">
+    </div>
+</div>
+
+<style>
+    #chatContainer {
+        display: flex;
+        flex-direction: column;
+        max-width: 800px;
+        margin: 40px auto;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+    #chatBox {
+        height: 300px;
+        overflow-y: auto;
+        padding: 10px;
+        background: #f4f4f4;
+        color: black;
+    }
+    #chatInputContainer {
+        display: flex;
+        padding: 10px;
+        background: white;
+    }
+    #userInput {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .message {
+        margin: 5px 0;
+        padding: 8px;
+        border-radius: 5px;
+    }
+    .userMessage {
+        background: #007BFF;
+        color: white;
+        text-align: right;
+    }
+    .botMessage {
+        background: #ddd;
+        color: black;
+        text-align: left;
+    }
+</style>
+
+<script>
+    function handleKeyPress(event) {
+        if (event.key === "Enter") {
+            sendMessage();
+        }
+    }
+    
+    async function sendMessage() {
+        const userInput = document.getElementById("userInput").value.trim();
+        if (!userInput) return;
+        
+        addMessageToChat(userInput, "userMessage");
+        document.getElementById("userInput").value = "";
+
+        // Simulación de respuesta de la IA
+        setTimeout(() => {
+            addMessageToChat("Hola, ¿cómo puedo ayudarte?", "botMessage");
+        }, 1000);
+    }
+    
+    function addMessageToChat(message, className) {
+        const chatBox = document.getElementById("chatBox");
+        const messageElement = document.createElement("div");
+        messageElement.classList.add("message", className);
+        messageElement.textContent = message;
+        chatBox.appendChild(messageElement);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+</script>
         <p class="footer-phrase">Simple and complete, that's JJJ.</p>
     </div>
     <!-- Footer -->
@@ -231,7 +311,5 @@
             document.getElementById("userInput").value = "";
         }
     </script>
-
 </body>
 </html>
-      
