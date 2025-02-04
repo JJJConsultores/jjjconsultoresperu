@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JJJ Consultores - Chat</title>
+    <title>Barra de Chat Simple</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -55,40 +55,30 @@
             // Limpiar el campo de entrada
             document.getElementById("userInput").value = "";
 
-            // Endpoint de Qwen
-            const url = "https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions";
+            // Endpoint de prueba (DummyJSON)
+            const url = `https://dummyjson.com/products/search?q=${encodeURIComponent(userInput)}`;
 
             try {
-                const response = await fetch(url, {
-                    method: "POST",
-                    headers: {
-                        "Authorization": "Bearer LTAI5tEhmaTtgr2E9M2vg3yY:a25615ebce35a1ca34eac734b4d0dc6fd9a4a6a0e39223e0cf3a7200556bcf6f", // Usa el nuevo token generado
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        model: "qwen-plus",
-                        messages: [
-                            { role: "system", content: "You are a helpful assistant." },
-                            { role: "user", content: userInput }
-                        ]
-                    })
-                });
-
+                const response = await fetch(url);
+                
                 // Verificar el estado de la respuesta
                 if (!response.ok) {
-                    console.error("Error HTTP:", response.status, response.statusText);
-                    appendToResponseBox(`Error HTTP: ${response.status} ${response.statusText}`);
+                    appendToResponseBox("Error: No se pudo conectar con el servidor.");
                     return;
                 }
 
                 const data = await response.json();
-                console.log("Respuesta completa de Qwen:", data); // Depuración
 
-                // Mostrar EXACTAMENTE lo que devuelve la API
+                // Procesar la respuesta
+                let respuesta = "No se pudo obtener una respuesta.";
+                if (data.products && data.products.length > 0) {
+                    respuesta = `Resultado: ${data.products[0].title}`;
+                }
+
+                // Mostrar la respuesta en el recuadro
                 appendToResponseBox(`Tú: ${userInput}`);
-                appendToResponseBox(`Respuesta de Qwen: ${JSON.stringify(data)}`);
+                appendToResponseBox(`Respuesta: ${respuesta}`);
             } catch (error) {
-                console.error("Error:", error); // Depuración
                 appendToResponseBox("Error: Hubo un problema al procesar tu solicitud.");
             }
         }
