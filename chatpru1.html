@@ -73,26 +73,24 @@
             const userInput = document.getElementById("userInput").value.trim();
             if (!userInput) return;
 
-            // Limpiar el campo de entrada
             document.getElementById("userInput").value = "";
-
-            // Agregar mensaje del usuario al chat
             appendToResponseBox(userInput, "user-message");
 
-            // Llamada a la API de OpenAI
-            const url = "https://api.openai.com/v1/chat/completions";
+            const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+            const openAiUrl = "https://api.openai.com/v1/chat/completions";
+
             const headers = {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${API_KEY}`
             };
             const body = JSON.stringify({
-                model: "gpt-4",
+                model: "gpt-3.5-turbo",  // Puedes cambiar a "gpt-4" si tienes acceso
                 messages: [{ role: "system", content: "Eres un asistente útil." }, 
                            { role: "user", content: userInput }]
             });
 
             try {
-                const response = await fetch(url, {
+                const response = await fetch(proxyUrl + openAiUrl, {
                     method: "POST",
                     headers: headers,
                     body: body
