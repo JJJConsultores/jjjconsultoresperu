@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -60,9 +61,86 @@
         .circle.descargables { background-color: #9370DB; }
         .circle.subir { background-color: #FFA07A; }
         .circle.sunat { background-color: #FFC107; }
+        .legal-footer {
+            background-color: #2c2c2c;
+            color: lightgray;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 0.9em;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .legal-content {
+            color: white;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            font-style: italic;
+        }
+        .legal-content .logo {
+            margin-right: 20px;
+        }
+        .legal-footer a {
+            margin: 0 15px;
+            color: lightgray;
+            font-size: 14px;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 20px;
+        }
+        .main-content {
+            margin-left: 220px;
+            margin-right: 20px;
+            text-align: center;
+            padding-bottom: 60px;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+        #chat {
+            max-width: 800px;
+            margin: 40px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #userInput {
+            width: 80%;
+            max-width: 700px;
+            height: 30px;
+            padding: 5px 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .logo {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            vertical-align: middle;
+        }
+        .footer-phrase {
+            font-style: italic;
+            color: white;
+            margin-top: 10px;
+        }
+        h1 {
+            margin-bottom: 0;
+        }
+        #greeting {
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
+    <!-- Sidebar -->
     <div class="sidebar">
         <h2>Menú</h2>
         <ul>
@@ -75,66 +153,113 @@
             <li><span class="circle sunat"></span><a href="buzon_sunat.html" style="text-decoration: none; color: white;">Buzón SUNAT</a></li>
         </ul>
     </div>
+    <!-- Contenido principal -->
     <div class="main-content">
         <p id="greeting"></p>
         <h1 id="welcomeMessage"></h1>
-
         <!-- Contenedor de la conversación -->
-        <div id="chatContainer">
-            <div id="chatBox"></div>
-            <div id="chatInputContainer">
-                <input type="text" id="userInput" placeholder="Escribe tu pregunta..." onkeypress="handleKeyPress(event)" />
-                <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Enviar" onclick="sendMessage()" class="logo">
-            </div>
+<div id="chatContainer">
+    <div id="chatBox"></div>
+    <div id="chatInputContainer">
+        <input type="text" id="userInput" placeholder="Escribe tu pregunta..." onkeypress="handleKeyPress(event)" />
+        <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Enviar" onclick="sendMessage()" class="logo">
+    </div>
+</div>
+
+<style>
+    #chatContainer {
+        display: flex;
+        flex-direction: column;
+        max-width: 800px;
+        margin: 40px auto;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+    #chatBox {
+        height: 300px;
+        overflow-y: auto;
+        padding: 10px;
+        background: #f4f4f4;
+        color: black;
+    }
+    #chatInputContainer {
+        display: flex;
+        padding: 10px;
+        background: white;
+    }
+    #userInput {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .message {
+        margin: 5px 0;
+        padding: 8px;
+        border-radius: 5px;
+    }
+    .userMessage {
+        background: #007BFF;
+        color: white;
+        text-align: right;
+    }
+    .botMessage {
+        background: #ddd;
+        color: black;
+        text-align: left;
+    }
+</style>
+
+<script>
+    function handleKeyPress(event) {
+        if (event.key === "Enter") {
+            sendMessage();
+        }
+    }
+    
+    async function sendMessage() {
+        const userInput = document.getElementById("userInput").value.trim();
+        if (!userInput) return;
+        
+        addMessageToChat(userInput, "userMessage");
+        document.getElementById("userInput").value = "";
+
+        // Simulación de respuesta de la IA
+        setTimeout(() => {
+            addMessageToChat("Hola, ¿cómo puedo ayudarte?", "botMessage");
+        }, 1000);
+    }
+    
+    function addMessageToChat(message, className) {
+        const chatBox = document.getElementById("chatBox");
+        const messageElement = document.createElement("div");
+        messageElement.classList.add("message", className);
+        messageElement.textContent = message;
+        chatBox.appendChild(messageElement);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+</script>
+        <p class="footer-phrase">Simple and complete, that's JJJ.</p>
+    </div>
+    <!-- Footer -->
+    <div class="legal-footer">
+        <div class="legal-content">
+            <img class="logo" src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" />
+            <div style="font-size: 0.8em;">JJJ Consultores Empresariales S.A.C.® / RUC: 20604236135</div>
+        </div>
+        <div class="footer-links">
+            <a href="contacto.html" style="color: lightgray; font-size: 14px;">Contacto</a>
+            <a href="#">Paga tu factura Aquí</a>
+            <a href="terminos.html">Términos de Uso</a>
+            <a href="aviso_legal.html">Aviso Legal</a>
+            <a href="aviso_cookies.html">Aviso de Cookies</a>
         </div>
     </div>
 
-    <style>
-        #chatContainer {
-            display: flex;
-            flex-direction: column;
-            max-width: 800px;
-            margin: 40px auto;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-        #chatBox {
-            height: 300px;
-            overflow-y: auto;
-            padding: 10px;
-            background: #f4f4f4;
-            color: black;
-        }
-        #chatInputContainer {
-            display: flex;
-            padding: 10px;
-            background: white;
-        }
-        #userInput {
-            flex: 1;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .message {
-            margin: 5px 0;
-            padding: 8px;
-            border-radius: 5px;
-        }
-        .userMessage {
-            background: #007BFF;
-            color: white;
-            text-align: right;
-        }
-        .botMessage {
-            background: #ddd;
-            color: black;
-            text-align: left;
-        }
-    </style>
-    <script>
+    <!-- Scripts -->
+       <script>
         window.onload = function() {
             const clientName = sessionStorage.getItem("clientName") || "Cliente";
             const now = new Date();
@@ -155,7 +280,7 @@
             const userInput = document.getElementById("userInput").value.trim();
             if (!userInput) return;
             
-            addMessageToChat(userInput, "userMessage");
+            addMessageToChat(userInput, "userMessage");  // Agrega el mensaje del usuario en el chat
             document.getElementById("userInput").value = "";
 
             // Endpoint de la API pública de Qwen
@@ -165,7 +290,7 @@
                 const response = await fetch(url, {
                     method: "POST",
                     headers: {
-                        "Authorization": "Bearer LTAI5tEhmaTtgr2E9M2vg3yY:P3029Qlfh99OUAliNvHCYKG3GE9LHT", // Tus credenciales actuales
+                        "Authorization": "Bearer LTAI5tEhmaTtgr2E9M2vg3yY:P3029Qlfh99OUAliNvHCYKG3GE9LHT",
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
@@ -179,22 +304,16 @@
 
                 const data = await response.json();
 
-                // Imprime la respuesta completa en la consola para depuración
-                console.log("Respuesta de la API:", data);
-
                 // Verifica si la respuesta contiene un campo "response"
                 const respuestaQwen = data.response || "No se pudo obtener una respuesta.";
 
-                // Mostrar la respuesta en el chat
+                // Mostrar la respuesta en el chat en lugar de un alert
                 addMessageToChat(respuestaQwen, "botMessage");
 
             } catch (error) {
                 console.error("Error al comunicarse con Qwen:", error);
                 addMessageToChat("Hubo un problema al procesar tu solicitud. Por favor, intenta nuevamente.", "botMessage");
             }
-
-            // Limpiar el campo de entrada
-            document.getElementById("userInput").value = "";
         }
 
         function addMessageToChat(message, className) {
