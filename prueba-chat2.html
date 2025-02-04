@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barra de Chat Simple</title>
+    <title>Barra de Chat Mejorada</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -20,10 +20,11 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            width: 320px;
         }
         #responseBox {
             width: 300px;
-            height: 150px;
+            height: 200px;
             border: 1px solid #ccc;
             border-radius: 5px;
             padding: 10px;
@@ -31,6 +32,25 @@
             overflow-y: auto;
             background-color: white;
             color: black;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .user-message {
+            align-self: flex-end;
+            background-color: #007BFF;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            max-width: 80%;
+        }
+        .bot-message {
+            align-self: flex-start;
+            background-color: #f1f1f1;
+            color: black;
+            padding: 5px;
+            border-radius: 5px;
+            max-width: 80%;
         }
         #userInput {
             width: 300px;
@@ -42,10 +62,9 @@
     </style>
 </head>
 <body>
-    <!-- Barra de chat -->
     <div id="chat">
         <div id="responseBox"></div>
-        <input type="text" id="userInput" placeholder="Escribe tu pregunta..." />
+        <input type="text" id="userInput" placeholder="Escribe tu mensaje..." />
     </div>
     <script>
         async function sendMessage() {
@@ -55,46 +74,36 @@
             // Limpiar el campo de entrada
             document.getElementById("userInput").value = "";
 
-            // Endpoint de prueba (DummyJSON)
-            const url = `https://dummyjson.com/products/search?q=${encodeURIComponent(userInput)}`;
+            // Agregar mensaje del usuario al chat
+            appendToResponseBox(userInput, "user-message");
+
+            // API gratuita para chatbot (puedes cambiarla por OpenAI o Dialogflow si tienes clave)
+            const url = `https://api.simsimi.net/v2/?text=${encodeURIComponent(userInput)}&lc=es`;
 
             try {
                 const response = await fetch(url);
-                
-                // Verificar el estado de la respuesta
-                if (!response.ok) {
-                    appendToResponseBox("Error: No se pudo conectar con el servidor.");
-                    return;
-                }
-
                 const data = await response.json();
 
-                // Procesar la respuesta
-                let respuesta = "No se pudo obtener una respuesta.";
-                if (data.products && data.products.length > 0) {
-                    respuesta = `Resultado: ${data.products[0].title}`;
+                // Mostrar la respuesta en el chat
+                if (data.success) {
+                    appendToResponseBox(data.success, "bot-message");
+                } else {
+                    appendToResponseBox("Lo siento, no entendí eso.", "bot-message");
                 }
-
-                // Mostrar la respuesta en el recuadro
-                appendToResponseBox(`Tú: ${userInput}`);
-                appendToResponseBox(`Respuesta: ${respuesta}`);
             } catch (error) {
-                appendToResponseBox("Error: Hubo un problema al procesar tu solicitud.");
+                appendToResponseBox("Error: No se pudo conectar con el servidor.", "bot-message");
             }
         }
 
-        // Función para agregar mensajes al recuadro de respuestas
-        function appendToResponseBox(message) {
+        function appendToResponseBox(message, className) {
             const responseBox = document.getElementById("responseBox");
-            const newMessage = document.createElement("p");
+            const newMessage = document.createElement("div");
             newMessage.textContent = message;
+            newMessage.classList.add(className);
             responseBox.appendChild(newMessage);
-
-            // Desplazar automáticamente hacia abajo para ver el último mensaje
             responseBox.scrollTop = responseBox.scrollHeight;
         }
 
-        // Detectar cuando se presiona "Enter" en el campo de texto
         document.getElementById("userInput").addEventListener("keydown", function(event) {
             if (event.key === "Enter") {
                 sendMessage();
