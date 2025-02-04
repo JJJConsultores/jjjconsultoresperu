@@ -17,7 +17,7 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            overflow-x: hidden;
+            overflow-x: hidden; /* Evita el scroll horizontal */
         }
         .sidebar {
             width: 200px;
@@ -60,7 +60,7 @@
         .circle.documentos { background-color: #FFD700; }
         .circle.descargables { background-color: #9370DB; }
         .circle.subir { background-color: #FFA07A; }
-        .circle.sunat { background-color: #FFC107; }
+        .circle.sunat { background-color: #FFC107; } /* Nuevo color para Buzón SUNAT */
         .legal-footer {
             background-color: #2c2c2c;
             color: lightgray;
@@ -75,13 +75,33 @@
             justify-content: space-between;
             align-items: center;
         }
+        .legal-content {
+            color: white;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            font-style: italic;
+        }
+        .legal-content .logo {
+            margin-right: 20px;
+        }
+        .legal-footer a {
+            margin: 0 15px;
+            color: lightgray;
+            font-size: 14px;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 20px;
+        }
         .main-content {
             margin-left: 220px;
             margin-right: 20px;
             text-align: center;
-            padding-bottom: 60px;
+            padding-bottom: 60px; /* Asegura que no se superponga con la barra legal */
             flex-grow: 1;
-            overflow-y: auto;
+            overflow-y: auto; /* Permite el scroll vertical */
         }
         #chat {
             max-width: 800px;
@@ -117,6 +137,24 @@
         #greeting {
             margin-top: 10px;
         }
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: calc(100% - 240px);
+            margin: 40px auto;
+        }
+        .dashboard .card {
+            background-color: white;
+            color: black;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-size: 1em;
+            font-weight: bold;
+            height: 250px;
+        }
     </style>
 </head>
 <body>
@@ -142,6 +180,15 @@
             <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" onclick="sendMessage()" class="logo">
         </div>
         <p class="footer-phrase">Simple and complete, that's JJJ.</p>
+        <!-- Sección de cuadros -->
+        <div class="dashboard">
+            <div class="card">Mis Pendientes</div>
+            <div class="card">Notificaciones</div>
+            <div class="card">Mis Pedidos</div>
+            <div class="card">Mis Impuestos del Mes</div>
+            <div class="card">Notificaciones no Atendidas</div>
+            <div class="card">Bloc de Notas</div>
+        </div>
     </div>
     <!-- Footer -->
     <div class="legal-footer">
@@ -149,6 +196,66 @@
             <img class="logo" src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" />
             <div style="font-size: 0.8em;">JJJ Consultores Empresariales S.A.C.® / RUC: 20604236135</div>
         </div>
+        <div class="footer-links">
+            <a href="contacto.html" style="color: lightgray; font-size: 14px;">Contacto</a>
+            <a href="#">Paga tu factura Aquí</a>
+            <a href="terminos.html">Términos de Uso</a>
+            <a href="aviso_legal.html">Aviso Legal</a>
+            <a href="aviso_cookies.html">Aviso de Cookies</a>
+        </div>
     </div>
+    <script>
+        window.onload = function() {
+            const clientName = sessionStorage.getItem("clientName") || "Cliente";
+            const now = new Date();
+            const hours = now.getHours();
+            const greetingText = hours < 12 ? "¡Buenos días" : (hours < 18 ? "¡Buenas tardes" : "¡Buenas noches");
+            const dateText = now.toLocaleDateString('es-PE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            document.getElementById('greeting').innerText = Hoy, ${dateText}.;
+            document.getElementById('welcomeMessage').innerText = ${greetingText}, ${clientName}!;
+        };
+
+        async function sendMessage() {
+            const userInput = document.getElementById("userInput").value.trim();
+            if (!userInput) return;
+
+            // Endpoint de la API pública de Qwen
+            const url = "https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions";
+
+            try {
+                const response = await fetch(url, {
+                    method: "POST",
+                    headers: {
+                        "Authorization": "Bearer LTAI5tEhmaTtgr2E9M2vg3yY:P3029Qlfh99OUAliNvHCYKG3GE9LHT", // Tus credenciales actuales
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        model: "qwen-plus",
+                        messages: [
+                            { role: "system", content: "You are a helpful assistant." },
+                            { role: "user", content: userInput }
+                        ]
+                    })
+                });
+
+                const data = await response.json();
+
+                // Imprime la respuesta completa en la consola para depuración
+                console.log("Respuesta de la API:", data);
+
+                // Verifica si la respuesta contiene un campo "response"
+                const respuestaQwen = data.response || "No se pudo obtener una respuesta.";
+
+                // Mostrar la respuesta en la interfaz
+                alert(Respuesta: ${respuestaQwen});
+            } catch (error) {
+                console.error("Error al comunicarse con Qwen:", error);
+                alert("Hubo un problema al procesar tu solicitud. Por favor, intenta nuevamente.");
+            }
+
+            // Limpiar el campo de entrada
+            document.getElementById("userInput").value = "";
+        }
+    </script>
 </body>
 </html>
