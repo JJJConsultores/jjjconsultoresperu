@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barra de Chat Mejorada</title>
+    <title>Chat con GPT-4</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -24,7 +24,7 @@
         }
         #responseBox {
             width: 300px;
-            height: 200px;
+            height: 300px;
             border: 1px solid #ccc;
             border-radius: 5px;
             padding: 10px;
@@ -67,6 +67,8 @@
         <input type="text" id="userInput" placeholder="Escribe tu mensaje..." />
     </div>
     <script>
+        const API_KEY = "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";  // Reemplaza con tu clave API de OpenAI
+
         async function sendMessage() {
             const userInput = document.getElementById("userInput").value.trim();
             if (!userInput) return;
@@ -77,19 +79,34 @@
             // Agregar mensaje del usuario al chat
             appendToResponseBox(userInput, "user-message");
 
-            // API gratuita para chatbot (puedes cambiarla por OpenAI o Dialogflow si tienes clave)
-            const url = `https://api.simsimi.net/v2/?text=${encodeURIComponent(userInput)}&lc=es`;
+            // Llamada a la API de OpenAI
+            const url = "https://api.openai.com/v1/chat/completions";
+            const headers = {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${API_KEY}`
+            };
+            const body = JSON.stringify({
+                model: "gpt-4",
+                messages: [{ role: "system", content: "Eres un asistente útil." }, 
+                           { role: "user", content: userInput }]
+            });
 
             try {
-                const response = await fetch(url);
-                const data = await response.json();
+                const response = await fetch(url, {
+                    method: "POST",
+                    headers: headers,
+                    body: body
+                });
 
-                // Mostrar la respuesta en el chat
-                if (data.success) {
-                    appendToResponseBox(data.success, "bot-message");
-                } else {
-                    appendToResponseBox("Lo siento, no entendí eso.", "bot-message");
+                if (!response.ok) {
+                    throw new Error("Error en la respuesta del servidor.");
                 }
+
+                const data = await response.json();
+                const respuesta = data.choices[0].message.content || "No entendí tu pregunta.";
+
+                appendToResponseBox(respuesta, "bot-message");
+
             } catch (error) {
                 appendToResponseBox("Error: No se pudo conectar con el servidor.", "bot-message");
             }
