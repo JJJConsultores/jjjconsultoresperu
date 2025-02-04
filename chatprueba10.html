@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat con GPT-4</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #007BFF;
+            color: white;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        #chat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 320px;
+        }
+        #responseBox {
+            width: 300px;
+            height: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            overflow-y: auto;
+            background-color: white;
+            color: black;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .user-message {
+            align-self: flex-end;
+            background-color: #007BFF;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            max-width: 80%;
+        }
+        .bot-message {
+            align-self: flex-start;
+            background-color: #f1f1f1;
+            color: black;
+            padding: 5px;
+            border-radius: 5px;
+            max-width: 80%;
+        }
+        #userInput {
+            width: 300px;
+            height: 30px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat">
+        <div id="responseBox"></div>
+        <input type="text" id="userInput" placeholder="Escribe tu mensaje..." />
+    </div>
+    <script>
+        const API_KEY = "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";  // Reemplaza con tu clave API de OpenAI
+
+        async function sendMessage() {
+            const userInput = document.getElementById("userInput").value.trim();
+            if (!userInput) return;
+
+            document.getElementById("userInput").value = "";
+            appendToResponseBox(userInput, "user-message");
+
+            const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+            const openAiUrl = "https://api.openai.com/v1/chat/completions";
+
+            const headers = {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${API_KEY}`
+            };
+            const body = JSON.stringify({
+                model: "gpt-3.5-turbo",  // Puedes cambiar a "gpt-4" si tienes acceso
+                messages: [{ role: "system", content: "Eres un asistente útil." }, 
+                           { role: "user", content: userInput }]
+            });
+
+            try {
+                const response = await fetch(proxyUrl + openAiUrl, {
+                    method: "POST",
+                    headers: headers,
+                    body: body
+                });
+
+                if (!response.ok) {
+                    throw new Error("Error en la respuesta del servidor.");
+                }
+
+                const data = await response.json();
+                const respuesta = data.choices[0].message.content || "No entendí tu pregunta.";
+
+                appendToResponseBox(respuesta, "bot-message");
+
+            } catch (error) {
+                appendToResponseBox("Error: No se pudo conectar con el servidor.", "bot-message");
+            }
+        }
+
+        function appendToResponseBox(message, className) {
+            const responseBox = document.getElementById("responseBox");
+            const newMessage = document.createElement("div");
+            newMessage.textContent = message;
+            newMessage.classList.add(className);
+            responseBox.appendChild(newMessage);
+            responseBox.scrollTop = responseBox.scrollHeight;
+        }
+
+        document.getElementById("userInput").addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
