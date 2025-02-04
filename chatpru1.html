@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barra de Chat Mejorada</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #007BFF;
+            color: white;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        #chat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 320px;
+        }
+        #responseBox {
+            width: 300px;
+            height: 200px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            overflow-y: auto;
+            background-color: white;
+            color: black;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .user-message {
+            align-self: flex-end;
+            background-color: #007BFF;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            max-width: 80%;
+        }
+        .bot-message {
+            align-self: flex-start;
+            background-color: #f1f1f1;
+            color: black;
+            padding: 5px;
+            border-radius: 5px;
+            max-width: 80%;
+        }
+        #userInput {
+            width: 300px;
+            height: 30px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat">
+        <div id="responseBox"></div>
+        <input type="text" id="userInput" placeholder="Escribe tu mensaje..." />
+    </div>
+    <script>
+        async function sendMessage() {
+            const userInput = document.getElementById("userInput").value.trim();
+            if (!userInput) return;
+
+            // Limpiar el campo de entrada
+            document.getElementById("userInput").value = "";
+
+            // Agregar mensaje del usuario al chat
+            appendToResponseBox(userInput, "user-message");
+
+            // API gratuita para chatbot (puedes cambiarla por OpenAI o Dialogflow si tienes clave)
+            const url = `https://api.simsimi.net/v2/?text=${encodeURIComponent(userInput)}&lc=es`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                // Mostrar la respuesta en el chat
+                if (data.success) {
+                    appendToResponseBox(data.success, "bot-message");
+                } else {
+                    appendToResponseBox("Lo siento, no entendí eso.", "bot-message");
+                }
+            } catch (error) {
+                appendToResponseBox("Error: No se pudo conectar con el servidor.", "bot-message");
+            }
+        }
+
+        function appendToResponseBox(message, className) {
+            const responseBox = document.getElementById("responseBox");
+            const newMessage = document.createElement("div");
+            newMessage.textContent = message;
+            newMessage.classList.add(className);
+            responseBox.appendChild(newMessage);
+            responseBox.scrollTop = responseBox.scrollHeight;
+        }
+
+        document.getElementById("userInput").addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
