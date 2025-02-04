@@ -17,7 +17,7 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            overflow-x: hidden; /* Evita el scroll horizontal */
+            overflow-x: hidden;
         }
         .sidebar {
             width: 200px;
@@ -48,60 +48,13 @@
             font-size: 1em;
             color: white;
         }
-        .circle {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-        .circle.perfil { background-color: #FF5733; }
-        .circle.contable { background-color: #33FF57; }
-        .circle.laboral { background-color: #3357FF; }
-        .circle.documentos { background-color: #FFD700; }
-        .circle.descargables { background-color: #9370DB; }
-        .circle.subir { background-color: #FFA07A; }
-        .circle.sunat { background-color: #FFC107; } /* Nuevo color para Buzón SUNAT */
-        .legal-footer {
-            background-color: #2c2c2c;
-            color: lightgray;
-            padding: 10px 20px;
-            text-align: center;
-            font-size: 0.9em;
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .legal-content {
-            color: white;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            font-style: italic;
-        }
-        .legal-content .logo {
-            margin-right: 20px;
-        }
-        .legal-footer a {
-            margin: 0 15px;
-            color: lightgray;
-            font-size: 14px;
-        }
-        .footer-links {
-            display: flex;
-            justify-content: flex-end;
-            padding-right: 20px;
-        }
         .main-content {
             margin-left: 220px;
             margin-right: 20px;
             text-align: center;
-            padding-bottom: 60px; /* Asegura que no se superponga con la barra legal */
+            padding-bottom: 60px;
             flex-grow: 1;
-            overflow-y: auto; /* Permite el scroll vertical */
+            overflow-y: auto;
         }
         #chat {
             max-width: 800px;
@@ -131,29 +84,36 @@
             color: white;
             margin-top: 10px;
         }
-        h1 {
-            margin-bottom: 0;
-        }
-        #greeting {
-            margin-top: 10px;
-        }
+
+        /* Estilos para los botones inteligentes */
         .dashboard {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            max-width: calc(100% - 240px);
-            margin: 40px auto;
+            margin-top: 40px;
         }
-        .dashboard .card {
-            background-color: white;
-            color: black;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            font-size: 1em;
+        .category-btn, .pdt-btn {
+            display: block;
+            width: 200px;
+            margin: 10px auto;
+            padding: 10px;
+            font-size: 16px;
             font-weight: bold;
-            height: 250px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .category-btn {
+            background-color: #FF9800;
+            color: white;
+        }
+        .category-btn:hover {
+            background-color: #E68900;
+        }
+        .pdt-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .pdt-btn:hover {
+            background-color: #388E3C;
         }
     </style>
 </head>
@@ -162,15 +122,16 @@
     <div class="sidebar">
         <h2>Menú</h2>
         <ul>
-            <li><span class="circle perfil"></span>Perfil</li>
-            <li><span class="circle contable"></span>Contable</li>
-            <li><span class="circle laboral"></span>Laboral</li>
-            <li><span class="circle documentos"></span>Documentos</li>
-            <li><span class="circle descargables"></span>Descargables</li>
-            <li><span class="circle subir"></span>Subir Archivo</li>
-            <li><span class="circle sunat"></span><a href="buzon_sunat.html" style="text-decoration: none; color: white;">Buzón SUNAT</a></li>
+            <li>Perfil</li>
+            <li>Contable</li>
+            <li>Laboral</li>
+            <li>Documentos</li>
+            <li>Descargables</li>
+            <li>Subir Archivo</li>
+            <li><a href="buzon_sunat.html" style="text-decoration: none; color: white;">Buzón SUNAT</a></li>
         </ul>
     </div>
+
     <!-- Contenido principal -->
     <div class="main-content">
         <p id="greeting"></p>
@@ -180,31 +141,51 @@
             <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="Logo de JJJ" onclick="sendMessage()" class="logo">
         </div>
         <p class="footer-phrase">Simple and complete, that's JJJ.</p>
-        <!-- Sección de cuadros -->
+
+        <!-- NUEVA SECCIÓN: Botones Inteligentes para PDTs -->
         <div class="dashboard">
-            <div class="card">Mis Pendientes</div>
-            <div class="card">Notificaciones</div>
-            <div class="card">Mis Pedidos</div>
-            <div class="card">Mis Impuestos del Mes</div>
-            <div class="card">Notificaciones no Atendidas</div>
-            <div class="card">Bloc de Notas</div>
+            <h2>Selecciona una opción</h2>
+            
+            <!-- Botones de categorías principales -->
+            <button class="category-btn" onclick="showOptions('igv_renta')">📌 IGV y Renta</button>
+            <button class="category-btn" onclick="showOptions('planilla')">📌 Planilla</button>
+            <button class="category-btn" onclick="showOptions('otras_rentas')">📌 Otras Rentas</button>
+
+            <!-- Contenedor donde aparecerán las opciones de cantidad de PDTs -->
+            <div id="optionsContainer" style="display: none; margin-top: 20px;">
+                <h3>¿Cuántos PDT necesitas?</h3>
+                <button class="pdt-btn" onclick="selectPDT(1)">1</button>
+                <button class="pdt-btn" onclick="selectPDT(3)">3</button>
+                <button class="pdt-btn" onclick="selectPDT(6)">6</button>
+                <button class="pdt-btn" onclick="selectPDT(12)">12</button>
+                <button class="pdt-btn" onclick="enterManualPDT()">Otro número</button>
+            </div>
         </div>
     </div>
-    <!-- Footer -->
-    <div class="legal-footer">
-        <div class="legal-content">
-            <img class="logo" src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" />
-            <div style="font-size: 0.8em;">JJJ Consultores Empresariales S.A.C.® / RUC: 20604236135</div>
-        </div>
-        <div class="footer-links">
-            <a href="contacto.html" style="color: lightgray; font-size: 14px;">Contacto</a>
-            <a href="#">Paga tu factura Aquí</a>
-            <a href="terminos.html">Términos de Uso</a>
-            <a href="aviso_legal.html">Aviso Legal</a>
-            <a href="aviso_cookies.html">Aviso de Cookies</a>
-        </div>
-    </div>
+
     <script>
+        let selectedCategory = "";
+
+        // Función para mostrar las opciones de cantidad de PDTs según la categoría seleccionada
+        function showOptions(category) {
+            selectedCategory = category;
+            document.getElementById("optionsContainer").style.display = "block";
+        }
+
+        // Función para manejar la selección de cantidad de PDTs
+        function selectPDT(cantidad) {
+            alert(`Has seleccionado ${cantidad} PDT en la categoría: ${selectedCategory}`);
+            // Aquí podríamos llamar al backend para obtener los archivos PDT y enviarlos al usuario
+        }
+
+        // Función para ingresar manualmente la cantidad de PDTs
+        function enterManualPDT() {
+            let cantidad = prompt("¿Cuántos PDT necesitas?");
+            if (cantidad) {
+                selectPDT(cantidad);
+            }
+        }
+
         window.onload = function() {
             const clientName = sessionStorage.getItem("clientName") || "Cliente";
             const now = new Date();
@@ -214,48 +195,6 @@
             document.getElementById('greeting').innerText = `Hoy, ${dateText}.`;
             document.getElementById('welcomeMessage').innerText = `${greetingText}, ${clientName}!`;
         };
-
-        async function sendMessage() {
-            const userInput = document.getElementById("userInput").value.trim();
-            if (!userInput) return;
-
-            // Endpoint de la API pública de Qwen
-            const url = "https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions";
-
-            try {
-                const response = await fetch(url, {
-                    method: "POST",
-                    headers: {
-                        "Authorization": "Bearer LTAI5tEhmaTtgr2E9M2vg3yY:P3029Qlfh99OUAliNvHCYKG3GE9LHT", // Tus credenciales actuales
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        model: "qwen-plus",
-                        messages: [
-                            { role: "system", content: "You are a helpful assistant." },
-                            { role: "user", content: userInput }
-                        ]
-                    })
-                });
-
-                const data = await response.json();
-
-                // Imprime la respuesta completa en la consola para depuración
-                console.log("Respuesta de la API:", data);
-
-                // Verifica si la respuesta contiene un campo "response"
-                const respuestaQwen = data.response || "No se pudo obtener una respuesta.";
-
-                // Mostrar la respuesta en la interfaz
-                alert(`Respuesta: ${respuestaQwen}`);
-            } catch (error) {
-                console.error("Error al comunicarse con Qwen:", error);
-                alert("Hubo un problema al procesar tu solicitud. Por favor, intenta nuevamente.");
-            }
-
-            // Limpiar el campo de entrada
-            document.getElementById("userInput").value = "";
-        }
     </script>
 </body>
 </html>
