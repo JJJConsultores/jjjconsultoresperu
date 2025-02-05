@@ -252,108 +252,74 @@
         background-color: #0056b3;
     }
 
-   /* 🔹 Contenedor de opciones */
-#optionsContainer {
-    padding: 15px;
-    margin: 20px auto;
-    max-width: 800px;
-    text-align: center;
-}
+    /* 🔹 Contenedor de opciones */
+    #optionsContainer {
+        background: white;
+        padding: 15px;
+        margin: 20px auto;
+        max-width: 800px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
 
-/* 🔹 Botones de nivel 1 (primeras opciones) */
-#smartButtons {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 10px;
-    max-width: 600px;
-    margin: auto;
-    padding: 10px;
-}
+    #smartButtons {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 10px;
+        max-width: 600px;
+        margin: auto;
+        padding: 10px;
+    }
 
-/* 🔹 Botones de nivel 2 */
-.subButton {
-    background-color: #F4F4F4;
-    color: black;
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    text-align: center;
-    transition: background 0.3s ease;
-    margin: 5px;
-    width: auto;
-    min-width: 150px;
-}
+    /* Botones de nivel 2 */
+    .subButton {
+        background-color: #F4F4F4;
+        color: black;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        text-align: center;
+        transition: background 0.3s ease;
+        margin: 5px;
+        width: 90%;
+    }
 
-/* 🔹 Efecto hover */
-.subButton:hover {
-    background-color: #DDDDDD;
-}
-
-/* 🔹 Contenedor de subopciones (sin fondo blanco) */
-#subOptions {
-    padding: 15px;
-    margin: 10px auto;
-    max-width: 600px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* ✅ Animación suave */
-}
-
-/* ✅ Cuando se muestran las opciones, se activan estas reglas */
-#subOptions.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* 🔹 Botones de control alineados */
-#subOptions div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 10px;
-}
+    .subButton:hover {
+        background-color: #DDDDDD;
+    }
 
     /* 🔹 Contenedor de subopciones */
     #subOptions {
-    background: transparent;  /* ✅ Cambio importante */
-    padding: 15px;
-    margin: 10px auto;
-    max-width: 600px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
-
-/* ✅ Se activa la animación cuando aparece */
-#subOptions.show {
-    opacity: 1;
-    transform: translateY(0);
-}
+        background: white;
+        padding: 15px;
+        margin: 10px auto;
+        max-width: 600px;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
     /* 🔹 Botones de control */
     .controlButton {
-    background-color: #444444;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    text-align: center;
-    transition: background 0.3s ease;
-    width: 90%;
-    margin-top: 10px; /* ✅ Espaciado extra entre botones */
-}
+        background-color: #444444;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        text-align: center;
+        transition: background 0.3s ease;
+        width: 90%;
+        margin-top: 5px;
+    }
+
     .controlButton:hover {
         background-color: #222222;
     }
@@ -406,22 +372,13 @@ function showFinalStep(category, selectedOption) {
     subOptionContainer.innerHTML = ""; // Limpiar opciones previas
 
     const months = ["1 Mes", "3 Meses", "6 Meses", "12 Meses", "Otros"];
-months.forEach(month => {
-    const btn = document.createElement("button");
-    btn.classList.add("subButton");
-    btn.textContent = month;
-    btn.onclick = () => {
-        if (month === "Otros") {
-            const customMonths = prompt("Ingresa la cantidad de meses:");
-            if (customMonths) {
-                sendFinalRequest(selectedOption, ${customMonths} Meses);
-            }
-        } else {
-            sendFinalRequest(selectedOption, month);
-        }
-    };
-    subOptionContainer.appendChild(btn);
-});
+    months.forEach(month => {
+        const btn = document.createElement("button");
+        btn.classList.add("subButton");
+        btn.textContent = month;
+        btn.onclick = () => sendFinalRequest(selectedOption, month);
+        subOptionContainer.appendChild(btn);
+    });
 
     // Agregar botones de control debajo
     addControlButtons(subOptionContainer, "back", category);
