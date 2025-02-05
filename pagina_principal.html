@@ -1,144 +1,179 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JJJ Consultores - Chat</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #007BFF;
-            background-image: radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 10%), 
-                              radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 10%);
-            background-position: 0 0, 50px 50px;
-            background-size: 100px 100px;
-            color: white;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-        .sidebar {
-            width: 200px;
-            background-color: #2c2c2c;
-            color: white;
-            padding: 20px;
-            height: 100vh;
-            position: fixed;
-            left: 0;
-            top: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-        .sidebar h2 {
-            color: lightgray;
-            font-size: 1.2em;
-            margin-bottom: 20px;
-        }
-        .sidebar ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        .sidebar ul li {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            font-size: 1em;
-            color: white;
-        }
+body {
+    font-family: Arial, sans-serif;
+    background-color: #007BFF;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 10%), 
+                      radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 10%);
+    background-position: 0 0, 50px 50px;
+    background-size: 100px 100px;
+    color: white;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding-top: 20px; /* Evita que el chat tape la fecha y el saludo */
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #2c2c2c;
+    color: white;
+    padding: 20px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Ajuste responsive para sidebar */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+.sidebar h2 {
+    color: lightgray;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 1em;
+    color: white;
+}
         .circle {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-        .circle.perfil { background-color: #FF5733; }
-        .circle.contable { background-color: #33FF57; }
-        .circle.laboral { background-color: #3357FF; }
-        .circle.documentos { background-color: #FFD700; }
-        .circle.descargables { background-color: #9370DB; }
-        .circle.subir { background-color: #FFA07A; }
-        .circle.sunat { background-color: #FFC107; }
-        .legal-footer {
-            background-color: #2c2c2c;
-            color: lightgray;
-            padding: 10px 20px;
-            text-align: center;
-            font-size: 0.9em;
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .legal-content {
-            color: white;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            font-style: italic;
-        }
-        .legal-content .logo {
-            margin-right: 20px;
-        }
-        .legal-footer a {
-            margin: 0 15px;
-            color: lightgray;
-            font-size: 14px;
-        }
-        .footer-links {
-            display: flex;
-            justify-content: flex-end;
-            padding-right: 20px;
-        }
-        .main-content {
-            margin-left: 220px;
-            margin-right: 20px;
-            text-align: center;
-            padding-bottom: 60px;
-            flex-grow: 1;
-            overflow-y: auto;
-        }
-        #chat {
-            max-width: 800px;
-            margin: 40px auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        #userInput {
-            width: 80%;
-            max-width: 700px;
-            height: 30px;
-            padding: 5px 10px;
-            margin-right: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .logo {
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            vertical-align: middle;
-        }
-        .footer-phrase {
-            font-style: italic;
-            color: white;
-            margin-top: 10px;
-        }
-        h1 {
-            margin-bottom: 0;
-        }
-        #greeting {
-            margin-top: 10px;
-        }
-    </style>
-</head>
+    width: 12px; /* Ajustado para mejor visibilidad */
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.circle.perfil { background-color: #FF5733; }
+.circle.contable { background-color: #33FF57; }
+.circle.laboral { background-color: #3357FF; }
+.circle.documentos { background-color: #FFD700; }
+.circle.descargables { background-color: #9370DB; }
+.circle.subir { background-color: #FFA07A; }
+.circle.sunat { background-color: #FFC107; }
+
+.legal-footer {
+    background-color: #2c2c2c;
+    color: lightgray;
+    padding: 12px 20px; /* Más espacio para mejor lectura */
+    text-align: center;
+    font-size: 0.9em;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Permite mejor ajuste en pantallas pequeñas */
+}
+
+.legal-content {
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-style: italic;
+}
+
+.legal-content .logo {
+    margin-right: 15px;
+    width: 35px; /* Ajuste para evitar que el logo se vea demasiado grande */
+}
+
+.legal-footer a {
+    margin: 0 12px;
+    color: lightgray;
+    font-size: 14px;
+    text-decoration: none; /* Evita subrayados molestos */
+}
+
+.footer-links {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 15px;
+    flex-wrap: wrap; /* Mejor ajuste en dispositivos móviles */
+}
+ .main-content {
+    margin-left: 220px;
+    margin-right: 20px;
+    text-align: center;
+    padding-bottom: 60px;
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-top: 20px; /* 🔹 Ajuste para evitar que el chat tape la fecha y saludo */
+}
+
+#chat {
+    max-width: 700px; /* 🔹 Reducido para no ocupar demasiado espacio */
+    margin: 20px auto; /* 🔹 Menos margen para mejor ajuste */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#userInput {
+    width: 75%; /* 🔹 Ajustado para mayor armonía */
+    max-width: 600px;
+    height: 35px; /* 🔹 Un poco más grande para mejor interacción */
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.logo {
+    border-radius: 50%;
+    width: 35px; /* 🔹 Ajuste para que no se vea demasiado grande */
+    height: 35px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.footer-phrase {
+    font-style: italic;
+    color: white;
+    margin-top: 10px;
+    font-size: 14px; /* 🔹 Ajuste de tamaño */
+}
+
+h1 {
+    margin-bottom: 5px; /* 🔹 Espacio mejorado */
+    font-size: 22px;
+}
+
+#greeting {
+    margin-top: 5px;
+    font-size: 16px;
+    font-weight: bold; /* 🔹 Resalta el mensaje de saludo */
+}
+
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
@@ -150,58 +185,71 @@
             <li><span class="circle documentos"></span>Documentos</li>
             <li><span class="circle descargables"></span>Descargables</li>
             <li><span class="circle subir"></span>Subir Archivo</li>
-            <li><span class="circle sunat"></span><a href="buzon_sunat.html" style="text-decoration: none; color: white;">Buzón SUNAT</a></li>
+            <li><span class="circle sunat"></span>
+                <a href="buzon_sunat.html" style="text-decoration: none; color: white;">Buzón SUNAT</a>
+            </li>
         </ul>
     </div>
+
     <!-- Contenido principal -->
     <div class="main-content">
         <p id="greeting"></p>
         <h1 id="welcomeMessage"></h1>
+
         <!-- Contenedor de la conversación -->
-<div id="chatContainer">
-    <div id="chatBox"></div>
-     <div id="smartButtons">
-        <button class="button" onclick="showOptions('PDTs')">📁 PDTs y Declaraciones 📊</button>
-        <button class="button" onclick="showOptions('Contratos')">📄 Contratos y Documentos 📝</button>
-        <button class="button" onclick="showOptions('Documentos')">📜 Documentos 📂</button>
-        <button class="button" onclick="showOptions('EstadosFinancieros')">💰 Estados Financieros 📈</button>
-        <button class="button" onclick="showOptions('Reportes')">📊 Reportes 📑</button>
-        <button class="button" onclick="showOptions('InfoJJJ')">🔒 Información JJJ</button>
-    </div>
+        <div id="chatContainer">
+            <div id="chatBox"></div>
 
-    <div id="subOptions"></div> <!-- Aquí se mostrarán las subopciones -->
+            <!-- Botones principales -->
+            <div id="smartButtons">
+                <button class="button" onclick="showOptions('PDTs')">📁 PDTs y Declaraciones 📊</button>
+                <button class="button" onclick="showOptions('Contratos')">📄 Contratos y Documentos 📝</button>
+                <button class="button" onclick="showOptions('Documentos')">📜 Documentos 📂</button>
+                <button class="button" onclick="showOptions('EstadosFinancieros')">💰 Estados Financieros 📈</button>
+                <button class="button" onclick="showOptions('Reportes')">📊 Reportes 📑</button>
+                <button class="button" onclick="showOptions('InfoJJJ')">🔒 Información JJJ</button>
+            </div>
 
-    <div id="chatInputContainer">
-        <input type="text" id="userInput" placeholder="Escribe tu pregunta..." onkeypress="handleKeyPress(event)" />
-        <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" 
-             alt="Enviar" 
-             onclick="sendMessage()" 
-             class="logo">
+            <!-- Contenedor de subopciones -->
+            <div id="subOptions"></div>
+
+            <!-- Entrada de usuario -->
+            <div id="chatInputContainer">
+                <input type="text" id="userInput" placeholder="Escribe tu pregunta..." onkeypress="handleKeyPress(event)" />
+                <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" 
+                     alt="Enviar" 
+                     onclick="sendMessage()" 
+                     class="logo">
+            </div>
+        </div>
     </div>
-</div>
+</body>
 
 <style>
     #chatContainer {
         display: flex;
         flex-direction: column;
-        max-width: 800px;
-        margin: 40px auto;
+        max-width: 750px; /* Reducido para que no cubra la fecha y bienvenida */
+        margin: 20px auto; /* Ajuste del margen para mejor alineación */
         background: white;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         overflow: hidden;
+        padding: 10px; /* Espaciado interno */
     }
     #chatBox {
-        height: 300px;
+        height: 250px; /* Reducido para no tapar otros elementos */
         overflow-y: auto;
         padding: 10px;
         background: #f4f4f4;
         color: black;
+        border-radius: 5px;
     }
     #chatInputContainer {
         display: flex;
         padding: 10px;
         background: white;
+        border-top: 1px solid #ddd; /* Separador visual */
     }
     #userInput {
         flex: 1;
@@ -218,21 +266,26 @@
         background: #007BFF;
         color: white;
         text-align: right;
+        border-radius: 10px;
+        padding: 8px 12px;
     }
     .botMessage {
         background: #ddd;
         color: black;
         text-align: left;
+        border-radius: 10px;
+        padding: 8px 12px;
     }
     #smartButtons {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Ajustable para distintos tamaños */
         gap: 10px;
         max-width: 600px;
-        margin: 20px auto;
+        margin: 10px auto; /* Margen reducido */
         padding: 10px;
     }
-
+</style>
+<style>
     .button {
         background-color: #007BFF;
         color: white;
@@ -243,6 +296,8 @@
         font-size: 16px;
         text-align: center;
         transition: background 0.3s ease;
+        width: 100%; /* Asegura consistencia en tamaños */
+        max-width: 220px; /* Máximo ancho definido */
     }
 
     .button:hover {
@@ -260,6 +315,8 @@
         font-size: 14px;
         text-align: center;
         transition: background 0.3s ease;
+        width: auto;
+        min-width: 160px; /* Evita que sean demasiado pequeños */
     }
 
     .subButton:hover {
@@ -277,60 +334,74 @@
         font-size: 14px;
         text-align: center;
         transition: background 0.3s ease;
+        width: 100%;
+        max-width: 200px;
+        margin-top: 5px; /* Espacio entre botones */
     }
 
     .controlButton:hover {
         background-color: #222222;
     }
+
+    /* Ajuste de botones en móviles */
+    @media (max-width: 600px) {
+        .button, .subButton, .controlButton {
+            font-size: 14px;
+            padding: 10px;
+            max-width: 100%; /* Que ocupen todo el ancho posible en pantallas pequeñas */
+        }
+    }
 </style>
 
 <script>
    function handleKeyPress(event) {
-    if (event.key === "Enter") {
-        sendMessage();
-    }
-}
+       if (event.key === "Enter") {
+           sendMessage();
+       }
+   }
 
-async function sendMessage() {
-    const userInput = document.getElementById("userInput").value.trim();
-    if (!userInput) return;
-    
-    addMessageToChat(userInput, "userMessage");
-    document.getElementById("userInput").value = "";
+   async function sendMessage() {
+       const userInput = document.getElementById("userInput").value.trim();
+       if (!userInput) return;
+       
+       addMessageToChat(userInput, "userMessage");
+       document.getElementById("userInput").value = "";
 
-    // Simulación de respuesta de la IA
-    setTimeout(() => {
-        addMessageToChat("Hola, ¿cómo puedo ayudarte?", "botMessage");
-    }, 1000);
-}
+       // Simulación de respuesta de la IA con un ligero retraso
+       setTimeout(() => {
+           addMessageToChat("Hola, ¿cómo puedo ayudarte?", "botMessage");
+       }, 800);
+   }
 
-// 🔹 FUNCIÓN PARA MOSTRAR SUBOPCIONES 🔹
-function showOptions(category) {
-    const subOptions = {
-        "PDTs": ["IGV-Renta", "Planillas", "Otras Rentas"],
-        "Contratos": ["Plazo Fijo", "Indeterminado", "Recibo por Honorario", "Anteriores", "Otros"],
-        "Documentos": ["Sunat", "Sunafil", "Registrales y Notariales", "Empleados", "Otros"],
-        "EstadosFinancieros": ["3 Meses", "6 Meses", "Anual", "Archivo"],
-        "Reportes": ["Reporte Tributario", "Reporte Aduanero", "Ficha RUC"],
-        "InfoJJJ": ["Factura Contable", "Contrato Comercial"]
-    };
+   // 🔹 FUNCIÓN PARA MOSTRAR SUBOPCIONES 🔹
+   function showOptions(category) {
+       const subOptions = {
+           "PDTs": ["IGV-Renta", "Planillas", "Otras Rentas"],
+           "Contratos": ["Plazo Fijo", "Indeterminado", "Recibo por Honorario", "Anteriores", "Otros"],
+           "Documentos": ["Sunat", "Sunafil", "Registrales y Notariales", "Empleados", "Otros"],
+           "EstadosFinancieros": ["3 Meses", "6 Meses", "Anual", "Archivo"],
+           "Reportes": ["Reporte Tributario", "Reporte Aduanero", "Ficha RUC"],
+           "InfoJJJ": ["Factura Contable", "Contrato Comercial"]
+       };
 
-    const subOptionContainer = document.getElementById("subOptions");
-    subOptionContainer.innerHTML = ""; // Limpiar opciones previas
+       const subOptionContainer = document.getElementById("subOptions");
+       subOptionContainer.innerHTML = ""; // Limpiar opciones previas
+       subOptionContainer.style.display = "block";
 
-    if (subOptions[category]) {
-        subOptions[category].forEach(option => {
-            const btn = document.createElement("button");
-            btn.classList.add("subButton");
-            btn.textContent = option;
-            btn.onclick = () => showFinalStep(category, option);
-            subOptionContainer.appendChild(btn);
-        });
+       if (!subOptions[category]) return;
 
-        // Agregar botones de control
-        addControlButtons(subOptionContainer, "menu");
-    }
-}
+       subOptions[category].forEach(option => {
+           const btn = document.createElement("button");
+           btn.classList.add("subButton");
+           btn.textContent = option;
+           btn.onclick = () => showFinalStep(category, option);
+           subOptionContainer.appendChild(btn);
+       });
+
+       // Agregar botones de control
+       addControlButtons(subOptionContainer, "menu");
+   }
+</script>
 
 // 🔹 FUNCIÓN PARA MOSTRAR SELECCIÓN DE MESES 🔹
 function showFinalStep(category, selectedOption) {
@@ -342,7 +413,18 @@ function showFinalStep(category, selectedOption) {
         const btn = document.createElement("button");
         btn.classList.add("subButton");
         btn.textContent = month;
-        btn.onclick = () => sendFinalRequest(selectedOption, month);
+        btn.onclick = () => {
+            let selectedPeriod = month;
+            if (month === "Otros") {
+                const customMonths = prompt("Ingresa la cantidad de meses:");
+                if (customMonths) {
+                    selectedPeriod = `${customMonths} Meses`;
+                } else {
+                    return;
+                }
+            }
+            sendFinalRequest(selectedOption, selectedPeriod);
+        };
         subOptionContainer.appendChild(btn);
     });
 
@@ -355,13 +437,13 @@ function addControlButtons(container, type, category = null) {
     const backButton = document.createElement("button");
     backButton.classList.add("controlButton");
     backButton.textContent = "⬅️ Retroceder";
-    
+
     if (type === "menu") {
         backButton.onclick = () => container.innerHTML = "";
     } else if (type === "back" && category) {
         backButton.onclick = () => showOptions(category);
     }
-    
+
     container.appendChild(backButton);
 
     const mainMenuButton = document.createElement("button");
@@ -373,17 +455,22 @@ function addControlButtons(container, type, category = null) {
 
 // 🔹 FUNCIÓN PARA PROCESAR SOLICITUD 🔹
 function sendFinalRequest(option, period) {
-    addMessageToChat(Has solicitado ${option} por ${period}. Procesando..., "botMessage");
+    addMessageToChat(`Has solicitado ${option} por ${period}. Procesando...`, "botMessage");
 
     // Simulación de respuesta con retardo
     setTimeout(() => {
-        addMessageToChat(✅ Tu solicitud de ${option} por ${period} ha sido enviada por correo., "botMessage");
+        addMessageToChat(`✅ Tu solicitud de ${option} por ${period} ha sido enviada por correo.`, "botMessage");
     }, 2000);
 }
 
 // 🔹 FUNCIÓN PARA AÑADIR MENSAJES AL CHAT 🔹
 function addMessageToChat(message, className) {
     const chatBox = document.getElementById("chatBox");
+    if (!chatBox) {
+        console.error("⚠️ No se encontró el contenedor del chat.");
+        return;
+    }
+
     const messageElement = document.createElement("div");
     messageElement.classList.add("message", className);
     messageElement.textContent = message;
@@ -416,8 +503,8 @@ function addMessageToChat(message, className) {
             const hours = now.getHours();
             const greetingText = hours < 12 ? "¡Buenos días" : (hours < 18 ? "¡Buenas tardes" : "¡Buenas noches");
             const dateText = now.toLocaleDateString('es-PE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-            document.getElementById('greeting').innerText = Hoy, ${dateText}.;
-            document.getElementById('welcomeMessage').innerText = ${greetingText}, ${clientName}!;
+            document.getElementById('greeting').innerText = `Hoy, ${dateText}.`;
+            document.getElementById('welcomeMessage').innerText = `${greetingText}, ${clientName}!`;
         };
 
         function handleKeyPress(event) {
@@ -462,12 +549,17 @@ function addMessageToChat(message, className) {
 
             } catch (error) {
                 console.error("Error al comunicarse con Qwen:", error);
-                addMessageToChat("Hubo un problema al procesar tu solicitud. Por favor, intenta nuevamente.", "botMessage");
+                addMessageToChat("⚠️ Hubo un problema al procesar tu solicitud. Por favor, intenta nuevamente.", "botMessage");
             }
         }
 
         function addMessageToChat(message, className) {
             const chatBox = document.getElementById("chatBox");
+            if (!chatBox) {
+                console.error("⚠️ No se encontró el contenedor del chat.");
+                return;
+            }
+
             const messageElement = document.createElement("div");
             messageElement.classList.add("message", className);
             messageElement.textContent = message;
@@ -477,18 +569,20 @@ function addMessageToChat(message, className) {
     </script>
 
     <div class="legal-footer">
-        <div class="legal-content">
-            <img class="logo" src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" />
-            <div style="font-size: 0.8em;">JJJ Consultores Empresariales S.A.C.® / RUC: 20604236135</div>
-        </div>
-        <div class="footer-links">
-            <a href="contacto.html" style="color: lightgray; font-size: 14px;">Contacto</a>
-            <a href="#">Paga tu factura Aquí</a>
-            <a href="terminos.html">Términos de Uso</a>
-            <a href="aviso_legal.html">Aviso Legal</a>
-            <a href="aviso_cookies.html">Aviso de Cookies</a>
+    <div class="legal-content">
+        <img class="logo" src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="JJJ Consultores Logo" />
+        <div style="font-size: 0.8em; text-align: center;">
+            JJJ Consultores Empresariales S.A.C.® <br> RUC: 20604236135
         </div>
     </div>
+    <div class="footer-links">
+        <a href="contacto.html">Contacto</a>
+        <a href="#">Paga tu factura Aquí</a>
+        <a href="terminos.html">Términos de Uso</a>
+        <a href="aviso_legal.html">Aviso Legal</a>
+        <a href="aviso_cookies.html">Aviso de Cookies</a>
+    </div>
+</div>
 
 </body>
 </html>
