@@ -50,7 +50,7 @@
 
         .sidebar h2 {
             color: lightgray;
-            font-size: 1.2em;
+            font-size: 1.4em; /* 🔹 Más grande */
             margin-bottom: 20px;
         }
 
@@ -129,15 +129,15 @@
             margin-left: 220px;
             margin-right: 20px;
             text-align: center;
-            padding-bottom: 60px;
+            padding-bottom: 80px; /* 🔹 Más espacio para la frase */
             flex-grow: 1;
             overflow-y: auto;
-            padding-top: 20px; /* 🔹 Ajuste para evitar que el chat tape la fecha y saludo */
+            padding-top: 20px;
         }
 
         #chat {
-            max-width: 700px; /* 🔹 Reducido para no ocupar demasiado espacio */
-            margin: 20px auto; /* 🔹 Menos margen para mejor ajuste */
+            max-width: 700px;
+            margin: 20px auto;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -147,22 +147,28 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* 🔹 Nuevo estilo para los botones, ahora en una barra gris claro */
+        /* 🔹 Frase de empresa con más espacio */
+        .footer-phrase {
+            font-style: italic;
+            color: white;
+            margin-top: 20px; /* 🔹 Aumentado */
+            font-size: 16px; /* 🔹 Más grande */
+            font-weight: bold; /* 🔹 Resalta más */
+        }
+
+        /* 🔹 Botones sin marco gris */
         #smartButtons {
-            background: #d9d9d9; /* 🔹 Gris claro */
-            padding: 15px;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 10px;
-            max-width: 700px;
-            margin: 20px auto; /* 🔹 Mueve la barra debajo del chat */
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 10px;
         }
 
         .button {
-            background-color: #444444; /* 🔹 Color más oscuro para resaltar */
-            color: white; /* 🔹 Texto en blanco */
+            background-color: #2c2c2c; /* 🔹 Gris oscuro como la barra lateral */
+            color: white;
             padding: 12px;
             border: none;
             border-radius: 8px;
@@ -175,44 +181,46 @@
         }
 
         .button:hover {
-            background-color: #333333;
+            background-color: #1a1a1a;
+        }
+
+        /* 🔹 Bienvenida más grande */
+        h1 {
+            font-size: 26px; /* 🔹 Más grande */
+            font-weight: bold; /* 🔹 Resalta más */
+            margin-bottom: 10px;
+        }
+
+        #greeting {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* 🔹 Ajuste botón de enviar */
+        #chatInputContainer {
+            display: flex;
+            align-items: center; /* 🔹 Asegura alineación correcta */
+            padding: 10px;
+            background: white;
+            border-top: 1px solid #ddd;
         }
 
         #userInput {
-            width: 75%; /* 🔹 Ajustado para mayor armonía */
-            max-width: 600px;
-            height: 35px; /* 🔹 Un poco más grande para mejor interacción */
-            padding: 8px 12px;
+            flex: 1;
+            padding: 8px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            font-size: 14px;
         }
 
         .logo {
             border-radius: 50%;
-            width: 35px; /* 🔹 Ajuste para que no se vea demasiado grande */
-            height: 35px;
+            width: 40px; /* 🔹 Más grande */
+            height: 40px;
             cursor: pointer;
             vertical-align: middle;
+            margin-left: 8px; /* 🔹 Separación del input */
         }
 
-        .footer-phrase {
-            font-style: italic;
-            color: white;
-            margin-top: 10px;
-            font-size: 14px; /* 🔹 Ajuste de tamaño */
-        }
-
-        h1 {
-            margin-bottom: 5px; /* 🔹 Espacio mejorado */
-            font-size: 22px;
-        }
-
-        #greeting {
-            margin-top: 5px;
-            font-size: 16px;
-            font-weight: bold; /* 🔹 Resalta el mensaje de saludo */
-        }
     </style>
 </head>
 
@@ -252,16 +260,17 @@
             </div>
         </div>
 
-        <!-- 🔹 Botones movidos abajo 🔹 -->
-        <div id="buttonContainer">
-            <div id="smartButtons">
-                <button class="button" onclick="showOptions('PDTs')">📁 PDTs y Declaraciones 📊</button>
-                <button class="button" onclick="showOptions('Contratos')">📄 Contratos y Documentos 📝</button>
-                <button class="button" onclick="showOptions('Documentos')">📜 Documentos 📂</button>
-                <button class="button" onclick="showOptions('EstadosFinancieros')">💰 Estados Financieros 📈</button>
-                <button class="button" onclick="showOptions('Reportes')">📊 Reportes 📑</button>
-                <button class="button" onclick="showOptions('InfoJJJ')">🔒 Información JJJ</button>
-            </div>
+        <!-- 🔹 Frase de empresa (bien separada del chat) 🔹 -->
+        <p class="footer-phrase">Simple y completo, eso es JJJ.</p>
+
+        <!-- 🔹 Botones flotantes debajo de la frase 🔹 -->
+        <div id="smartButtons">
+            <button class="button" onclick="showOptions('PDTs')">📁 PDTs y Declaraciones 📊</button>
+            <button class="button" onclick="showOptions('Contratos')">📄 Contratos y Documentos 📝</button>
+            <button class="button" onclick="showOptions('Documentos')">📜 Documentos 📂</button>
+            <button class="button" onclick="showOptions('EstadosFinancieros')">💰 Estados Financieros 📈</button>
+            <button class="button" onclick="showOptions('Reportes')">📊 Reportes 📑</button>
+            <button class="button" onclick="showOptions('InfoJJJ')">🔒 Información JJJ</button>
         </div>
     </div>
 
@@ -288,6 +297,7 @@
         }
         #chatInputContainer {
             display: flex;
+            align-items: center;
             padding: 10px;
             background: white;
             border-top: 1px solid #ddd;
@@ -299,27 +309,29 @@
             border-radius: 5px;
         }
 
-        /* 🔹 Botones ajustados abajo 🔹 */
-        #buttonContainer {
-            background: #d1d1d1; /* 🔹 Fondo gris claro */
-            padding: 15px;
+        /* 🔹 Frase de empresa mejor alineada */
+        .footer-phrase {
+            font-style: italic;
+            color: white;
+            margin-top: 25px; /* 🔹 Más espacio entre chat y botones */
+            font-size: 16px;
+            font-weight: bold;
             text-align: center;
-            border-radius: 10px;
-            margin: 20px auto;
-            max-width: 700px;
         }
 
+        /* 🔹 Botones sin marco gris, ahora flotando en azul */
         #smartButtons {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 10px;
+            gap: 12px;
             max-width: 600px;
-            margin: 0 auto;
+            margin: 20px auto;
+            padding: 10px;
         }
 
         .button {
             background-color: #2c2c2c; /* 🔹 Gris oscuro como la barra lateral */
-            color: white; /* 🔹 Texto blanco */
+            color: white;
             padding: 12px;
             border: none;
             border-radius: 8px;
@@ -333,10 +345,20 @@
         .button:hover {
             background-color: #1a1a1a;
         }
+
+        /* 🔹 Botón de enviar correctamente alineado */
+        .logo {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            vertical-align: middle;
+            margin-left: 10px;
+        }
     </style>
 </body>
 
-      /* Botones de nivel 2 */
+    /* Botones de nivel 2 */
     .subButton {
         background-color: white; /* Fondo blanco */
         color: #007BFF; /* Texto azul */
@@ -418,7 +440,11 @@
 
        const subOptionContainer = document.getElementById("subOptions");
        subOptionContainer.innerHTML = ""; // Limpiar opciones previas
-       subOptionContainer.style.display = "block";
+       subOptionContainer.style.display = "flex";
+       subOptionContainer.style.justifyContent = "center";
+       subOptionContainer.style.flexWrap = "wrap";
+       subOptionContainer.style.gap = "10px";
+       subOptionContainer.style.marginTop = "15px";
 
        if (!subOptions[category]) {
            console.error("Categoría no encontrada:", category);
@@ -445,6 +471,12 @@ function showFinalStep(category, selectedOption) {
     subOptionContainer.innerHTML = ""; // Limpiar opciones previas
 
     const months = ["1 Mes", "3 Meses", "6 Meses", "12 Meses", "Otros"];
+    subOptionContainer.style.display = "flex";
+    subOptionContainer.style.justifyContent = "center";
+    subOptionContainer.style.flexWrap = "wrap";
+    subOptionContainer.style.gap = "10px";
+    subOptionContainer.style.marginTop = "15px";
+
     months.forEach(month => {
         const btn = document.createElement("button");
         btn.classList.add("subButton");
@@ -465,12 +497,18 @@ function showFinalStep(category, selectedOption) {
         subOptionContainer.appendChild(btn);
     });
 
-    // Agregar botones de control
+    // Agregar botones de control con mejor espaciado
     addControlButtons(subOptionContainer, "back", category);
 }
 
 // 🔹 FUNCIÓN PARA AGREGAR BOTONES DE CONTROL 🔹
 function addControlButtons(container, type, category = null) {
+    const buttonWrapper = document.createElement("div");
+    buttonWrapper.style.display = "flex";
+    buttonWrapper.style.justifyContent = "center";
+    buttonWrapper.style.gap = "10px";
+    buttonWrapper.style.marginTop = "15px";
+
     const backButton = document.createElement("button");
     backButton.classList.add("controlButton");
     backButton.textContent = "⬅️ Retroceder";
@@ -481,22 +519,24 @@ function addControlButtons(container, type, category = null) {
         backButton.onclick = () => showOptions(category);
     }
 
-    container.appendChild(backButton);
+    buttonWrapper.appendChild(backButton);
 
     const mainMenuButton = document.createElement("button");
     mainMenuButton.classList.add("controlButton");
     mainMenuButton.textContent = "🏠 Menú Principal";
     mainMenuButton.onclick = () => location.reload(); // Recarga la página
-    container.appendChild(mainMenuButton);
+    buttonWrapper.appendChild(mainMenuButton);
+
+    container.appendChild(buttonWrapper);
 }
 
 // 🔹 FUNCIÓN PARA PROCESAR SOLICITUD 🔹
 function sendFinalRequest(option, period) {
     addMessageToChat(`⌛ Procesando tu solicitud de ${option} por ${period}...`, "botMessage");
 
-    // Simulación de respuesta con retardo
+    // Simulación de respuesta con retardo y mensaje de éxito
     setTimeout(() => {
-        addMessageToChat(`✅ Tu solicitud de ${option} por ${period} ha sido enviada por correo.`, "botMessage");
+        addMessageToChat(`✅ Tu solicitud de ${option} por ${period} ha sido procesada. Recibirás un correo con más detalles.`, "botMessage");
     }, 1500);
 }
 
@@ -517,19 +557,20 @@ function addMessageToChat(message, className) {
 </script>
 
 <style>
-/* Botones de nivel 2 - Ahora blancos con texto azul */
+/* 🔹 Botones de nivel 2 - Ahora blancos con texto azul y mejor alineados */
 .subButton {
     background-color: white;
     color: #007BFF;
-    padding: 10px;
-    border: 1px solid #007BFF;
+    padding: 12px;
+    border: 2px solid #007BFF;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 16px;
     text-align: center;
     transition: background 0.3s ease, color 0.3s ease;
     width: auto;
-    min-width: 160px;
+    min-width: 180px;
+    margin: 5px; /* 🔹 Espaciado entre botones */
 }
 
 .subButton:hover {
@@ -537,28 +578,80 @@ function addMessageToChat(message, className) {
     color: white;
 }
 
-/* Botones de control - Siguen oscuros */
+/* 🔹 Botones de control - Siguen oscuros y alineados correctamente */
 .controlButton {
-    background-color: #444444;
+    background-color: #2c2c2c;
     color: white;
-    padding: 10px;
+    padding: 12px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 16px;
     text-align: center;
     transition: background 0.3s ease;
     width: 100%;
-    max-width: 200px;
-    margin-top: 5px;
+    max-width: 220px;
+    margin: 5px auto; /* 🔹 Centrado y con margen */
 }
 
 .controlButton:hover {
-    background-color: #222222;
+    background-color: #1a1a1a;
+}
+
+/* 🔹 Ajuste de botones en móviles */
+@media (max-width: 600px) {
+    .button, .subButton, .controlButton {
+        font-size: 14px;
+        padding: 10px;
+        max-width: 100%;
+    }
+}
+
+/* 🔹 Ajuste del mensaje de bienvenida */
+#welcomeMessage {
+    font-size: 24px; /* 🔹 Más grande */
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* 🔹 Ajuste de la frase de la empresa */
+.footer-phrase {
+    font-style: italic;
+    color: white;
+    margin-top: 15px; /* 🔹 Más espacio para evitar que se tape */
+    font-size: 16px;
+    text-align: center;
+}
+
+/* 🔹 Ajuste del botón de enviar en el chat */
+#chatInputContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background: white;
+    border-top: 1px solid #ddd;
+}
+
+#userInput {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.logo {
+    border-radius: 50%;
+    width: 40px; /* 🔹 Un poco más grande */
+    height: 40px;
+    cursor: pointer;
+    margin-left: 10px; /* 🔹 Separado del input */
 }
 </style>
 
- <script>
+<script>
 window.onload = function() {
     const clientName = sessionStorage.getItem("clientName") || "Cliente";
     const now = new Date();
