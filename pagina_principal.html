@@ -160,7 +160,19 @@
         <!-- Contenedor de la conversación -->
 <div id="chatContainer">
     <div id="chatBox"></div>
-     <div id="smartButtons">
+
+    <div id="chatInputContainer">
+        <input type="text" id="userInput" placeholder="Escribe tu pregunta..." onkeypress="handleKeyPress(event)" />
+        <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" 
+             alt="Enviar" 
+             onclick="sendMessage()" 
+             class="logo">
+    </div>
+</div>
+
+<!-- 🔹 Sección de opciones independiente del chat 🔹 -->
+<div id="optionsContainer">
+    <div id="smartButtons">
         <button class="button" onclick="showOptions('PDTs')">📁 PDTs y Declaraciones 📊</button>
         <button class="button" onclick="showOptions('Contratos')">📄 Contratos y Documentos 📝</button>
         <button class="button" onclick="showOptions('Documentos')">📜 Documentos 📂</button>
@@ -170,14 +182,6 @@
     </div>
 
     <div id="subOptions"></div> <!-- Aquí se mostrarán las subopciones -->
-
-    <div id="chatInputContainer">
-        <input type="text" id="userInput" placeholder="Escribe tu pregunta..." onkeypress="handleKeyPress(event)" />
-        <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" 
-             alt="Enviar" 
-             onclick="sendMessage()" 
-             class="logo">
-    </div>
 </div>
 
 <style>
@@ -209,31 +213,29 @@
         border: 1px solid #ccc;
         border-radius: 5px;
     }
-    .message {
-        margin: 5px 0;
-        padding: 8px;
-        border-radius: 5px;
+
+    /* 🔹 Contenedor de botones independientes 🔹 */
+    #optionsContainer {
+        background: white;
+        padding: 15px;
+        margin: 20px auto;
+        max-width: 800px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
     }
-    .userMessage {
-        background: #007BFF;
-        color: white;
-        text-align: right;
-    }
-    .botMessage {
-        background: #ddd;
-        color: black;
-        text-align: left;
-    }
+
     #smartButtons {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 10px;
         max-width: 600px;
-        margin: 20px auto;
+        margin: auto;
         padding: 10px;
-    }
+    
+</style>
 
-    .button {
+        .button {
         background-color: #007BFF;
         color: white;
         padding: 12px;
@@ -243,10 +245,31 @@
         font-size: 16px;
         text-align: center;
         transition: background 0.3s ease;
+        width: 100%;
     }
 
     .button:hover {
         background-color: #0056b3;
+    }
+
+    /* 🔹 Contenedor de opciones */
+    #optionsContainer {
+        background: white;
+        padding: 15px;
+        margin: 20px auto;
+        max-width: 800px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    #smartButtons {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 10px;
+        max-width: 600px;
+        margin: auto;
+        padding: 10px;
     }
 
     /* Botones de nivel 2 */
@@ -260,36 +283,46 @@
         font-size: 14px;
         text-align: center;
         transition: background 0.3s ease;
+        margin: 5px;
+        width: 90%;
     }
 
     .subButton:hover {
         background-color: #DDDDDD;
     }
 
-    /* Botones de control */
-    .controlButton {
-        background-color: #444444;
-        color: white;
-        padding: 10px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 14px;
-        text-align: center;
-        transition: background 0.3s ease;
-    }
+    /* 🔹 Contenedor de subopciones */
+    #subOptions {
+    background: white;
+    padding: 15px;
+    margin: 10px auto;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease-in-out; /* ✅ Animación suave */
+}
 
+    /* 🔹 Botones de control */
+    .controlButton {
+    background-color: #444444;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+    transition: background 0.3s ease;
+    width: 90%;
+    margin-top: 10px; /* ✅ Espaciado extra entre botones */
+}
     .controlButton:hover {
         background-color: #222222;
     }
-</style>
-
-<script>
-   function handleKeyPress(event) {
-    if (event.key === "Enter") {
-        sendMessage();
-    }
-}
 
 async function sendMessage() {
     const userInput = document.getElementById("userInput").value.trim();
@@ -317,6 +350,7 @@ function showOptions(category) {
 
     const subOptionContainer = document.getElementById("subOptions");
     subOptionContainer.innerHTML = ""; // Limpiar opciones previas
+    subOptionContainer.style.display = "block"; // Asegurar que se muestre el contenedor
 
     if (subOptions[category]) {
         subOptions[category].forEach(option => {
@@ -327,7 +361,7 @@ function showOptions(category) {
             subOptionContainer.appendChild(btn);
         });
 
-        // Agregar botones de control
+        // Agregar botones de control debajo
         addControlButtons(subOptionContainer, "menu");
     }
 }
@@ -338,37 +372,82 @@ function showFinalStep(category, selectedOption) {
     subOptionContainer.innerHTML = ""; // Limpiar opciones previas
 
     const months = ["1 Mes", "3 Meses", "6 Meses", "12 Meses", "Otros"];
-    months.forEach(month => {
-        const btn = document.createElement("button");
-        btn.classList.add("subButton");
-        btn.textContent = month;
-        btn.onclick = () => sendFinalRequest(selectedOption, month);
-        subOptionContainer.appendChild(btn);
-    });
+months.forEach(month => {
+    const btn = document.createElement("button");
+    btn.classList.add("subButton");
+    btn.textContent = month;
+    btn.onclick = () => {
+        if (month === "Otros") {
+            const customMonths = prompt("Ingresa la cantidad de meses:");
+            if (customMonths) {
+                sendFinalRequest(selectedOption, `${customMonths} Meses`);
+            }
+        } else {
+            sendFinalRequest(selectedOption, month);
+        }
+    };
+    subOptionContainer.appendChild(btn);
+});
 
-    // Agregar botones de control
+    // Agregar botones de control debajo
     addControlButtons(subOptionContainer, "back", category);
 }
 
 // 🔹 FUNCIÓN PARA AGREGAR BOTONES DE CONTROL 🔹
 function addControlButtons(container, type, category = null) {
+    const buttonsContainer = document.createElement("div");
+    buttonsContainer.style.marginTop = "15px";
+    buttonsContainer.style.display = "flex";
+    buttonsContainer.style.flexDirection = "column";
+    buttonsContainer.style.alignItems = "center";
+
     const backButton = document.createElement("button");
     backButton.classList.add("controlButton");
     backButton.textContent = "⬅️ Retroceder";
-    
+
     if (type === "menu") {
         backButton.onclick = () => container.innerHTML = "";
     } else if (type === "back" && category) {
         backButton.onclick = () => showOptions(category);
     }
-    
-    container.appendChild(backButton);
 
     const mainMenuButton = document.createElement("button");
     mainMenuButton.classList.add("controlButton");
     mainMenuButton.textContent = "🏠 Menú Principal";
     mainMenuButton.onclick = () => location.reload(); // Recarga la página
-    container.appendChild(mainMenuButton);
+
+    buttonsContainer.appendChild(backButton);
+    buttonsContainer.appendChild(mainMenuButton);
+    container.appendChild(buttonsContainer);
+}
+
+// 🔹 FUNCIÓN PARA PROCESAR SOLICITUD 🔹
+function sendFinalRequest(option, period) {
+    addMessageToChat(`Has solicitado ${option} por ${period}. Procesando...`, "botMessage");
+
+    // Simulación de respuesta con retardo
+    setTimeout(() => {
+        addMessageToChat(`✅ Tu solicitud de ${option} por ${period} ha sido enviada por correo.`, "botMessage");
+    }, 2000);
+}
+
+// 🔹 FUNCIÓN PARA AÑADIR MENSAJES AL CHAT 🔹
+function addMessageToChat(message, className) {
+    const chatBox = document.getElementById("chatBox");
+    const messageElement = document.createElement("div");
+    messageElement.classList.add("message", className);
+    messageElement.textContent = message;
+    chatBox.appendChild(messageElement);
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+   const mainMenuButton = document.createElement("button");
+mainMenuButton.classList.add("controlButton");
+mainMenuButton.textContent = "🏠 Menú Principal";
+mainMenuButton.onclick = () => {
+    document.getElementById("subOptions").innerHTML = ""; // Limpia todas las opciones
+    document.getElementById("subOptions").style.display = "none"; // Oculta el contenedor
+};
+container.appendChild(mainMenuButton);
 }
 
 // 🔹 FUNCIÓN PARA PROCESAR SOLICITUD 🔹
@@ -391,104 +470,106 @@ function addMessageToChat(message, className) {
     chatBox.scrollTop = chatBox.scrollHeight;
 }
 </script>
-        <p class="footer-phrase">Simple and complete, that's JJJ.</p>
-    </div>
-    <!-- Footer -->
-    <div class="legal-footer">
-        <div class="legal-content">
-            <img class="logo" src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" />
-            <div style="font-size: 0.8em;">JJJ Consultores Empresariales S.A.C.® / RUC: 20604236135</div>
-        </div>
-        <div class="footer-links">
-            <a href="contacto.html" style="color: lightgray; font-size: 14px;">Contacto</a>
-            <a href="#">Paga tu factura Aquí</a>
-            <a href="terminos.html">Términos de Uso</a>
-            <a href="aviso_legal.html">Aviso Legal</a>
-            <a href="aviso_cookies.html">Aviso de Cookies</a>
-        </div>
-    </div>
 
-    <!-- Scripts -->
-       <script>
-        window.onload = function() {
-            const clientName = sessionStorage.getItem("clientName") || "Cliente";
-            const now = new Date();
-            const hours = now.getHours();
-            const greetingText = hours < 12 ? "¡Buenos días" : (hours < 18 ? "¡Buenas tardes" : "¡Buenas noches");
-            const dateText = now.toLocaleDateString('es-PE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-            document.getElementById('greeting').innerText = `Hoy, ${dateText}.`;
-            document.getElementById('welcomeMessage').innerText = `${greetingText}, ${clientName}!`;
-        };
+<p class="footer-phrase">Simple and complete, that's JJJ.</p>
+</div>
 
-        function handleKeyPress(event) {
-            if (event.key === "Enter") {
-                sendMessage();
-            }
-        }
+<!-- Footer -->
+<div class="legal-footer">
+    <div class="legal-content">
+        <img class="logo" src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" />
+        <div style="font-size: 0.8em;">JJJ Consultores Empresariales S.A.C.® / RUC: 20604236135</div>
+    </div>
+    <div class="footer-links">
+        <a href="contacto.html" style="color: lightgray; font-size: 14px;">Contacto</a>
+        <a href="#">Paga tu factura Aquí</a>
+        <a href="terminos.html">Términos de Uso</a>
+        <a href="aviso_legal.html">Aviso Legal</a>
+        <a href="aviso_cookies.html">Aviso de Cookies</a>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script>
+window.onload = function() {
+    const clientName = sessionStorage.getItem("clientName") || "Cliente";
+    const now = new Date();
+    const hours = now.getHours();
+    const greetingText = hours < 12 ? "¡Buenos días" : (hours < 18 ? "¡Buenas tardes" : "¡Buenas noches");
+    const dateText = now.toLocaleDateString('es-PE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    document.getElementById('greeting').innerText = `Hoy, ${dateText}.`;
+    document.getElementById('welcomeMessage').innerText = `${greetingText}, ${clientName}!`;
+};
+
+function handleKeyPress(event) {
+    if (event.key === "Enter") {
+        sendMessage();
+    }
+}
+
+       async function sendMessage() {
+    const userInput = document.getElementById("userInput").value.trim();
+    if (!userInput) return;
     
-        async function sendMessage() {
-            const userInput = document.getElementById("userInput").value.trim();
-            if (!userInput) return;
-            
-            addMessageToChat(userInput, "userMessage");  // Agrega el mensaje del usuario en el chat
-            document.getElementById("userInput").value = "";
+    addMessageToChat(userInput, "userMessage");  // Agrega el mensaje del usuario en el chat
+    document.getElementById("userInput").value = "";
 
-            // Endpoint de la API pública de Qwen
-            const url = "https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions";
+    // Endpoint de la API pública de Qwen
+    const url = "https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions";
 
-            try {
-                const response = await fetch(url, {
-                    method: "POST",
-                    headers: {
-                        "Authorization": "Bearer LTAI5tEhmaTtgr2E9M2vg3yY:P3029Qlfh99OUAliNvHCYKG3GE9LHT",
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        model: "qwen-plus",
-                        messages: [
-                            { role: "system", content: "You are a helpful assistant." },
-                            { role: "user", content: userInput }
-                        ]
-                    })
-                });
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Authorization": "Bearer LTAI5tEhmaTtgr2E9M2vg3yY:P3029Qlfh99OUAliNvHCYKG3GE9LHT",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                model: "qwen-plus",
+                messages: [
+                    { role: "system", content: "You are a helpful assistant." },
+                    { role: "user", content: userInput }
+                ]
+            })
+        });
 
-                const data = await response.json();
+        const data = await response.json();
+        const respuestaQwen = data.response || "No se pudo obtener una respuesta.";
 
-                // Verifica si la respuesta contiene un campo "response"
-                const respuestaQwen = data.response || "No se pudo obtener una respuesta.";
+        // Mostrar la respuesta en el chat
+        addMessageToChat(respuestaQwen, "botMessage");
 
-                // Mostrar la respuesta en el chat en lugar de un alert
-                addMessageToChat(respuestaQwen, "botMessage");
+    } catch (error) {
+        console.error("Error al comunicarse con Qwen:", error);
+        addMessageToChat("⚠️ Hubo un problema al procesar tu solicitud. Intenta nuevamente.", "botMessage");
+    }
+}
 
-            } catch (error) {
-                console.error("Error al comunicarse con Qwen:", error);
-                addMessageToChat("Hubo un problema al procesar tu solicitud. Por favor, intenta nuevamente.", "botMessage");
-            }
-        }
+function addMessageToChat(message, className) {
+    const chatBox = document.getElementById("chatBox");
+    const messageElement = document.createElement("div");
+    messageElement.classList.add("message", className);
+    messageElement.textContent = message;
+    chatBox.appendChild(messageElement);
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+</script>
 
-        function addMessageToChat(message, className) {
-            const chatBox = document.getElementById("chatBox");
-            const messageElement = document.createElement("div");
-            messageElement.classList.add("message", className);
-            messageElement.textContent = message;
-            chatBox.appendChild(messageElement);
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
-    </script>
-
-    <div class="legal-footer">
-        <div class="legal-content">
-            <img class="logo" src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" />
-            <div style="font-size: 0.8em;">JJJ Consultores Empresariales S.A.C.® / RUC: 20604236135</div>
-        </div>
-        <div class="footer-links">
-            <a href="contacto.html" style="color: lightgray; font-size: 14px;">Contacto</a>
-            <a href="#">Paga tu factura Aquí</a>
-            <a href="terminos.html">Términos de Uso</a>
-            <a href="aviso_legal.html">Aviso Legal</a>
-            <a href="aviso_cookies.html">Aviso de Cookies</a>
-        </div>
+<!-- Footer -->
+<div class="legal-footer">
+    <div class="legal-content">
+        <img class="logo" src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" />
+        <div style="font-size: 0.8em;">JJJ Consultores Empresariales S.A.C.® / RUC: 20604236135</div>
     </div>
+    <div class="footer-links">
+        <a href="contacto.html" style="color: lightgray; font-size: 14px;">Contacto</a>
+        <a href="#">Paga tu factura Aquí</a>
+        <a href="terminos.html">Términos de Uso</a>
+        <a href="aviso_legal.html">Aviso Legal</a>
+        <a href="aviso_cookies.html">Aviso de Cookies</a>
+    </div>
+</div>
 
 </body>
 </html>
+
