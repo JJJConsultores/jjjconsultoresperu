@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="en"> <!-- Cambiado a inglés -->
+<html lang="es"> 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JJJ Consultants - Chat</title>
     <style>
 
-/* Ajuste de proporción del logo en la barra inferior */
 .legal-footer .logo {
-    width: 40px; /* Ajuste de tamaño */
+    width: 40px; 
     height: auto;
-    object-fit: contain; /* Mantiene la proporción correcta */
+    object-fit: contain;
     margin-right: 15px;
 }
 
@@ -25,7 +24,7 @@
             flex-direction: column;
             min-height: 100vh;
             overflow-x: hidden;
-            padding-top: 20px; /* Evita que el chat tape la fecha y el saludo */
+            padding-top: 20px; 
         }
 
         .sidebar {
@@ -42,7 +41,6 @@
             align-items: flex-start;
         }
 
-        /* Ajuste responsive para sidebar */
         @media (max-width: 768px) {
             .sidebar {
                 position: absolute;
@@ -54,7 +52,7 @@
 
         .sidebar h2 {
             color: lightgray;
-            font-size: 1.4em; /* 🔹 Más grande */
+            font-size: 1.4em; 
             margin-bottom: 20px;
         }
 
@@ -72,7 +70,7 @@
         }
 
         .circle {
-            width: 12px; /* Ajustado para mejor visibilidad */
+            width: 12px; 
             height: 12px;
             border-radius: 50%;
             margin-right: 8px;
@@ -89,7 +87,7 @@
         .legal-footer {
             background-color: #2c2c2c;
             color: lightgray;
-            padding: 12px 20px; /* Más espacio para mejor lectura */
+            padding: 12px 20px; 
             text-align: center;
             font-size: 0.9em;
             position: fixed;
@@ -99,7 +97,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap; /* Permite mejor ajuste en pantallas pequeñas */
+            flex-wrap: wrap; 
         }
 
         .legal-content {
@@ -112,28 +110,28 @@
 
         .legal-content .logo {
             margin-right: 15px;
-            width: 35px; /* Ajuste para evitar que el logo se vea demasiado grande */
+            width: 35px; 
         }
 
         .legal-footer a {
             margin: 0 12px;
             color: lightgray;
             font-size: 14px;
-            text-decoration: none; /* Evita subrayados molestos */
+            text-decoration: none; 
         }
 
         .footer-links {
             display: flex;
             justify-content: flex-end;
             padding-right: 15px;
-            flex-wrap: wrap; /* Mejor ajuste en dispositivos móviles */
+            flex-wrap: wrap; 
         }
 
         .main-content {
             margin-left: 220px;
             margin-right: 20px;
             text-align: center;
-            padding-bottom: 80px; /* 🔹 Más espacio para la frase */
+            padding-bottom: 80px; 
             flex-grow: 1;
             overflow-y: auto;
             padding-top: 20px;
@@ -151,7 +149,6 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* 🔹 Frase de empresa con más espacio */
         .footer-phrase {
             font-style: italic;
             color: white;
@@ -162,12 +159,9 @@
             text-align: center;
         }
 
-        /* 🔹 Botones sin marco gris */
-        
-        /* 🔹 Bienvenida más grande */
         h1 {
-            font-size: 30px; /* 🔹 Más grande */
-            font-weight: bold; /* 🔹 Resalta más */
+            font-size: 30px; 
+            font-weight: bold; 
             text-align: center;
             margin-bottom: 10px;
         }
@@ -178,7 +172,6 @@
             text-align: center;
         }
 
-        /* 🔹 Ajuste botón de enviar */
         #chatInputContainer {
             display: flex;
             align-items: center;
@@ -208,7 +201,7 @@
 <body>
     <!-- Sidebar -->
     <div class="sidebar">
-        <h2>Menú</h2> <!-- Cambiado a inglés -->
+        <h2>Menú</h2> 
         <ul>
             <li><span class="circle perfil"></span>Perfil</li>
             <li><span class="circle contable"></span>Contabilidad</li>
@@ -222,16 +215,13 @@
         </ul>
     </div>
 
-    <!-- Main Content -->
     <div class="main-content">
         <p id="greeting"></p>
         <h1 id="welcomeMessage"></h1>
 
-        <!-- Chat Container -->
         <div id="chatContainer">
             <div id="chatBox"></div>
 
-            <!-- User Input -->
             <div id="chatInputContainer">
                 <input type="text" id="userInput" placeholder="Escribe tu pregunta..." onkeypress="handleKeyPress(event)" />
                 <img src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" 
@@ -241,16 +231,13 @@
             </div>
         </div>
 
-        <!-- 🔹 Company Phrase (Separated from chat) 🔹 -->
         <p class="footer-phrase">Simple & complete, that's JJJ.</p>
 
-        <!-- 🔹 Floating Buttons Below the Phrase 🔹 -->
         <div id="smartButtons">
         </div>
     </div>
 
     <style>
-        /* Chat Styles */
         #chatContainer {
             display: flex;
             flex-direction: column;
@@ -284,19 +271,15 @@
             border-radius: 5px;
         }
 
-        /* 🔹 Better Aligned Company Phrase */
         .footer-phrase {
             font-style: italic;
             color: white;
-            margin-top: 25px; /* 🔹 More space between chat and buttons */
+            margin-top: 25px; 
             font-size: 18px;
             font-weight: bold;
             text-align: center;
         }
 
-        /* 🔹 Floating Buttons in Blue */
-        
-        /* 🔹 Correctly Aligned Enviar Button */
         .logo {
             border-radius: 50%;
             width: 40px;
@@ -308,14 +291,11 @@
     </style>
 
 </body>
-
-  <!-- 🔹 Asegúrate de que este contenedor esté en tu HTML -->
-
 <style>
-/* 🔹 Botones de nivel 2 */
-    background-color: white; /* Fondo blanco */
-    color: #007BFF; /* Texto azul */
-    border: 2px solid #007BFF; /* Borde azul */
+
+    background-color: white; 
+    color: #007BFF; 
+    border: 2px solid #007BFF; 
     padding: 10px;
     border-radius: 8px;
     cursor: pointer;
@@ -323,20 +303,17 @@
     text-align: center;
     transition: background 0.3s ease, color 0.3s ease;
     width: auto;
-    min-width: 160px; /* Evita que sean demasiado pequeños */
+    min-width: 160px; 
 }
 
-    background-color: #007BFF; /* Azul al pasar el mouse */
-    color: white; /* Texto blanco en hover */
+    background-color: #007BFF; 
+    color: white; 
 }
 
-/* 🔹 Botones de control (Volver / Página Principal) */
-
-/* 🔹 Ajuste de botones en móviles */
 @media (max-width: 600px) {
         font-size: 14px;
         padding: 10px;
-        max-width: 100%; /* Que ocupen todo el ancho posible en pantallas pequeñas */
+        max-width: 100%;
     }
 }
 </style>
@@ -355,13 +332,11 @@ async function sendMessage() {
     addMessageToChat(userInput, "userMessage");
     document.getElementById("userInput").value = "";
 
-    // Simulación de respuesta de la IA con un ligero retraso
     setTimeout(() => {
         addMessageToChat("Hola, ¿cómo puedo ayudarte?", "botMessage");
     }, 500);
 }
 
-// 🔹 FUNCIÓN PARA MOSTRAR SUBOPCIONES 🔹
         "PDTs": ["IGV-Renta", "Planillas", "Otras Rentas"],
         "Contratos": ["Plazo Fijo", "Indeterminado", "Recibo por Honorario", "Anteriores", "Otros"],
         "Documentos": ["Sunat", "Sunafil", "Registrales y Notariales", "Empleados", "Otros"],
@@ -393,7 +368,6 @@ async function sendMessage() {
     // Agregar botones de control
 }
 
-// 🔹 FUNCIÓN PARA MOSTRAR SELECCIÓN DE MESES 🔹
     subOptionContainer.innerHTML = ""; // Limpiar opciones previas
 
     const months = ["1 Mes", "3 Meses", "6 Meses", "12 Meses", "Otros"];
@@ -412,7 +386,7 @@ async function sendMessage() {
                 let customMonths;
                 do {
                     customMonths = prompt("Ingresa la cantidad de meses (solo números):");
-                    if (!customMonths) return; // Si cancela, no hace nada
+                    if (!customMonths) return; 
                 } while (isNaN(customMonths) || customMonths <= 0);
 
                 selectedPeriod = `${customMonths} Meses`;
@@ -421,10 +395,8 @@ async function sendMessage() {
         subOptionContainer.appendChild(btn);
     });
 
-    // Agregar botones de control con mejor espaciado
 }
 
-// 🔹 FUNCIÓN PARA AGREGAR BOTONES DE CONTROL 🔹
     const buttonWrapper = document.createElement("div");
     buttonWrapper.style.display = "flex";
     buttonWrapper.style.justifyContent = "center";
@@ -445,22 +417,19 @@ async function sendMessage() {
     const mainMenúButton = document.createElement("button");
     mainMenúButton.classList.add("controlButton");
     mainMenúButton.textContent = "🏠 Menú Principal";
-    mainMenúButton.onclick = () => location.reload(); // Recarga la página
+    mainMenúButton.onclick = () => location.reload(); /
     buttonWrapper.appendChild(mainMenúButton);
 
     container.appendChild(buttonWrapper);
 }
 
-// 🔹 FUNCIÓN PARA PROCESAR SOLICITUD 🔹
     addMessageToChat(`⌛ Procesando tu solicitud de ${option} por ${period}...`, "botMessage");
 
-    // Simulación de respuesta con retardo y mensaje de éxito
     setTimeout(() => {
         addMessageToChat(`✅ Tu solicitud de ${option} por ${period} ha sido procesada. Recibirás un correo con más detalles.`, "botMessage");
     }, 1500);
 }
 
-// 🔹 FUNCIÓN PARA AÑADIR MENSAJES AL CHAT 🔹
     const chatBox = document.getElementById("chatBox");
     if (!chatBox) {
         console.error("⚠️ Chat container not found.");
@@ -475,7 +444,6 @@ async function sendMessage() {
 }
 </script>
 
-<!-- 🔹 FOOTER MEJORADO 🔹 -->
 <div class="legal-footer">
     <div class="legal-content">
         <img class="logo" src="https://raw.githubusercontent.com/JJJConsultores/jjjconsultoresperu/0bf183c168f4420cd6cc35159052e2dbd9b5d9d0/logotipo%20jjj.png" alt="JJJ Consultores Logo"/>
